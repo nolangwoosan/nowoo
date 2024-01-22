@@ -1,0 +1,21 @@
+{
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "material-icon-theme.folders.associations": {
+    "_assets": "Resource",
+    "_components": "Components",
+    "_constants": "Constant",
+    "_lib": "Lib",
+    "_styles": "Css",
+    "_types": "Typescript",
+    "(route)": "Routes"
+  },
+  "editor.quickSuggestions": {
+    "strings": true
+  },
+  "css.validate": false,
+  "editor.inlineSuggest.enabled": true,
+  "css.lint.unknownAtRules": "ignore",
+  "cSpell.words": ["supabase"]
+}
