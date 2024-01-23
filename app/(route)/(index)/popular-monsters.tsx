@@ -19,6 +19,7 @@ export default async function PopularMonsters() {
             href={monsters.maple_mob_id ? ROUTES.MONSTER(monsters.maple_mob_id) : ROUTES.HOME}
           >
             <Image
+              className='aspect-square object-contain'
               src={getMonsterImage(monsters.maple_mob_id ?? 0)}
               width={60}
               height={60}

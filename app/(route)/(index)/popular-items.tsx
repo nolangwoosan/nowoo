@@ -18,7 +18,13 @@ export default async function PopularItems() {
             key={item.id}
             href={item.maple_item_id ? ROUTES.ITEM(item.maple_item_id) : ROUTES.HOME}
           >
-            <Image src={getItemImage(item.maple_item_id ?? 0)} width={60} height={60} alt={item.name_kor ?? ''} />
+            <Image
+              className='aspect-square object-contain'
+              src={getItemImage(item.maple_item_id ?? 0)}
+              width={60}
+              height={60}
+              alt={item.name_kor ?? ''}
+            />
             <span>{item.name_kor}</span>
           </Link>
         ))}
