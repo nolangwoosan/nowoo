@@ -8,14 +8,15 @@
 
 ## 환경 설정
 
-### .env.local 파일 생성
+### 1. .env.local 파일 생성
 
 ```
 NEXT_PUBLIC_SUPABASE_URL=https://<your_supabase_url>.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=<your_supabase_anon_key>
 ```
 
-### 스키마 기반 타입스크립트 파일 자동 생성 ([Generating TypeScript Types](https://supabase.com/docs/guides/api/rest/generating-types))
+### 2. 스키마 기반 타입스크립트 파일 자동 생성 ([Generating TypeScript Types](https://supabase.com/docs/guides/api/rest/generating-types))
+- app/_types/supabase.ts 파일이 이미 존재할 경우, 생략해도 됩니다.
 
 1. npx supabase login
 2. npx supabase link (tarotbunny 선택 > DB 비밀번호 입력)
