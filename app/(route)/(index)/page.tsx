@@ -3,11 +3,13 @@ import Image from 'next/image'
 import { Suspense } from 'react'
 
 import PopularItems from './popular-items'
+import PopularMonsters from './popular-monsters'
 import Search from './search'
-import { getItems } from './utils'
+import { getItems, getMonsters } from './utils'
 
 export default async function HomePage() {
-  const { data: items } = await getItems()
+  const items = await getItems()
+  const monsters = await getMonsters()
 
   return (
     <section className='flex flex-col items-center gap-4 p-24'>
@@ -17,12 +19,12 @@ export default async function HomePage() {
         height={180}
         alt=''
       />
-      <Search items={items} />
+      <Search items={items} monsters={monsters} />
       <div className='mt-4 h-[200px] w-[1200px] max-w-full bg-white' />
       <div className='mt-8 flex w-full gap-10'>
         <Suspense>
           <PopularItems />
-          <PopularItems />
+          <PopularMonsters />
         </Suspense>
       </div>
     </section>

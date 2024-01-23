@@ -1,3 +1,12 @@
+#!/bin/bash
+# Stop accidental commits to main
+BRANCH=`git rev-parse --abbrev-ref HEAD`
+ 
+if [[ "$BRANCH" == "main" ]]; then
+    echo -e "You are on [ $BRANCH ] branch . You can not directly commit on [ $BRANCH ] branch."
+    echo -e "Please checkout the other branch and commit"   
+fi
+
  #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 

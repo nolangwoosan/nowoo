@@ -9,9 +9,10 @@ import SearchResult from './search-result'
 
 interface Props {
   items: Tables<'items'>[] | null
+  monsters: Tables<'monsters'>[] | null
 }
 
-export default function Search({ items }: Readonly<Props>) {
+export default function Search({ items, monsters }: Readonly<Props>) {
   const [searchValue, setSearchValue] = useState('')
 
   const onChangeSearchValue = (value: string) => {
@@ -28,6 +29,9 @@ export default function Search({ items }: Readonly<Props>) {
       <Suspense>
         <SearchResult
           items={searchValue ? items?.filter((item) => item.name_kor?.includes(searchValue)).slice(0, 5) ?? [] : []}
+          monsters={
+            searchValue ? monsters?.filter((monster) => monster.name_kor?.includes(searchValue)).slice(0, 5) ?? [] : []
+          }
         />
       </Suspense>
     </div>

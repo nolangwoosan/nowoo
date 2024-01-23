@@ -6,7 +6,7 @@ import { ROUTES } from '@/app/_constants/routes'
 import { getItemImage, getItems } from './utils'
 
 export default async function PopularItems() {
-  const { data: items } = await getItems()
+  const items = await getItems()
 
   return (
     <div className='flex w-full flex-col gap-8'>
