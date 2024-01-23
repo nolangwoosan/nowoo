@@ -12,7 +12,7 @@ export default async function PopularItems() {
     <div className='flex w-full flex-col gap-8'>
       <span className='text-2xl font-bold'>다른 유저들이 선호하는 아이템</span>
       <div className='flex flex-col gap-4 rounded-sm bg-white p-12 shadow-md max-sm:p-4'>
-        {items?.slice(0, 5)?.map((item) => (
+        {items.slice(0, 5)?.map((item) => (
           <Link
             className='flex items-center gap-8'
             key={item.id}
