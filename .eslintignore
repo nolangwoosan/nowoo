@@ -6,3 +6,4 @@ postcss.config.js
 tailwind.config.js
 database.types.ts
 supabase.ts
+out

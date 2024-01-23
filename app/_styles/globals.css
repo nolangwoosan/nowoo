@@ -7,3 +7,7 @@
     text-wrap: balance;
   }
 }
+
+body {
+  background: linear-gradient(158deg, #f3f6f7 0%, #f6f4f7 54.77%, #dee6e9 100%);
+}
