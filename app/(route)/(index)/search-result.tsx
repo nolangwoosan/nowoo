@@ -1,28 +1,24 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { use } from 'react'
-
 import { ROUTES } from '@/app/_constants/routes'
+import { Tables } from '@/app/_types/supabase'
 
-import { getItemImage, getItems } from './utils'
+import { getItemImage } from './utils'
 
 interface Props {
-  searchValue: string
+  items: Tables<'items'>[]
 }
 
-export default function SearchResult({ searchValue }: Readonly<Props>) {
-  const items = use(getItems())
-  const filteredItems = items?.filter((item) => item.name_kor?.includes(searchValue)).slice(0, 5)
-
-  if (!searchValue || !filteredItems?.length) return null
+export default async function SearchResult({ items }: Readonly<Props>) {
+  if (!items.length) return null
 
   return (
     <div className='border-red absolute z-10 w-full rounded-b-[30px] border-red-900 bg-white shadow-md'>
       <div className='flex flex-col gap-4 p-8'>
         <div className='text-center text-2xl font-bold text-gray-600'>아이템</div>
         <div className='flex flex-col gap-2 px-4'>
-          {filteredItems?.map((item) => (
+          {items?.map((item) => (
             <Link
               className='flex items-center gap-4'
               href={item.maple_item_id ? ROUTES.ITEM(item.maple_item_id) : ROUTES.HOME}
