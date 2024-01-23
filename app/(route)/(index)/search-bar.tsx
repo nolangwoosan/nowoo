@@ -10,7 +10,7 @@ export default function SearchBar({ isItemExist, searchValue, onChangeSearchValu
   return (
     <input
       className={cn(
-        'focus: w-[600px] rounded-[30px] border-none px-8 py-4 focus:border-transparent focus:ring-0 max-sm:w-full',
+        'w-full rounded-[30px] border-none px-8 py-4 focus:border-transparent focus:ring-0',
         isItemExist && 'rounded-b-none'
       )}
       type='text'

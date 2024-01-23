@@ -20,7 +20,7 @@ export default function Search({ items, monsters }: Readonly<Props>) {
   }
 
   return (
-    <div className='relative w-full'>
+    <div className='relative flex w-[600px] justify-center max-sm:w-full'>
       <SearchBar
         isItemExist={searchValue ? items?.some((item) => item.name_kor?.includes(searchValue)) ?? false : false}
         searchValue={searchValue}
