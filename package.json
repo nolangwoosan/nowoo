@@ -10,7 +10,7 @@
     "prettier": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
     "eslint": "eslint \"src/**/*.{js,jsx,ts,tsx}\"",
     "eslint:fix": "eslint  \"src/**/*.{js,jsx,ts,tsx}\" --fix",
-    "update-types": "npx supabase gen types typescript --project-id \"$PROJECT_REF\" > app/_types/database.types.ts",
+    "update-types": "npx supabase gen types typescript --linked --schema maple_land > app/_types/supabase.ts",
     "prepare": "husky install"
   },
   "lint-staged": {
@@ -51,7 +51,6 @@
     "postcss": "^8",
     "prettier": "^3.2.4",
     "prettier-plugin-tailwindcss": "^0.5.11",
-    "supabase": "^1.131.5",
     "tailwindcss": "^3.3.0",
     "typescript": "^5"
   }

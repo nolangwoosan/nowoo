@@ -19,7 +19,7 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=<your_supabase_anon_key>
 
 1. npx supabase login
 2. npx supabase link (tarotbunny 선택 > DB 비밀번호 입력)
-3. npx supabase gen types typescript --linked --schema maple_land > app/\_types/database.types.ts
+3. pnpm update-types
 
 ## 실행 방법
 
