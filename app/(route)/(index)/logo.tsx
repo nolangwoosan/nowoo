@@ -1,8 +1,11 @@
 import Image from 'next/image'
+import Link from 'next/link'
+
+import { ROUTES } from '@/app/_constants/routes'
 
 export default function Logo() {
   return (
-    <div className='flex items-center gap-2'>
+    <Link className='flex items-center gap-2' href={ROUTES.HOME}>
       <Image
         src='https://vcsbnusyecxmogxxeoww.supabase.co/storage/v1/object/sign/images/nowoo_logo-removebg-preview.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvbm93b29fbG9nby1yZW1vdmViZy1wcmV2aWV3LnBuZyIsImlhdCI6MTcwNjA2MjUzMywiZXhwIjoxODYzNzQyNTMzfQ.SlP8E0TSx0Usuo42VsNevsKA7bLTH-ih-IR-g6vstJ0&t=2024-01-24T02%3A15%3A33.259Z'
         width={240}
@@ -15,6 +18,6 @@ export default function Logo() {
         height={50}
         alt='nowoo'
       />
-    </div>
+    </Link>
   )
 }

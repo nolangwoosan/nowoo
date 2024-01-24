@@ -1,3 +1,5 @@
+import { Search } from 'lucide-react'
+
 import { cn } from '@/app/_styles/utils'
 
 interface Props {
@@ -8,15 +10,20 @@ interface Props {
 
 export default function SearchBar({ isItemExist, searchValue, onChangeSearchValue }: Readonly<Props>) {
   return (
-    <input
+    <div
       className={cn(
-        'w-full rounded-[30px] border-none px-8 py-4 focus:border-transparent focus:ring-0',
+        'flex w-full items-center gap-4 rounded-[30px] bg-white px-8 py-4',
         isItemExist && 'rounded-b-none'
       )}
-      type='text'
-      value={searchValue}
-      onChange={(e) => onChangeSearchValue(e.target.value)}
-      placeholder='아이템 or 몬스터 이름'
-    />
+    >
+      <input
+        className='flex-1 border-none p-0 focus:border-transparent focus:ring-0'
+        type='text'
+        value={searchValue}
+        onChange={(e) => onChangeSearchValue(e.target.value)}
+        placeholder='아이템 or 몬스터 이름'
+      />
+      <Search />
+    </div>
   )
 }

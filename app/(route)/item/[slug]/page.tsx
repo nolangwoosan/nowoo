@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { notFound } from 'next/navigation'
 
 import supabase from '@/app/_lib/utils/supabase'
 
@@ -23,12 +24,12 @@ export default async function Page({
 
   const { data: item } = await supabase.from('items').select().eq('maple_item_id', slug).single()
 
-  if (!item) return null
+  if (!item) return notFound()
 
   return (
-    <main className='flex h-screen flex-col items-center justify-center gap-1'>
+    <section className='flex flex-col items-center gap-4 p-24 max-sm:p-4'>
       <Image
-        className='max-h-20 min-h-20  min-w-20 max-w-20 object-contain'
+        className='aspect-square object-contain'
         src={`https://maplestory.io/api/gms/62/item/${item.maple_item_id}/icon?resize=3`}
         width={80}
         height={80}
@@ -36,6 +37,6 @@ export default async function Page({
       />
       <h1>{item.name_kor}</h1>
       <p>Item Id: {item.maple_item_id}</p>
-    </main>
+    </section>
   )
 }
