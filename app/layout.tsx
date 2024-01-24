@@ -13,7 +13,7 @@ const pretendard = localFont({
 })
 
 export const metadata: Metadata = {
-  title: 'NOWOO',
+  title: 'NOWOO - 메이플랜드 아이템 검색 사이트',
   description: '메이플랜드 아이템 검색 사이트',
   applicationName: 'NOWOO',
   keywords: '메이플스토리, 메이플랜드, 아이템, 몬스터',
