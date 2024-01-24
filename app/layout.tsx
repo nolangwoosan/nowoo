@@ -53,6 +53,12 @@ export const metadata: Metadata = {
       },
     ],
   },
+  verification: {
+    google: 'Kqvp08KOCUZgU4pyr6CUFymLP3Fw6EyNaQjmSrAa5fg',
+    other: {
+      'naver-site-verification': 'b779ab4179ff0174da67f6f4178e29bda49a5a7f',
+    },
+  },
 }
 
 export default function RootLayout({
