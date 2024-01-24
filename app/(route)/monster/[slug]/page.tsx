@@ -12,10 +12,10 @@ interface Props {
 }
 
 export default async function Page({ params }: Readonly<Props>) {
+  const { slug } = params
+
   const items = await getItems()
   const monsters = await getMonsters()
-
-  const { slug } = params
 
   const monster = monsters.find(({ maple_mob_id }) => maple_mob_id?.toString() === slug)
 

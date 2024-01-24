@@ -11,7 +11,7 @@ export default async function PopularMonsters() {
   return (
     <div className='flex w-full flex-col gap-8'>
       <span className='text-2xl font-bold'>인기 몬스터</span>
-      <div className='flex flex-col gap-4 rounded-sm bg-white p-12 shadow-md max-sm:p-4'>
+      <div className='flex flex-col gap-4 rounded-sm bg-white p-12 shadow-md max-md:gap-2 max-md:p-4'>
         {monsters.slice(0, 5)?.map((monster) => (
           <Link
             className='flex items-center gap-8'
