@@ -11,7 +11,7 @@ export default async function HomePage() {
   const monsters = await getMonsters()
 
   return (
-    <section className='flex flex-col items-center gap-4 p-24 max-sm:p-4'>
+    <section className='flex flex-col items-center gap-4 p-24 max-sm:px-4 max-sm:py-16'>
       <Logo />
       <Search items={items} monsters={monsters} />
       <div className='mt-4 h-[200px] w-[1200px] max-w-full bg-white' />
