@@ -1,5 +1,5 @@
 #!/bin/sh
 cd ../
 mkdir output
-cp -R ./mapleland/* ./output
-cp -R ./output ./mapleland/
+cp -R ./nowoo/* ./output
+cp -R ./output ./nowoo/
