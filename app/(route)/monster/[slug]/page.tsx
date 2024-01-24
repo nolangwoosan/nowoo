@@ -1,34 +1,23 @@
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
 
-import supabase from '@/app/_lib/utils/supabase'
-
 import Logo from '../../(index)/logo'
 import Search from '../../(index)/search'
 import { getItems, getMonsters } from '../../(index)/utils'
 
-export async function generateStaticParams() {
-  const { data: monsters } = await supabase.from('monsters').select().limit(9)
-
-  if (!monsters) return []
-
-  return monsters?.map(({ maple_mob_id }) => ({
-    slug: maple_mob_id?.toString() ?? '',
-  }))
-}
-
-export default async function Page({
-  params,
-}: {
+interface Props {
   params: {
     slug: string
   }
-}) {
+}
+
+export default async function Page({ params }: Readonly<Props>) {
   const items = await getItems()
   const monsters = await getMonsters()
 
   const { slug } = params
-  const { data: monster } = await supabase.from('monsters').select().eq('maple_mob_id', slug).single()
+
+  const monster = monsters.find(({ maple_mob_id }) => maple_mob_id?.toString() === slug)
 
   if (!monster) return notFound()
 

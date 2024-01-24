@@ -3,26 +3,22 @@ import { notFound } from 'next/navigation'
 
 import supabase from '@/app/_lib/utils/supabase'
 
-export async function generateStaticParams() {
-  const { data: items } = await supabase.from('items').select().limit(9)
-
-  if (!items) return []
-
-  return items?.map(({ maple_item_id }) => ({
-    slug: maple_item_id?.toString() ?? '',
-  }))
-}
-
-export default async function Page({
-  params,
-}: {
+interface Props {
   params: {
     slug: string
   }
-}) {
+}
+
+export default async function Page({ params }: Readonly<Props>) {
   const { slug } = params
 
-  const { data: item } = await supabase.from('items').select().eq('maple_item_id', slug).single()
+  const { data: item } = await supabase
+    .from('items')
+    .select()
+    .match({
+      maple_item_id: slug,
+    })
+    .single()
 
   if (!item) return notFound()
 

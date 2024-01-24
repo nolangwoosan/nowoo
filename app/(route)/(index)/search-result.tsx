@@ -46,7 +46,7 @@ export default async function SearchResult({ items, monsters }: Readonly<Props>)
             {monsters.map((monster) => (
               <Link
                 className='flex items-center gap-4 px-4 py-2 hover:bg-[#FB9E48] hover:text-white'
-                href={monster.maple_mob_id ? ROUTES.ITEM(monster.maple_mob_id) : ROUTES.HOME}
+                href={monster.maple_mob_id ? ROUTES.MONSTER(monster.maple_mob_id) : ROUTES.HOME}
                 key={monster.id}
               >
                 <Image
