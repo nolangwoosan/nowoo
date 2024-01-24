@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   openGraph: {
     siteName: 'NOWOO',
     type: 'website',
-    title: 'NOWOO',
+    title: 'NOWOO - 메이플랜드 아이템 검색 사이트',
     description: '메이플랜드 아이템 검색 사이트',
     images: [
       {
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'NOWOO',
+    title: 'NOWOO - 메이플랜드 아이템 검색 사이트',
     description: '메이플랜드 아이템 검색 사이트',
     images: [
       {
