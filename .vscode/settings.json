@@ -17,5 +17,5 @@
   "css.validate": false,
   "editor.inlineSuggest.enabled": true,
   "css.lint.unknownAtRules": "ignore",
-  "cSpell.words": ["supabase"]
+  "cSpell.words": ["NOWOO", "supabase"]
 }
