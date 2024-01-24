@@ -6,6 +6,7 @@ import type { Metadata } from 'next'
 
 import '@/app/_styles/globals.css'
 import GoogleAnalytics from './_components/shared/google-analytics'
+import { openGraphImage } from './_constants/open-graph'
 import { cn } from './_styles/utils'
 
 const pretendard = localFont({
@@ -35,7 +36,7 @@ export const metadata: Metadata = {
     description: '메이플랜드 아이템 검색 사이트',
     images: [
       {
-        url: 'https://vcsbnusyecxmogxxeoww.supabase.co/storage/v1/object/sign/images/nowoo_og_image.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvbm93b29fb2dfaW1hZ2UucG5nIiwiaWF0IjoxNzA2MDYxNDIwLCJleHAiOjE4NjM3NDE0MjB9.T8dSKNIZ1czDXzd2j2Em8bw5iq8DMaO199JmM3pNaaU&t=2024-01-24T01%3A57%3A00.419Z',
+        url: openGraphImage,
         width: 1200,
         height: 630,
       },
@@ -47,7 +48,7 @@ export const metadata: Metadata = {
     description: '메이플랜드 아이템 검색 사이트',
     images: [
       {
-        url: 'https://vcsbnusyecxmogxxeoww.supabase.co/storage/v1/object/sign/images/nowoo_og_image.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvbm93b29fb2dfaW1hZ2UucG5nIiwiaWF0IjoxNzA2MDYxNDIwLCJleHAiOjE4NjM3NDE0MjB9.T8dSKNIZ1czDXzd2j2Em8bw5iq8DMaO199JmM3pNaaU&t=2024-01-24T01%3A57%3A00.419Z',
+        url: openGraphImage,
         width: 1200,
         height: 630,
       },

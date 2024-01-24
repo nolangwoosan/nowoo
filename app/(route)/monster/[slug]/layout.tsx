@@ -1,4 +1,5 @@
 import Footer from '@/app/_components/shared/footer'
+import { openGraphImage } from '@/app/_constants/open-graph'
 import supabase from '@/app/_lib/utils/supabase'
 
 import { getMonsterImage } from '../../(index)/utils'
@@ -18,7 +19,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     openGraph: {
       images: [
         {
-          url: getMonsterImage(monster?.maple_mob_id || 0),
+          url: monster?.maple_mob_id ? getMonsterImage(monster.maple_mob_id) : openGraphImage,
         },
       ],
     },
