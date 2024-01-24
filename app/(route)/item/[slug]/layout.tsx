@@ -1,5 +1,6 @@
 import Footer from '@/app/_components/shared/footer'
 import { openGraphImage } from '@/app/_constants/open-graph'
+import { ROUTES } from '@/app/_constants/routes'
 import supabase from '@/app/_lib/utils/supabase'
 
 import { getItemImage } from '../../(index)/utils'
@@ -16,7 +17,22 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   return {
     title: `${item?.name_kor || '아이템'} | NOWOO - 메이플랜드 아이템 검색 사이트`,
     description: item?.description_kor || '메이플랜드 아이템 검색 사이트',
+    alternates: {
+      canonical: `https://nowoo.kr + ${ROUTES.ITEM(Number(params.slug))}`,
+    },
     openGraph: {
+      title: `${item?.name_kor || '아이템'} | NOWOO - 메이플랜드 아이템 검색 사이트`,
+      description: item?.description_kor || '메이플랜드 아이템 검색 사이트',
+      images: [
+        {
+          url: item?.maple_item_id ? getItemImage(item.maple_item_id) : openGraphImage,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${item?.name_kor || '아이템'} | NOWOO - 메이플랜드 아이템 검색 사이트`,
+      description: item?.description_kor || '메이플랜드 아이템 검색 사이트',
       images: [
         {
           url: item?.maple_item_id ? getItemImage(item.maple_item_id) : openGraphImage,

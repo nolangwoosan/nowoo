@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   creator: 'NOWOO',
   metadataBase: new URL('https://nowoo.kr'),
   alternates: {
-    canonical: '/',
+    canonical: 'https://nowoo.kr',
   },
   icons: [
     {
