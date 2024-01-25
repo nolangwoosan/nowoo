@@ -1,10 +1,11 @@
 import { Suspense } from 'react'
 
-import Logo from './logo'
+import Logo from '@/components/logo'
+import Search from '@/components/search'
+import { getItems, getMonsters } from '@/lib/utils'
+
 import PopularItems from './popular-items'
 import PopularMonsters from './popular-monsters'
-import Search from './search'
-import { getItems, getMonsters } from './utils'
 
 export default async function HomePage() {
   const items = await getItems()

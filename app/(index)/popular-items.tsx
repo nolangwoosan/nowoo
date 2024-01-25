@@ -2,8 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import { ROUTES } from '@/constants/routes'
-
-import { getItemImage, getItems } from './utils'
+import { getItemImage, getItems } from '@/lib/utils'
 
 export default async function PopularItems() {
   const items = await getItems()

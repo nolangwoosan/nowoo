@@ -1,9 +1,8 @@
 import Footer from '@/components/footer'
 import { openGraphImage } from '@/constants/open-graph'
 import { ROUTES } from '@/constants/routes'
+import { getMonsterImage } from '@/lib/utils'
 import supabase from '@/lib/utils/supabase'
-
-import { getMonsterImage } from '../../(index)/utils'
 
 export async function generateMetadata({ params }: { params: { slug: string } }) {
   const { data: monster } = await supabase

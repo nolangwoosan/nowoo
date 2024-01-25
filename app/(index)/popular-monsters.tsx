@@ -2,8 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import { ROUTES } from '@/constants/routes'
-
-import { getMonsterImage, getMonsters } from './utils'
+import { getMonsterImage, getMonsters } from '@/lib/utils'
 
 export default async function PopularMonsters() {
   const monsters = await getMonsters()

@@ -1,9 +1,9 @@
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
 
-import Logo from '../../(index)/logo'
-import Search from '../../(index)/search'
-import { getItemImage, getItems, getMonsters } from '../../(index)/utils'
+import Logo from '@/components/logo'
+import Search from '@/components/search'
+import { getItemImage, getItems, getMonsters } from '@/lib/utils'
 
 interface Props {
   params: {
