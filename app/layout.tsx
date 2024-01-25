@@ -1,13 +1,13 @@
-import localFont from 'next/font/local'
+import './globals.css'
 
 import { Analytics as VercelAnalytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import type { Metadata } from 'next'
+import localFont from 'next/font/local'
 
-import '@/app/_styles/globals.css'
-import GoogleAnalytics from './_components/shared/google-analytics'
-import { openGraphImage } from './_constants/open-graph'
-import { cn } from './_styles/utils'
+import GoogleAnalytics from '@/components/google-analytics'
+import { openGraphImage } from '@/constants/open-graph'
+import { cn } from '@/lib/utils'
 
 const pretendard = localFont({
   src: '../public/fonts/PretendardVariable.woff2',

@@ -2,7 +2,7 @@
 
 import { Suspense, useState } from 'react'
 
-import { Tables } from '@/app/_types/supabase'
+import { Tables } from '@/@types/supabase'
 
 import SearchBar from './search-bar'
 import SearchResult from './search-result'

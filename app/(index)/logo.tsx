@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { ROUTES } from '@/app/_constants/routes'
+import { ROUTES } from '@/constants/routes'
 
 export default function Logo() {
   return (

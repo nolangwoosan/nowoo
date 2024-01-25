@@ -1,7 +1,7 @@
-import Footer from '@/app/_components/shared/footer'
-import { openGraphImage } from '@/app/_constants/open-graph'
-import { ROUTES } from '@/app/_constants/routes'
-import supabase from '@/app/_lib/utils/supabase'
+import Footer from '@/components/footer'
+import { openGraphImage } from '@/constants/open-graph'
+import { ROUTES } from '@/constants/routes'
+import supabase from '@/lib/utils/supabase'
 
 import { getMonsterImage } from '../../(index)/utils'
 

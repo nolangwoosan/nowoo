@@ -1,8 +1,8 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { ROUTES } from '@/app/_constants/routes'
-import { Tables } from '@/app/_types/supabase'
+import { Tables } from '@/@types/supabase'
+import { ROUTES } from '@/constants/routes'
 
 import { getItemImage, getMonsterImage } from './utils'
 

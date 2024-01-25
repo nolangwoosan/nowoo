@@ -1,4 +1,4 @@
-import Footer from '@/app/_components/shared/footer'
+import Footer from '@/components/footer'
 
 export default function RootLayout({
   children,

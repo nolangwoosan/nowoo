@@ -1,6 +1,6 @@
 import { createClient } from '@supabase/supabase-js'
 
-import { Database } from '@/app/_types/supabase'
+import { Database } from '@/@types/supabase'
 
 export default createClient<Database>(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,

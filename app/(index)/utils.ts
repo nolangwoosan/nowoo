@@ -1,4 +1,4 @@
-import supabase from '@/app/_lib/utils/supabase'
+import supabase from '@/lib/utils/supabase'
 
 export const getItems = async () => {
   const { data: items } = await supabase.from('items').select()

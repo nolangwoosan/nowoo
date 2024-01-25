@@ -1,6 +1,6 @@
 import { Search } from 'lucide-react'
 
-import { cn } from '@/app/_styles/utils'
+import { cn } from '@/lib/utils'
 
 interface Props {
   isItemExist: boolean
