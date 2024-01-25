@@ -72,7 +72,7 @@ export default function RootLayout({
       <head>
         <link rel='icon' href='/favicon.ico' sizes='any' />
       </head>
-      <body className={cn(pretendard.className, 'min-h-dvh')}>
+      <body className={cn(pretendard.className, 'min-h-dvh text-[#222222]')}>
         <VercelAnalytics />
         <GoogleAnalytics />
         <SpeedInsights />

@@ -54,20 +54,20 @@ export default async function Page({ params }: Readonly<Props>) {
             </div>
           </div>
           <div className='mt-4 w-[280px] border border-[#E0E0E0]'>
-            <div className='flex bg-[#F9F9F9]'>
-              <span className='flex-1 text-center'>공격력</span>
+            <div className='flex bg-[#F9F9F9] '>
+              <span className='flex-1 border-r border-gray-300 text-center'>공격력</span>
               <span className='flex-1 text-center'>방어력</span>
             </div>
             <div className='flex bg-[#D9D9D9]'>
-              <span className='flex-1 text-center'>물리</span>
-              <span className='flex-1 text-center'>마법</span>
-              <span className='flex-1 text-center'>물리</span>
+              <span className='flex-1 border-r border-gray-200 text-center'>물리</span>
+              <span className='flex-1 border-r border-gray-200 text-center'>마법</span>
+              <span className='flex-1 border-r border-gray-200 text-center'>물리</span>
               <span className='flex-1 text-center'>마법</span>
             </div>
             <div className='flex bg-[#F9F9F9]'>
-              <span className='flex-1 text-center'>{monster.ph_attack}</span>
-              <span className='flex-1 text-center'>{monster.mg_attack}</span>
-              <span className='flex-1 text-center'>{monster.ph_defence}</span>
+              <span className='flex-1 border-r border-gray-300 text-center'>{monster.ph_attack}</span>
+              <span className='flex-1 border-r border-gray-300 text-center'>{monster.mg_attack}</span>
+              <span className='flex-1 border-r border-gray-300 text-center'>{monster.ph_defence}</span>
               <span className='flex-1 text-center'>{monster.mg_defence}</span>
             </div>
           </div>

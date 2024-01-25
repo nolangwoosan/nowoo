@@ -43,25 +43,25 @@ export default async function Page({ params }: Readonly<Props>) {
             <span className='text-lg text-[#FB9E48]'>전사</span>
           </div>
           <div className='flex gap-2'>
-            <div className='flex w-40 flex-col rounded-md border border-gray-300 bg-gray-200 p-2'>
+            <div className='flex w-40 flex-col rounded-md border border-[#E0E0E0] bg-[#F9F9F9] p-2'>
               <span>카테고리 {item.category}</span>
               <span>하위 카테고리 {item.sub_category}</span>
               <span>전체 카테고리 {item.overall_category}</span>
             </div>
-            <div className='flex w-40 flex-col rounded-md border border-gray-300 bg-gray-200 p-2'>
-              <span>REQ LEV: {item.req_level}</span>
-              <span>REQ STR: {item.req_str}</span>
-              <span>REQ DEX: {item.req_dex}</span>
-              <span>REQ INT: {item.req_int}</span>
-              <span>REQ LUK: {item.req_luk}</span>
-              <span>REQ POP: {item.req_pop}</span>
+            <div className='flex w-40 flex-col rounded-md border border-[#E0E0E0] bg-[#F9F9F9] p-2'>
+              <span>REQ LEV: {item.req_level ?? 0}</span>
+              <span>REQ STR: {item.req_str ?? 0}</span>
+              <span>REQ DEX: {item.req_dex ?? 0}</span>
+              <span>REQ INT: {item.req_int ?? 0}</span>
+              <span>REQ LUK: {item.req_luk ?? 0}</span>
+              <span>REQ POP: {item.req_pop ?? 0}</span>
             </div>
           </div>
           <div className='mt-4 flex flex-col'>
             <span>업그레이드 가능 횟수: {item.upgradable_count}</span>
           </div>
-          <div className='mt-4 flex w-80 justify-center rounded-md bg-orange-400 p-4'>
-            <span className='text-white'>상점 거래가: {item.price_shop} 메소</span>
+          <div className='mt-4 flex w-80 justify-center bg-[#FB9E48] p-4'>
+            <span className='text-white'>상점 거래가: {item.price_shop ?? 0} 메소</span>
           </div>
         </div>
       </div>
