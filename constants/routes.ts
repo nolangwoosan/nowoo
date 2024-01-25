@@ -1,5 +1,5 @@
 export const ROUTES = {
-  HOME: '/',
-  MONSTER: (id: number) => `/monster/${id}`,
-  ITEM: (id: number) => `/item/${id}`,
+  HOME: '/' as const,
+  MONSTER: (id: number) => `/monster/${id}` as const,
+  ITEM: (id: number) => `/item/${id}` as const,
 }
