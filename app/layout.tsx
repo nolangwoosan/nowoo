@@ -4,6 +4,7 @@ import { Analytics as VercelAnalytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import Script from 'next/script'
 
 import GoogleAnalytics from '@/components/google-analytics'
 import { openGraphImage } from '@/constants/open-graph'
@@ -77,6 +78,15 @@ export default function RootLayout({
         <SpeedInsights />
         {children}
       </body>
+      <Script async src='https://d-collect.jennifersoft.com/9fcd1340/demian.js' />
+      <Script id='jennifer-frontend'>
+        {`
+      (function(j,ennifer) {
+        j['dmndata']=[];j['jenniferFront']=function(args){window.dmndata.push(args)};
+        j['dmnaid']=ennifer;j['dmnatime']=new Date();j['dmnanocookie']=false;j['dmnajennifer']='JENNIFER_FRONT@INTG';
+    }(window, '9fcd1340'));
+        `}
+      </Script>
     </html>
   )
 }
