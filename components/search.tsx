@@ -1,36 +1,27 @@
-'use client'
+import { Suspense } from 'react'
 
-import { Suspense, useState } from 'react'
-
-import { Tables } from '@/@types/supabase'
+import supabase from '@/lib/utils/supabase'
 
 import SearchBar from './search-bar'
 import SearchResult from './search-result'
 
 interface Props {
-  items: Tables<'items'>[]
-  monsters: Tables<'monsters'>[]
+  query: string
 }
 
-export default function Search({ items, monsters }: Readonly<Props>) {
-  const [searchValue, setSearchValue] = useState('')
-
-  const onChangeSearchValue = (value: string) => {
-    setSearchValue(value)
-  }
-
-  const searchedItems = items.filter((item) => item.name_kor?.includes(searchValue)).slice(0, 5)
-  const searchedMonsters = monsters.filter((monster) => monster.name_kor?.includes(searchValue)).slice(0, 5)
+export default async function Search({ query }: Readonly<Props>) {
+  const isMatchedResultExist: boolean = await supabase
+    .from('items')
+    .select('id')
+    .ilike('name_kor', `%${query}%`)
+    .limit(1)
+    .then((response) => Boolean(response.data?.length))
 
   return (
     <div className='relative flex w-[600px] justify-center max-sm:w-full'>
-      <SearchBar
-        isItemExist={Boolean(searchValue && (searchedItems.length > 0 || searchedMonsters.length > 0))}
-        searchValue={searchValue}
-        onChangeSearchValue={onChangeSearchValue}
-      />
+      <SearchBar isMatchedResultExist={Boolean(query) && isMatchedResultExist} />
       <Suspense>
-        <SearchResult items={searchValue ? searchedItems : []} monsters={searchValue ? searchedMonsters : []} />
+        <SearchResult searchQuery={query} />
       </Suspense>
     </div>
   )

@@ -3,28 +3,34 @@ import { notFound } from 'next/navigation'
 
 import Logo from '@/components/logo'
 import Search from '@/components/search'
-import { getItems, getMonsters } from '@/lib/utils'
+import supabase from '@/lib/utils/supabase'
 
 interface Props {
   params: {
     slug: string
   }
+  searchParams?: {
+    query?: string
+  }
 }
 
-export default async function Page({ params }: Readonly<Props>) {
+export default async function Page({ params, searchParams }: Readonly<Props>) {
   const { slug } = params
 
-  const items = await getItems()
-  const monsters = await getMonsters()
-
-  const monster = monsters.find(({ maple_mob_id }) => maple_mob_id?.toString() === slug)
+  const { data: monster } = await supabase
+    .from('monsters')
+    .select(
+      'id, maple_mob_id, name_kor, name_eng, level, hp, mp, exp, ph_attack, mg_attack, ph_defence, mg_defence, description_kor'
+    )
+    .match({ maple_mob_id: slug })
+    .single()
 
   if (!monster) return notFound()
 
   return (
     <section className='flex flex-col items-center gap-4 p-24 max-sm:px-4 max-sm:py-16'>
       <Logo />
-      <Search items={items} monsters={monsters} />
+      <Search query={searchParams?.query || ''} />
       <div className='mt-8 flex w-[580px] max-w-full flex-col items-center rounded-md bg-white shadow-md'>
         <div className='mt-5 flex w-full flex-col items-center gap-1 bg-[#FEF9EE] p-2'>
           <span className='text-xl font-semibold'>{monster.name_kor}</span>

@@ -17,5 +17,5 @@
   "css.validate": false,
   "editor.inlineSuggest.enabled": true,
   "css.lint.unknownAtRules": "ignore",
-  "cSpell.words": ["naver", "NOWOO", "supabase"]
+  "cSpell.words": ["ilike", "lucide", "naver", "NOWOO", "supabase"]
 }

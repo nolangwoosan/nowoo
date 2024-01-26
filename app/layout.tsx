@@ -3,15 +3,13 @@ import './globals.css'
 import { Analytics as VercelAnalytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import type { Metadata } from 'next'
-import localFont from 'next/font/local'
+import { Inter } from 'next/font/google'
 
 import GoogleAnalytics from '@/components/google-analytics'
 import { openGraphImage } from '@/constants/open-graph'
 import { cn } from '@/lib/utils'
 
-const pretendard = localFont({
-  src: '../public/fonts/PretendardVariable.woff2',
-})
+const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'NOWOO - 메이플랜드 아이템 검색 사이트',
@@ -34,6 +32,7 @@ export const metadata: Metadata = {
     type: 'website',
     title: 'NOWOO - 메이플랜드 아이템 검색 사이트',
     description: '메이플랜드 아이템 검색 사이트',
+    url: 'https://nowoo.kr',
     images: [
       {
         url: openGraphImage,
@@ -72,7 +71,7 @@ export default function RootLayout({
       <head>
         <link rel='icon' href='/favicon.ico' sizes='any' />
       </head>
-      <body className={cn(pretendard.className, 'min-h-dvh text-[#222222]')}>
+      <body className={cn(inter.className, 'min-h-dvh text-[#222222]')}>
         <VercelAnalytics />
         <GoogleAnalytics />
         <SpeedInsights />

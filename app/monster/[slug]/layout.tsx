@@ -22,6 +22,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     openGraph: {
       title: `${monster?.name_kor || '몬스터'} | NOWOO - 메이플랜드 아이템 검색 사이트`,
       description: monster?.description_kor || '메이플랜드 아이템 검색 사이트',
+      url: `https://nowoo.kr + ${ROUTES.MONSTER(Number(params.slug))}`,
       images: [
         {
           url: monster?.maple_mob_id ? getMonsterImage(monster.maple_mob_id) : openGraphImage,
