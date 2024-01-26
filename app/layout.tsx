@@ -1,7 +1,5 @@
 import './globals.css'
 
-import { Analytics as VercelAnalytics } from '@vercel/analytics/react'
-import { SpeedInsights } from '@vercel/speed-insights/next'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import Script from 'next/script'
@@ -73,9 +71,7 @@ export default function RootLayout({
         <link rel='icon' href='/favicon.ico' sizes='any' />
       </head>
       <body className={cn(inter.className, 'min-h-dvh text-[#222222]')}>
-        <VercelAnalytics />
         <GoogleAnalytics />
-        <SpeedInsights />
         {children}
       </body>
       <Script async src='https://d-collect.jennifersoft.com/9fcd1340/demian.js' />

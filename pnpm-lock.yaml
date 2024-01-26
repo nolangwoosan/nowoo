@@ -8,12 +8,6 @@ dependencies:
   '@supabase/supabase-js':
     specifier: ^2.39.3
     version: 2.39.3
-  '@vercel/analytics':
-    specifier: ^1.1.2
-    version: 1.1.2
-  '@vercel/speed-insights':
-    specifier: ^1.0.6
-    version: 1.0.6(next@14.1.0)(react@18.2.0)
   clsx:
     specifier: ^2.1.0
     version: 2.1.0
@@ -632,40 +626,6 @@ packages:
   /@ungap/structured-clone@1.2.0:
     resolution: {integrity: sha512-zuVdFrMJiuCDQUMCzQaD6KL28MjnqqN8XnAqiEq9PNm/hCPTSGfrXCOfwj1ow4LFb/tNymJPwsNbVePc1xFqrQ==}
     dev: true
-
-  /@vercel/analytics@1.1.2:
-    resolution: {integrity: sha512-CodhkLCQ/EHzjX8k+Qg+OzTBY0UadykrcfolfSOJVZZY/ZJM5nbhztm9KdbYvMfqKlasAr1+OYy0ThZnDA/MYA==}
-    dependencies:
-      server-only: 0.0.1
-    dev: false
-
-  /@vercel/speed-insights@1.0.6(next@14.1.0)(react@18.2.0):
-    resolution: {integrity: sha512-T+6AxPhGMqj4hwY7t1kjtsPFI/alOfakNgzTfB0ujGAddQLqjAlvhWmNgWHcYWqcYoG3r53efzQEnXyjqgmKSg==}
-    requiresBuild: true
-    peerDependencies:
-      '@sveltejs/kit': ^1
-      next: '>= 13'
-      react: ^18 || ^19
-      svelte: ^4
-      vue: ^3
-      vue-router: ^4
-    peerDependenciesMeta:
-      '@sveltejs/kit':
-        optional: true
-      next:
-        optional: true
-      react:
-        optional: true
-      svelte:
-        optional: true
-      vue:
-        optional: true
-      vue-router:
-        optional: true
-    dependencies:
-      next: 14.1.0(react-dom@18.2.0)(react@18.2.0)
-      react: 18.2.0
-    dev: false
 
   /@webassemblyjs/ast@1.11.6:
     resolution: {integrity: sha512-IN1xI7PwOvLPgjcf180gC1bqn3q/QaOCwYUahIOhbYUu8KA/3tw2RT/T0Gidi1l7Hhj5D/INhJxiICObqpMu4Q==}
@@ -3186,10 +3146,6 @@ packages:
     dependencies:
       randombytes: 2.1.0
     dev: true
-
-  /server-only@0.0.1:
-    resolution: {integrity: sha512-qepMx2JxAa5jjfzxG79yPPq+8BuFToHd1hm7kI+Z4zAq1ftQiP7HcxMhDDItrbtwVeLg/cY2JnKnrcFkmiswNA==}
-    dev: false
 
   /set-function-length@1.2.0:
     resolution: {integrity: sha512-4DBHDoyHlM1IRPGYcoxexgh67y4ueR53FKV1yyxwFMY7aCqcN/38M1+SwZ/qJQ8iLv7+ck385ot4CcisOAPT9w==}
