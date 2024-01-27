@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation'
 
 import Logo from '@/components/logo'
 import SearchForm from '@/components/search-form'
+import { getMonsterImage } from '@/lib/utils'
 import supabase from '@/lib/utils/supabase'
 
 interface Props {
@@ -28,60 +29,66 @@ export default async function Page({ params }: Readonly<Props>) {
     <section className='flex flex-col items-center gap-4 p-24 max-sm:px-4 max-sm:py-16'>
       <Logo />
       <SearchForm />
-      <div className='mt-8 flex w-[580px] max-w-full flex-col items-center rounded-md bg-white shadow-md'>
-        <div className='mt-5 flex w-full flex-col items-center gap-1 bg-[#FEF9EE] p-2'>
-          <span className='text-xl font-semibold'>{monster.name_kor}</span>
-          <span className='text-sm'>{monster.name_eng}</span>
+      <div className='mt-8 flex w-[500px] max-w-full flex-col bg-[#06062C] bg-opacity-50 px-2 pb-20 text-white shadow-md'>
+        <div className='mt-5 flex w-full flex-col items-center gap-1 p-2'>
+          <h1 className='text-3xl font-semibold'>{monster.name_kor}</h1>
         </div>
-        <div className='flex flex-col items-center gap-2 p-4'>
-          <Image
-            className='aspect-square object-contain'
-            src={`https://maplestory.io/api/gms/62/mob/animated/${monster.maple_mob_id}/move`}
-            width={80}
-            height={80}
-            alt={monster.name_kor ?? 'No Name'}
-          />
-          <span className='mt-4 text-[#FB9E48]'>Lv. {monster.level}</span>
-          <div className='mt-2 flex flex-col gap-1'>
-            <div className='flex items-center'>
-              <span className='w-20 text-[#FF3B3B]'>HP {monster.hp}</span>
-              <div className='h-[10px] w-[180px] bg-[#FF3B3B]' />
+
+        <div className='flex gap-10 px-4 py-4'>
+          <div className='h-fit bg-white p-2'>
+            <Image
+              className='aspect-square object-contain'
+              src={getMonsterImage(monster.maple_mob_id ?? 0)}
+              width={160}
+              height={160}
+              alt={monster.name_kor ?? 'No Name'}
+            />
+          </div>
+          <div className='flex flex-col gap-3'>
+            <span>LEV: {monster.level}</span>
+            <div className='flex flex-col gap-1'>
+              <span className='text-[#FF3B3B]'>HP 10000</span>
+              <div className='h-[10px] w-[200px] bg-[#FF3B3B]' />
             </div>
-            <div className='flex items-center'>
-              <span className='w-20 text-[#1B69FF]'>MP {monster.mp}</span>
-              <div className='h-[10px] w-[180px] bg-[#1B69FF]' />
+            <div className='flex flex-col gap-1'>
+              <span className='text-[#1B69FF]'>MP 10000</span>
+              <div className='h-[10px] w-[200px] bg-[#1B69FF]' />
             </div>
-            <div className='flex items-center'>
-              <span className='w-20 text-[#A6AEB7]'>EXP {monster.exp}</span>
-              <div className='h-[10px] w-[180px] bg-[#A6AEB7]' />
+            <div className='flex flex-col gap-1'>
+              <span className='text-[#DFDFDF]'>EXP 97</span>
+              <div className='h-[10px] w-[200px] bg-[#DFDFDF]' />
             </div>
           </div>
-          <div className='mt-4 w-[280px] border border-[#E0E0E0]'>
-            <div className='flex bg-[#F9F9F9] '>
-              <span className='flex-1 border-r border-gray-300 text-center'>공격력</span>
-              <span className='flex-1 text-center'>방어력</span>
-            </div>
-            <div className='flex bg-[#D9D9D9]'>
-              <span className='flex-1 border-r border-gray-200 text-center'>물리</span>
-              <span className='flex-1 border-r border-gray-200 text-center'>마법</span>
-              <span className='flex-1 border-r border-gray-200 text-center'>물리</span>
+        </div>
+
+        <div className='mx-4 bg-[#c2c2d1] bg-opacity-20'>
+          <div className='flex border-b border-[#BBB]'>
+            <div className='flex-1 border-r border-[#BBB] text-center'>공격력</div>
+            <div className='flex-1 text-center'>방어력</div>
+          </div>
+          <div className='flex'>
+            <div className='grid flex-1 grid-cols-2 justify-between border-r border-[#BBB]'>
+              <span className='flex-1 text-center'>물리</span>
               <span className='flex-1 text-center'>마법</span>
+              <span className='flex-1 text-center'>66</span>
+              <span className='flex-1 text-center'>66</span>
             </div>
-            <div className='flex bg-[#F9F9F9]'>
-              <span className='flex-1 border-r border-gray-300 text-center'>{monster.ph_attack}</span>
-              <span className='flex-1 border-r border-gray-300 text-center'>{monster.mg_attack}</span>
-              <span className='flex-1 border-r border-gray-300 text-center'>{monster.ph_defence}</span>
-              <span className='flex-1 text-center'>{monster.mg_defence}</span>
+            <div className='grid flex-1 grid-cols-2 justify-between'>
+              <span className='flex-1 text-center'>물리</span>
+              <span className='flex-1 text-center'>마법</span>
+              <span className='flex-1 text-center'>66</span>
+              <span className='flex-1 text-center'>66</span>
             </div>
           </div>
-          <div className='mt-4 flex flex-col gap-1'>
-            <span>드랍율: 0.0008%</span>
-            <span>요구 명중률: 100%</span>
-            <span>내 레벨을 고려한 요구 명중률: 100%</span>
-            <span>언데드 여부: 아니오</span>
-            <span>MP 회복: 0</span>
-          </div>
-          <p className='mt-8'>{monster.description_kor}</p>
+        </div>
+
+        <div className='mt-4 flex flex-col gap-1 border-t-2 border-white px-4 pt-4'>
+          <span>드랍율: 0.008%</span>
+          <span>요구 명중률: </span>
+          <span>내 레벨을 고려한 요구명중률: 160</span>
+          <span>회피율: </span>
+          <span>언데드 여부: </span>
+          <span>MP 회복: </span>
         </div>
       </div>
     </section>
