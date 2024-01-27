@@ -3,29 +3,24 @@ import Link from 'next/link'
 
 import { ROUTES } from '@/constants/routes'
 import { getItemImage, getMonsterImage } from '@/lib/utils'
-import supabase from '@/lib/utils/supabase'
 
 interface Props {
-  searchQuery: string
+  items: {
+    id: number | null
+    maple_item_id: number | null
+    name_kor: string | null
+  }[]
+  monsters: {
+    id: number | null
+    maple_mob_id: number | null
+    name_kor: string | null
+  }[]
 }
 
-export default async function SearchResult({ searchQuery }: Readonly<Props>) {
-  const { data: items } = searchQuery
-    ? await supabase.from('items').select('id, maple_item_id, name_kor').ilike('name_kor', `%${searchQuery}%`).limit(5)
-    : { data: null }
-  const { data: monsters } = searchQuery
-    ? await supabase
-        .from('monsters')
-        .select('id, maple_mob_id, name_kor')
-        .ilike('name_kor', `%${searchQuery}%`)
-        .limit(5)
-    : { data: null }
-
-  if (!items?.length && !monsters?.length) return null
-
+export default function SearchResult({ items, monsters }: Readonly<Props>) {
   return (
-    <div className='absolute top-full z-10 max-h-96 min-h-8 w-full overflow-y-auto rounded-b-[30px] bg-white shadow-md'>
-      {items && (
+    <>
+      {Boolean(items?.length) && (
         <div className='flex flex-col gap-4 py-8'>
           <div className='text-center text-2xl font-bold text-gray-600'>아이템</div>
           <div className='flex flex-col'>
@@ -48,11 +43,11 @@ export default async function SearchResult({ searchQuery }: Readonly<Props>) {
           </div>
         </div>
       )}
-      {monsters && (
+      {Boolean(monsters?.length) && (
         <div className='flex flex-col gap-4'>
           <div className='text-center text-2xl font-bold text-gray-600'>몬스터</div>
           <div className='flex flex-col'>
-            {monsters.map((monster) => (
+            {monsters?.map((monster) => (
               <Link
                 key={monster.id}
                 className='flex items-center gap-4 px-4 py-2 hover:bg-[#FB9E48] hover:text-white'
@@ -71,6 +66,6 @@ export default async function SearchResult({ searchQuery }: Readonly<Props>) {
           </div>
         </div>
       )}
-    </div>
+    </>
   )
 }

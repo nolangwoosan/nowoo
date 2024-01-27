@@ -4,6 +4,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import Script from 'next/script'
 
+import CoreProvider from '@/components/core-provider'
 import GoogleAnalytics from '@/components/google-analytics'
 import { openGraphImage } from '@/constants/open-graph'
 import { cn } from '@/lib/utils'
@@ -71,8 +72,8 @@ export default function RootLayout({
         <link rel='icon' href='/favicon.ico' sizes='any' />
       </head>
       <body className={cn(inter.className, 'min-h-dvh text-[#222222]')}>
+        <CoreProvider>{children}</CoreProvider>
         <GoogleAnalytics />
-        {children}
       </body>
       <Script async src='https://d-collect.jennifersoft.com/9fcd1340/demian.js' />
       <Script id='jennifer-frontend'>

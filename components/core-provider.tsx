@@ -1,7 +1,9 @@
 'use client'
 
-import { Fragment, type PropsWithChildren } from 'react'
+import { type PropsWithChildren } from 'react'
+
+import ReactQueryClientProvider from './react-query-client-provider'
 
 export default function CoreProvider({ children }: Readonly<PropsWithChildren>) {
-  return <Fragment>{children}</Fragment>
+  return <ReactQueryClientProvider>{children}</ReactQueryClientProvider>
 }

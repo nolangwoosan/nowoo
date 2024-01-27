@@ -2,19 +2,16 @@ import Image from 'next/image'
 import { notFound } from 'next/navigation'
 
 import Logo from '@/components/logo'
-import Search from '@/components/search'
+import SearchForm from '@/components/search-form'
 import supabase from '@/lib/utils/supabase'
 
 interface Props {
   params: {
     slug: string
   }
-  searchParams?: {
-    query?: string
-  }
 }
 
-export default async function Page({ params, searchParams }: Readonly<Props>) {
+export default async function Page({ params }: Readonly<Props>) {
   const { slug } = params
 
   const { data: monster } = await supabase
@@ -30,7 +27,7 @@ export default async function Page({ params, searchParams }: Readonly<Props>) {
   return (
     <section className='flex flex-col items-center gap-4 p-24 max-sm:px-4 max-sm:py-16'>
       <Logo />
-      <Search query={searchParams?.query || ''} />
+      <SearchForm />
       <div className='mt-8 flex w-[580px] max-w-full flex-col items-center rounded-md bg-white shadow-md'>
         <div className='mt-5 flex w-full flex-col items-center gap-1 bg-[#FEF9EE] p-2'>
           <span className='text-xl font-semibold'>{monster.name_kor}</span>
