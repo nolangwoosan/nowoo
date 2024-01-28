@@ -9,21 +9,17 @@ export default async function PopularMonsters() {
   const { data: monsters } = await supabase.from('monsters').select('id, maple_mob_id, name_kor').limit(5)
 
   return (
-    <div className='flex w-full flex-col gap-8'>
+    <div className='flex w-full flex-col gap-8 max-md:gap-4'>
       <span className='text-2xl font-bold'>인기 몬스터</span>
       <div className='flex flex-col gap-4 rounded-sm bg-white p-12 shadow-md max-md:gap-2 max-md:p-4'>
         {monsters?.map((monster) => (
-          <Link
-            className='flex items-center gap-8'
-            key={monster.id}
-            href={monster.maple_mob_id ? ROUTES.MONSTER(monster.maple_mob_id) : ROUTES.HOME}
-          >
+          <Link className='flex items-center gap-8' key={monster.id} href={ROUTES.MONSTER(monster.maple_mob_id)}>
             <Image
               className='aspect-square object-contain'
-              src={getMonsterImage(monster.maple_mob_id ?? 0)}
+              src={getMonsterImage(monster.maple_mob_id)}
               width={60}
               height={60}
-              alt={monster.name_kor ?? ''}
+              alt={monster.name_kor}
             />
             <span>{monster.name_kor}</span>
           </Link>

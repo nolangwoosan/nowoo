@@ -2,9 +2,10 @@
 
 import { useQueries } from '@tanstack/react-query'
 import { Search } from 'lucide-react'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 
 import { useDebounce } from '@/lib/hooks/use-debounce'
+import { useOutsideClick } from '@/lib/hooks/use-outside-click'
 import { cn } from '@/lib/utils'
 
 import SearchResult from './search-result'
@@ -15,6 +16,7 @@ const QUERY_KEYS = {
 }
 
 export default function SearchForm() {
+  const searchFormRef = useRef<HTMLDivElement>(null)
   const [searchValue, setSearchValue] = useState('')
   const debouncedSearchValue = useDebounce(searchValue, 300)
 
@@ -35,11 +37,13 @@ export default function SearchForm() {
     ],
   })
 
+  useOutsideClick({ ref: searchFormRef, handler: () => setIsFocused(false) })
+
   return (
     <div
-      className='relative flex w-[600px] justify-center max-sm:w-full'
+      className='absolute top-60 flex w-[500px] flex-col justify-center max-lg:top-52 max-md:w-full max-md:px-4'
+      ref={searchFormRef}
       onFocus={() => setIsFocused(true)}
-      onBlur={() => setIsFocused(false)}
     >
       <div
         className={cn(
@@ -60,7 +64,7 @@ export default function SearchForm() {
       </div>
 
       {isFocused && (Boolean(itemsQuery.data?.data?.length) || Boolean(monstersQuery.data?.data?.length)) && (
-        <div className='absolute top-full z-10 max-h-96 min-h-8 w-full overflow-y-auto rounded-b-[30px] bg-white shadow-md'>
+        <div className='max-h-96 min-h-8 w-full overflow-y-auto rounded-b-[30px] bg-white shadow-md'>
           <SearchResult items={itemsQuery.data?.data ?? []} monsters={monstersQuery.data?.data ?? []} />
         </div>
       )}

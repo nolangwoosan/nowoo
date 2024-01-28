@@ -9,21 +9,17 @@ export default async function PopularItems() {
   const { data: items } = await supabase.from('items').select('id, maple_item_id, name_kor').limit(5)
 
   return (
-    <div className='flex w-full flex-col gap-8'>
+    <div className='flex w-full flex-col gap-8 max-md:gap-4'>
       <span className='text-2xl font-bold'>다른 유저들이 선호하는 아이템</span>
       <div className='flex flex-col gap-4 rounded-sm bg-white p-12 shadow-md max-md:gap-2 max-md:p-4'>
         {items?.map((item) => (
-          <Link
-            className='flex items-center gap-8'
-            key={item.id}
-            href={item.maple_item_id ? ROUTES.ITEM(item.maple_item_id) : ROUTES.HOME}
-          >
+          <Link className='flex items-center gap-8' key={item.id} href={ROUTES.ITEM(item.maple_item_id)}>
             <Image
               className='aspect-square object-contain'
-              src={getItemImage(item.maple_item_id ?? 0)}
+              src={getItemImage(item.maple_item_id)}
               width={60}
               height={60}
-              alt={item.name_kor ?? ''}
+              alt={item.name_kor}
             />
             <span>{item.name_kor}</span>
           </Link>
