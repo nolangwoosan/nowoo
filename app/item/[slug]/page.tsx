@@ -116,25 +116,31 @@ export default async function Page({ params }: Readonly<Props>) {
           </div>
         </div>
       </div>
-      {dropMonsters?.map((dropMonster) => (
-        <Link
-          className='flex w-[500px] items-center gap-7 bg-[#06062C] bg-opacity-50 px-8 py-2 max-md:w-full max-md:max-w-[500px]'
-          href={ROUTES.MONSTER(dropMonster.monsters.maple_mob_id)}
-          key={dropMonster.monsters.maple_mob_id}
-        >
-          <Image
-            className='aspect-square object-contain'
-            src={getMonsterImage(dropMonster.monsters.maple_mob_id)}
-            width={70}
-            height={70}
-            alt={dropMonster.monsters.name_kor}
-          />
-          <div className='flex flex-col gap-1'>
-            <span className='text-white'>{dropMonster.monsters.name_kor}</span>
-            <span className='text-[#FB9E48]'>드랍율: {dropMonster.drop_chance}</span>
-          </div>
-        </Link>
-      ))}
+
+      {dropMonsters && (
+        <div className='mt-4 flex flex-col items-center gap-5'>
+          <span className='text-xl font-semibold'>드랍 몬스터</span>
+          {dropMonsters.map((dropMonster) => (
+            <Link
+              className='flex w-[500px] items-center gap-7 bg-[#06062C] bg-opacity-50 px-8 py-2 max-md:w-full max-md:max-w-[500px]'
+              href={ROUTES.MONSTER(dropMonster.monsters.maple_mob_id)}
+              key={dropMonster.monsters.maple_mob_id}
+            >
+              <Image
+                className='aspect-square object-contain'
+                src={getMonsterImage(dropMonster.monsters.maple_mob_id)}
+                width={70}
+                height={70}
+                alt={dropMonster.monsters.name_kor}
+              />
+              <div className='flex flex-col gap-1'>
+                <span className='text-white'>{dropMonster.monsters.name_kor}</span>
+                <span className='text-[#FB9E48]'>드랍율: {dropMonster.drop_chance}</span>
+              </div>
+            </Link>
+          ))}
+        </div>
+      )}
     </section>
   )
 }

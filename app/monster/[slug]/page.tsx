@@ -125,25 +125,31 @@ export default async function Page({ params }: Readonly<Props>) {
           </div>
         )}
       </div>
-      {dropItems?.map((dropItem) => (
-        <Link
-          className='flex w-[500px] items-center gap-7 bg-[#06062C] bg-opacity-50 px-8 py-2 max-md:w-full max-md:max-w-[500px]'
-          href={ROUTES.ITEM(dropItem.items.maple_item_id)}
-          key={dropItem.items.maple_item_id}
-        >
-          <Image
-            className='aspect-square object-contain'
-            src={getItemImage(dropItem.items.maple_item_id)}
-            width={70}
-            height={70}
-            alt={dropItem.items.name_kor}
-          />
-          <div className='flex flex-col gap-1'>
-            <span className='text-white'>{dropItem.items.name_kor}</span>
-            <span className='text-[#FB9E48]'>드랍율: {dropItem.drop_chance}</span>
-          </div>
-        </Link>
-      ))}
+
+      {dropItems && (
+        <div className='mt-4 flex flex-col items-center gap-5'>
+          <span className='text-xl font-semibold'>드랍 아이템</span>
+          {dropItems.map((dropItem) => (
+            <Link
+              className='flex w-[500px] items-center gap-7 bg-[#06062C] bg-opacity-50 px-8 py-2 max-md:w-full max-md:max-w-[500px]'
+              href={ROUTES.ITEM(dropItem.items.maple_item_id)}
+              key={dropItem.items.maple_item_id}
+            >
+              <Image
+                className='aspect-square object-contain'
+                src={getItemImage(dropItem.items.maple_item_id)}
+                width={70}
+                height={70}
+                alt={dropItem.items.name_kor}
+              />
+              <div className='flex flex-col gap-1'>
+                <span className='text-white'>{dropItem.items.name_kor}</span>
+                <span className='text-[#FB9E48]'>드랍율: {dropItem.drop_chance}</span>
+              </div>
+            </Link>
+          ))}
+        </div>
+      )}
     </section>
   )
 }
