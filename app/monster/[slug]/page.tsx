@@ -1,10 +1,13 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
+import { Tables } from '@/@types/supabase'
 import Logo from '@/components/logo'
 import { Menu } from '@/components/menu'
 import SearchForm from '@/components/search-form'
-import { getMonsterImage } from '@/lib/utils'
+import { ROUTES } from '@/constants/routes'
+import { getItemImage, getMonsterImage } from '@/lib/utils'
 import supabase from '@/lib/utils/supabase'
 
 interface Props {
@@ -12,6 +15,13 @@ interface Props {
     slug: string
   }
 }
+
+type DropItemsReturnType =
+  | {
+      drop_chance: Tables<'monster_drops'>['drop_chance']
+      items: Tables<'items'>
+    }[]
+  | null
 
 export default async function Page({ params }: Readonly<Props>) {
   const { slug } = params
@@ -24,7 +34,18 @@ export default async function Page({ params }: Readonly<Props>) {
     .match({ maple_mob_id: slug })
     .single()
 
-  if (!monster) return notFound()
+  if (!monster) notFound()
+
+  const { data: dropItems } = await supabase
+    .from('monster_drops')
+    .select(
+      `
+    drop_chance,
+    items ( id, maple_item_id, name_kor, name_eng )
+  `
+    )
+    .match({ monster_id: monster.id })
+    .returns<DropItemsReturnType>()
 
   return (
     <section className='flex flex-col items-center gap-6 p-24 max-lg:px-4'>
@@ -104,6 +125,25 @@ export default async function Page({ params }: Readonly<Props>) {
           </div>
         )}
       </div>
+      {dropItems?.map((dropItem) => (
+        <Link
+          className='flex w-[500px] items-center gap-7 bg-[#06062C] bg-opacity-50 px-8 py-2 max-md:w-full max-md:max-w-[500px]'
+          href={ROUTES.ITEM(dropItem.items.maple_item_id)}
+          key={dropItem.items.maple_item_id}
+        >
+          <Image
+            className='aspect-square object-contain'
+            src={getItemImage(dropItem.items.maple_item_id)}
+            width={70}
+            height={70}
+            alt={dropItem.items.name_kor}
+          />
+          <div className='flex flex-col gap-1'>
+            <span className='text-white'>{dropItem.items.name_kor}</span>
+            <span className='text-[#FB9E48]'>드랍율: {dropItem.drop_chance}</span>
+          </div>
+        </Link>
+      ))}
     </section>
   )
 }

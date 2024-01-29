@@ -1,10 +1,13 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
+import { Tables } from '@/@types/supabase'
 import Logo from '@/components/logo'
 import { Menu } from '@/components/menu'
 import SearchForm from '@/components/search-form'
-import { cn, getItemImage } from '@/lib/utils'
+import { ROUTES } from '@/constants/routes'
+import { cn, getItemImage, getMonsterImage } from '@/lib/utils'
 import supabase from '@/lib/utils/supabase'
 
 interface Props {
@@ -12,6 +15,13 @@ interface Props {
     slug: string
   }
 }
+
+type DropMonstersReturnType =
+  | {
+      drop_chance: Tables<'monster_drops'>['drop_chance']
+      monsters: Tables<'monsters'>
+    }[]
+  | null
 
 const JOB: Record<number, string[]> = {
   0: ['초보자'],
@@ -29,6 +39,19 @@ export default async function Page({ params }: Readonly<Props>) {
   const { data: item } = await supabase.from('items').select().match({ maple_item_id: slug }).single()
 
   if (!item) return notFound()
+
+  const { data: dropMonsters } = await supabase
+    .from('monster_drops')
+    .select(
+      `
+    drop_chance,
+    monsters ( id, maple_mob_id, name_kor, name_eng )
+  `
+    )
+    .match({
+      item_id: item.id,
+    })
+    .returns<DropMonstersReturnType>()
 
   return (
     <section className='flex flex-col items-center gap-6 p-24 max-lg:px-4'>
@@ -93,6 +116,25 @@ export default async function Page({ params }: Readonly<Props>) {
           </div>
         </div>
       </div>
+      {dropMonsters?.map((dropMonster) => (
+        <Link
+          className='flex w-[500px] items-center gap-7 bg-[#06062C] bg-opacity-50 px-8 py-2 max-md:w-full max-md:max-w-[500px]'
+          href={ROUTES.MONSTER(dropMonster.monsters.maple_mob_id)}
+          key={dropMonster.monsters.maple_mob_id}
+        >
+          <Image
+            className='aspect-square object-contain'
+            src={getMonsterImage(dropMonster.monsters.maple_mob_id)}
+            width={70}
+            height={70}
+            alt={dropMonster.monsters.name_kor}
+          />
+          <div className='flex flex-col gap-1'>
+            <span className='text-white'>{dropMonster.monsters.name_kor}</span>
+            <span className='text-[#FB9E48]'>드랍율: {dropMonster.drop_chance}</span>
+          </div>
+        </Link>
+      ))}
     </section>
   )
 }
