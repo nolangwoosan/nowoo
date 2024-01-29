@@ -22,7 +22,7 @@ export default function SearchResult({ items, monsters }: Readonly<Props>) {
     <>
       {Boolean(items?.length) && (
         <div className='flex flex-col gap-4 py-8'>
-          <div className='text-center text-2xl font-bold text-gray-600'>아이템</div>
+          <div className='text-center text-2xl font-bold text-gray-600 max-md:text-base'>아이템</div>
           <div className='flex flex-col'>
             {items?.map((item) => (
               <Link
@@ -45,7 +45,7 @@ export default function SearchResult({ items, monsters }: Readonly<Props>) {
       )}
       {Boolean(monsters?.length) && (
         <div className='flex flex-col gap-4'>
-          <div className='text-center text-2xl font-bold text-gray-600'>몬스터</div>
+          <div className='text-center text-2xl font-bold text-gray-600 max-md:text-base'>몬스터</div>
           <div className='flex flex-col'>
             {monsters?.map((monster) => (
               <Link

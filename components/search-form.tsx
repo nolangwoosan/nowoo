@@ -2,8 +2,10 @@
 
 import { useQueries } from '@tanstack/react-query'
 import { Search } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 import { useRef, useState } from 'react'
 
+import { ROUTES } from '@/constants/routes'
 import { useDebounce } from '@/lib/hooks/use-debounce'
 import { useOutsideClick } from '@/lib/hooks/use-outside-click'
 import { cn } from '@/lib/utils'
@@ -16,10 +18,11 @@ const QUERY_KEYS = {
 }
 
 export default function SearchForm() {
+  const router = useRouter()
+
   const searchFormRef = useRef<HTMLDivElement>(null)
   const [searchValue, setSearchValue] = useState('')
   const debouncedSearchValue = useDebounce(searchValue, 300)
-
   const [isFocused, setIsFocused] = useState(false)
 
   const [itemsQuery, monstersQuery] = useQueries({
@@ -36,6 +39,23 @@ export default function SearchForm() {
       },
     ],
   })
+
+  const handleEnterKey = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter' && itemsQuery.data?.data?.length > 0) {
+      const firstItem = itemsQuery.data.data[0]
+      const firstMonster = monstersQuery.data.data[0]
+
+      if (firstItem) {
+        router.push(ROUTES.ITEM(firstItem.maple_item_id))
+        return
+      }
+
+      if (firstMonster) {
+        router.push(ROUTES.MONSTER(firstMonster.maple_mob_id))
+        return
+      }
+    }
+  }
 
   useOutsideClick({ ref: searchFormRef, handler: () => setIsFocused(false) })
 
@@ -59,6 +79,7 @@ export default function SearchForm() {
           placeholder='아이템 or 몬스터 이름'
           value={searchValue}
           onChange={(event) => setSearchValue(event.target.value)}
+          onKeyDown={handleEnterKey}
         />
         <Search />
       </div>
