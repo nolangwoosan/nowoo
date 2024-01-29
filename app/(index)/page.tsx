@@ -14,12 +14,17 @@ export default async function HomePage() {
   const [ip] = (header.get('x-forwarded-for') ?? '127.0.0.1').split(',')
   const userAgent = header.get('user-agent') ?? ''
 
-  await supabase.from('user_access').upsert([
+  await supabase.from('user_access').upsert(
+    [
+      {
+        ip,
+        agent: userAgent,
+      },
+    ],
     {
-      ip,
-      agent: userAgent,
-    },
-  ])
+      onConflict: 'ip',
+    }
+  )
 
   return (
     <section className='flex flex-col items-center gap-6 p-24 max-lg:px-4'>
