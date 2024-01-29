@@ -127,7 +127,7 @@ export default async function Page({ params }: Readonly<Props>) {
       </div>
 
       {dropItems && (
-        <div className='mt-4 flex flex-col items-center gap-5'>
+        <div className='mt-4 flex w-full flex-col items-center gap-5'>
           <span className='text-xl font-semibold'>드랍 아이템</span>
           {dropItems.map((dropItem) => (
             <Link

@@ -121,7 +121,7 @@ export default async function Page({ params }: Readonly<Props>) {
       </div>
 
       {dropMonsters && (
-        <div className='mt-4 flex flex-col items-center gap-5'>
+        <div className='mt-4 flex w-full flex-col items-center gap-5'>
           <span className='text-xl font-semibold'>드랍 몬스터</span>
           {dropMonsters.map((dropMonster) => (
             <Link

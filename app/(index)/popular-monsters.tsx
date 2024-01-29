@@ -6,7 +6,10 @@ import { getMonsterImage } from '@/lib/utils'
 import supabase from '@/lib/utils/supabase'
 
 export default async function PopularMonsters() {
-  const { data: monsters } = await supabase.from('monsters').select('id, maple_mob_id, name_kor').limit(5)
+  const { data: monsters } = await supabase
+    .from('monsters')
+    .select('id, maple_mob_id, name_kor')
+    .filter('name_kor', 'in', '("좀비루팡","드레이크","좀비버섯","뿔버섯","초록버섯")')
 
   return (
     <div className='flex w-full flex-col gap-8 max-md:gap-4'>
