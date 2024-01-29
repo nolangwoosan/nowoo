@@ -3,7 +3,7 @@ import Script from 'next/script'
 const GoogleAnalytics = () => {
   return (
     <>
-      <Script strategy='afterInteractive' src={`https://www.googletagmanager.com/gtag/js?id=G-1PM7NG5MDT`} />
+      <Script strategy='afterInteractive' src={`https://www.googletagmanager.com/gtag/js?id=G-VNFC8HCCQ5`} />
       <Script
         id='gtag-init'
         strategy='afterInteractive'
@@ -13,7 +13,7 @@ const GoogleAnalytics = () => {
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
             
-            gtag('config', 'G-1PM7NG5MDT');
+            gtag('config', 'G-VNFC8HCCQ5');
           `,
         }}
       />
