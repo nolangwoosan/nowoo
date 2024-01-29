@@ -92,7 +92,10 @@ export default async function Page({ params }: Readonly<Props>) {
 
         <div className='mb-5 flex justify-center gap-14 border-b-2 border-b-white pb-2 max-md:gap-4'>
           {['초보자', '전사', '마법사', '궁수', '도적'].map((job) => (
-            <span key={job} className={cn('text-lg', !JOB[item.req_job].includes(job) && 'text-red-500')}>
+            <span
+              key={job}
+              className={cn('text-lg', item.req_job !== 0 && !JOB[item.req_job].includes(job) && 'text-red-500')}
+            >
               {job}
             </span>
           ))}
