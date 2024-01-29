@@ -41,7 +41,7 @@ export default function SearchForm() {
 
   return (
     <div
-      className='absolute top-60 flex w-[500px] flex-col justify-center max-lg:top-52 max-md:w-full max-md:px-4'
+      className='absolute top-64 flex w-[500px] flex-col justify-center max-md:top-56 max-md:w-full max-md:max-w-[500px] max-md:px-4'
       ref={searchFormRef}
       onFocus={() => setIsFocused(true)}
     >

@@ -27,11 +27,11 @@ export default async function Page({ params }: Readonly<Props>) {
   if (!monster) return notFound()
 
   return (
-    <section className='flex flex-col items-center gap-6 p-24 max-lg:px-4 max-lg:py-16'>
+    <section className='flex flex-col items-center gap-6 p-24 max-lg:px-4'>
       <Logo />
       <Menu />
       <SearchForm />
-      <div className='mt-20 flex w-[500px] max-w-full flex-col bg-[#06062C] bg-opacity-50 p-10 text-white shadow-md'>
+      <div className='mt-24 flex w-[500px] max-w-full flex-col bg-[#06062C] bg-opacity-50 p-10 text-white shadow-md max-md:p-4'>
         <div className='flex w-full flex-col items-center gap-1'>
           <h1 className='text-2xl font-semibold'>
             {monster.name_kor} (Lv. {monster.level})
@@ -44,25 +44,32 @@ export default async function Page({ params }: Readonly<Props>) {
         <div className='flex gap-12 px-4 py-4'>
           <div className='h-fit bg-white p-2'>
             <Image
-              className='aspect-square object-contain'
+              className='aspect-square object-contain max-md:hidden'
               src={getMonsterImage(monster.maple_mob_id)}
               width={160}
               height={160}
               alt={monster.name_kor}
             />
+            <Image
+              className='aspect-square object-contain md:hidden'
+              src={getMonsterImage(monster.maple_mob_id)}
+              width={60}
+              height={60}
+              alt={monster.name_kor}
+            />
           </div>
-          <div className='flex flex-col gap-2'>
+          <div className='flex flex-1 flex-col gap-2'>
             <div className='flex flex-col gap-1'>
               <span className='text-[#FF3B3B]'>HP : {monster.hp}</span>
-              <div className='h-[10px] w-[200px] bg-[#FF3B3B]' />
+              <div className='h-[10px] w-[200px] bg-[#FF3B3B] max-md:w-full' />
             </div>
             <div className='flex flex-col gap-1'>
               <span className='text-[#1B69FF]'>MP : {monster.mp}</span>
-              <div className='h-[10px] w-[200px] bg-[#1B69FF]' />
+              <div className='h-[10px] w-[200px] bg-[#1B69FF] max-md:w-full' />
             </div>
             <div className='flex flex-col gap-1'>
               <span className='text-[#DFDFDF]'>EXP : {monster.exp}</span>
-              <div className='h-[10px] w-[200px] bg-[#DFDFDF]' />
+              <div className='h-[10px] w-[200px] bg-[#DFDFDF] max-md:w-full' />
             </div>
           </div>
         </div>

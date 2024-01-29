@@ -31,7 +31,7 @@ export default async function Page({ params }: Readonly<Props>) {
   if (!item) return notFound()
 
   return (
-    <section className='flex flex-col items-center gap-4 p-24 max-lg:px-4 max-lg:py-16'>
+    <section className='flex flex-col items-center gap-6 p-24 max-lg:px-4'>
       <Logo />
       <Menu />
       <SearchForm />
@@ -40,13 +40,20 @@ export default async function Page({ params }: Readonly<Props>) {
           <h1 className='text-3xl font-semibold'>{item.name_kor}</h1>
         </div>
 
-        <div className='flex gap-12 px-4 py-4'>
+        <div className='flex gap-12 px-4 py-4 max-md:gap-8'>
           <div className='h-fit bg-white bg-opacity-30 p-2'>
             <Image
-              className='aspect-square object-contain'
+              className='aspect-square object-contain max-md:hidden'
               src={getItemImage(item.maple_item_id)}
               width={160}
               height={160}
+              alt={item.name_kor}
+            />
+            <Image
+              className='aspect-square object-contain md:hidden'
+              src={getItemImage(item.maple_item_id)}
+              width={80}
+              height={80}
               alt={item.name_kor}
             />
           </div>
@@ -62,7 +69,7 @@ export default async function Page({ params }: Readonly<Props>) {
 
         <div className='mb-5 flex justify-center gap-14 border-b-2 border-b-white pb-2 max-md:gap-4'>
           {['초보자', '전사', '마법사', '궁수', '도적'].map((job) => (
-            <span key={job} className={cn('text-lg', JOB[item.req_job].includes(job) ? '' : 'text-red-500')}>
+            <span key={job} className={cn('text-lg', !JOB[item.req_job].includes(job) && 'text-red-500')}>
               {job}
             </span>
           ))}
@@ -81,7 +88,7 @@ export default async function Page({ params }: Readonly<Props>) {
             {Boolean(item.inc_hp) && <span>HP: +{item.inc_hp}</span>}
             {Boolean(item.inc_mp) && <span>MP: +{item.inc_mp}</span>}
             <span>업그레이드 가능 횟수 : {item.upgradable_count}</span>
-            <span>상점 거래가 : {item.price_shop} 메소</span>
+            <span>상점 거래가 : {item.price_shop.toLocaleString()} 메소</span>
             <span>거래 시세가 : {item.price_average ? `${item.price_average} 메소` : `데이터 준비중입니다.`}</span>
           </div>
         </div>
