@@ -24,7 +24,7 @@ export default async function HomePage() {
   }
 
   return (
-    <section className='flex flex-col items-center gap-6 p-24 max-lg:px-4'>
+    <section className='mx-auto flex max-w-7xl flex-col items-center gap-6 p-24 max-lg:px-4'>
       <Logo />
       <Menu />
       <SearchForm />
