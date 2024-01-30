@@ -1,7 +1,12 @@
 'use client'
 
 import dayjs from 'dayjs'
+import timezone from 'dayjs/plugin/timezone'
+import utc from 'dayjs/plugin/utc'
 import Link from 'next/link'
+
+dayjs.extend(utc)
+dayjs.extend(timezone)
 
 import { ROUTES } from '@/constants/routes'
 
@@ -23,8 +28,12 @@ export function Boards({ boards }: Props) {
           <div className='max-w-[60%] truncate text-[#999999] max-md:max-w-[40%]'>{board.title}</div>
           <div className='flex items-center gap-24 max-md:gap-6'>
             <span className='truncate text-[#999999]'>{board.writer}</span>
-            <span className='text-[#999999] max-md:hidden'>{dayjs(board.created_dt).format('YYYY.MM.DD HH:mm')}</span>
-            <span className='text-[#999999] md:hidden'>{dayjs(board.created_dt).format('YYYY.MM.DD')}</span>
+            <span className='text-[#999999] max-md:hidden'>
+              {dayjs(board.created_dt).tz('Asia/Seoul').format('YYYY.MM.DD HH:mm')}
+            </span>
+            <span className='text-[#999999] md:hidden'>
+              {dayjs(board.created_dt).tz('Asia/Seoul').format('YYYY.MM.DD')}
+            </span>
           </div>
         </Link>
       ))}

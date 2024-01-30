@@ -1,4 +1,6 @@
 import dayjs from 'dayjs'
+import timezone from 'dayjs/plugin/timezone'
+import utc from 'dayjs/plugin/utc'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
@@ -7,6 +9,9 @@ import { Menu } from '@/components/menu'
 import SearchForm from '@/components/search-form'
 import { ROUTES } from '@/constants/routes'
 import supabase from '@/lib/utils/supabase'
+
+dayjs.extend(utc)
+dayjs.extend(timezone)
 
 import { DeleteButton } from './delete-button'
 
@@ -34,7 +39,7 @@ export default async function Page({ params: { slug } }: Props) {
         <div className='mb-7 flex items-end justify-between border-b border-[#D8D8D8] pb-5'>
           <div className='flex flex-col gap-5'>
             <span className='font-bold'>{board.title}</span>
-            <span className='text-[#999]'>{dayjs(board.created_dt).format('YYYY.MM.DD HH:mm')}</span>
+            <span className='text-[#999]'>{dayjs(board.created_dt).tz('Asia/Seoul').format('YYYY.MM.DD HH:mm')}</span>
           </div>
           <span className='text-[#999]'>{board.writer}</span>
         </div>
