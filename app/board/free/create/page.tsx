@@ -59,7 +59,7 @@ export default function Page() {
   }
 
   return (
-    <section className='mx-auto flex max-w-screen-xl flex-col items-center gap-4 p-24 max-lg:px-4 max-lg:py-16'>
+    <section className='mx-auto flex max-w-screen-xl flex-col items-center gap-6 p-24 max-lg:px-4 max-lg:py-16'>
       <Logo />
       <Menu />
       <SearchForm />
@@ -68,9 +68,9 @@ export default function Page() {
           <h1 className='text-2xl font-bold'>자유게시판</h1>
         </div>
         <div className='flex flex-col'>
-          <div className='flex items-center border-b border-[#D8D8D8] px-4 py-3'>
-            <span className='w-[200px]'>제목</span>
-            <div className='flex-1'>
+          <div className='flex items-center gap-2 border-b border-[#D8D8D8] px-4 py-3 max-md:flex-col max-md:items-start max-md:px-0'>
+            <span className='w-[200px] max-md:text-lg max-md:font-semibold'>제목</span>
+            <div className='flex-1 max-md:w-full'>
               <input
                 className='w-full rounded-md border-none px-5 py-3'
                 placeholder='제목을 입력해주세요.'
@@ -79,9 +79,9 @@ export default function Page() {
               {errors.title && <span className='text-sm text-red-600'>{errors.title.message?.toString()}</span>}
             </div>
           </div>
-          <div className='flex items-center border-b border-[#D8D8D8] px-4 py-3'>
-            <span className='w-[200px]'>내용</span>
-            <div className='flex-1'>
+          <div className='flex items-center gap-2 border-b border-[#D8D8D8] px-4 py-3 max-md:flex-col max-md:items-start max-md:px-0'>
+            <span className='w-[200px] max-md:text-lg max-md:font-semibold'>내용</span>
+            <div className='flex-1 max-md:w-full'>
               <textarea
                 className='h-[250px] w-full rounded-md border-none px-5 py-3'
                 placeholder='내용을 입력해주세요.'
@@ -90,9 +90,9 @@ export default function Page() {
               {errors.content && <span className='text-sm text-red-600'>{errors.content.message?.toString()}</span>}
             </div>
           </div>
-          <div className='flex items-center border-b border-[#D8D8D8] px-4 py-3'>
-            <span className='w-[200px]'>작성자</span>
-            <div className='flex-1'>
+          <div className='flex items-center gap-2 border-b border-[#D8D8D8] px-4 py-3 max-md:flex-col max-md:items-start max-md:px-0'>
+            <span className='w-[200px] max-md:text-lg max-md:font-semibold'>작성자</span>
+            <div className='flex-1 max-md:w-full'>
               <input
                 className='w-full rounded-md border-none px-5 py-3'
                 placeholder='이름을 입력해주세요.'
@@ -101,9 +101,9 @@ export default function Page() {
               {errors.writer && <span className='text-sm text-red-600'>{errors.writer.message?.toString()}</span>}
             </div>
           </div>
-          <div className='flex items-center border-b border-[#D8D8D8] px-4 py-3'>
-            <span className='w-[200px]'>비밀번호</span>
-            <div className='flex-1'>
+          <div className='flex items-center gap-2 border-b border-[#D8D8D8] px-4 py-3 max-md:flex-col max-md:items-start max-md:px-0'>
+            <span className='w-[200px] max-md:text-lg max-md:font-semibold'>비밀번호</span>
+            <div className='flex-1 max-md:w-full'>
               <input
                 className='w-full rounded-md border-none px-5 py-3'
                 type='password'

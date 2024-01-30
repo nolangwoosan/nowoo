@@ -26,7 +26,7 @@ export default async function Page({ params: { slug } }: Props) {
   if (!board) notFound()
 
   return (
-    <section className='mx-auto flex max-w-screen-xl flex-col items-center gap-4 p-24 max-lg:px-4 max-lg:py-16'>
+    <section className='mx-auto flex max-w-screen-xl flex-col items-center gap-6 p-24 max-lg:px-4 max-lg:py-16'>
       <Logo />
       <Menu />
       <SearchForm />
