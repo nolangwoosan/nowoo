@@ -23,10 +23,6 @@ const boardSchema = object({
     minLength(1, '내용을 입력해주세요.'),
     maxLength(500, '내용은 500자 이내로 입력해주세요.'),
   ]),
-  writer: string('이름을 입력해주세요.', [
-    minLength(1, '이름을 입력해주세요.'),
-    maxLength(10, '이름은 10자 이내로 입력해주세요.'),
-  ]),
   password: string('비밀번호을 입력해주세요.', [
     minLength(1, '비밀번호을 입력해주세요.'),
     maxLength(10, '비밀번호은 10자 이내로 입력해주세요.'),
@@ -79,6 +75,7 @@ export default function Page() {
               {errors.title && <span className='text-sm text-red-600'>{errors.title.message?.toString()}</span>}
             </div>
           </div>
+
           <div className='flex items-center gap-2 border-b border-[#D8D8D8] px-4 py-3 max-md:flex-col max-md:items-start max-md:px-0'>
             <span className='w-[200px] max-md:text-lg max-md:font-semibold'>내용</span>
             <div className='flex-1 max-md:w-full'>
@@ -90,17 +87,7 @@ export default function Page() {
               {errors.content && <span className='text-sm text-red-600'>{errors.content.message?.toString()}</span>}
             </div>
           </div>
-          <div className='flex items-center gap-2 border-b border-[#D8D8D8] px-4 py-3 max-md:flex-col max-md:items-start max-md:px-0'>
-            <span className='w-[200px] max-md:text-lg max-md:font-semibold'>작성자</span>
-            <div className='flex-1 max-md:w-full'>
-              <input
-                className='w-full rounded-md border-none px-5 py-3'
-                placeholder='이름을 입력해주세요.'
-                {...register('writer')}
-              />
-              {errors.writer && <span className='text-sm text-red-600'>{errors.writer.message?.toString()}</span>}
-            </div>
-          </div>
+
           <div className='flex items-center gap-2 border-b border-[#D8D8D8] px-4 py-3 max-md:flex-col max-md:items-start max-md:px-0'>
             <span className='w-[200px] max-md:text-lg max-md:font-semibold'>비밀번호</span>
             <div className='flex-1 max-md:w-full'>

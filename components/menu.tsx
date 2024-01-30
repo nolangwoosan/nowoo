@@ -1,11 +1,15 @@
 'use client'
 
+import Link from 'next/link'
+
+import { ROUTES } from '@/constants/routes'
+
 export function Menu() {
   return (
     <div className='flex'>
-      <button className='border-r border-[#BCBCBC] px-6 max-md:px-4' onClick={() => alert('업데이트 준비 중입니다.')}>
+      <Link className='border-r border-[#BCBCBC] px-6 max-md:px-4' href={ROUTES.FREE_BOARD.LIST}>
         자유게시판
-      </button>
+      </Link>
       <a
         className='border-r border-[#BCBCBC] px-6 max-md:px-4'
         href='https://discord.gg/mapleland'

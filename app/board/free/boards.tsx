@@ -22,7 +22,7 @@ export function Boards({ boards }: Props) {
         >
           <div className='max-w-[60%] truncate text-[#999999] max-md:max-w-[40%]'>{board.title}</div>
           <div className='flex items-center gap-24 max-md:gap-6'>
-            <span className='max-w-[60px] truncate text-[#999999]'>{board.writer}</span>
+            <span className='truncate text-[#999999]'>{board.writer}</span>
             <span className='text-[#999999] max-md:hidden'>{dayjs(board.created_dt).format('YYYY.MM.DD HH:mm')}</span>
             <span className='text-[#999999] md:hidden'>{dayjs(board.created_dt).format('YYYY.MM.DD')}</span>
           </div>
