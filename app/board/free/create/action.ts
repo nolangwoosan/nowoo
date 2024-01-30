@@ -9,7 +9,7 @@ export async function createBoard({ title, content, password }: { title: string;
     {
       title,
       description: content,
-      writer: 'nowoo' + Math.floor(Math.random() * 10000),
+      writer: `nowoo${Math.floor(1000 + Math.random() * 9000)}`,
       password: await argon2.hash(password),
     },
   ])
