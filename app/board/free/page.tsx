@@ -43,11 +43,11 @@ export default function Page({ searchParams }: Props) {
           </Link>
         </div>
         <Suspense>
-          <Boards boards={boardQuery.data?.data} />
+          <Boards boards={boardQuery.data?.data ?? []} />
         </Suspense>
         <Pagination
           itemsPerPage={PAGE_SIZE}
-          totalItems={boardQuery.data.count}
+          totalItems={boardQuery.data?.count ?? 0}
           currentPage={currentPage}
           paginate={paginate}
         />
