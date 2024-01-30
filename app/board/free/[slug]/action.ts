@@ -1,7 +1,6 @@
 'use server'
 
 import * as argon2 from 'argon2'
-import { revalidatePath } from 'next/cache'
 
 import supabase from '@/lib/utils/supabase'
 
@@ -24,14 +23,10 @@ export const deleteBoard = async ({ slug, password }: { slug: string; password: 
     }
   }
 
-  const response = await supabase
+  await supabase
     .from('boards')
     .update({ id: Number(slug), deleted_dt: new Date().toUTCString() })
     .match({ id: Number(slug) })
-
-  console.log(response)
-
-  revalidatePath('/board/free')
 
   return {
     status: 200,

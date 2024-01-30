@@ -1,13 +1,14 @@
 'use client'
 
 import Link from 'next/link'
-import { Suspense, useState } from 'react'
+import { useState } from 'react'
 
 import Logo from '@/components/logo'
 import { Menu } from '@/components/menu'
 import SearchForm from '@/components/search-form'
 
 import { Boards } from './boards'
+import { BoardsSkeletonUi } from './boards-skeleton-ui'
 import { Pagination } from './pagination'
 import { useBoard } from './utils'
 
@@ -42,15 +43,18 @@ export default function Page({ searchParams }: Props) {
             등록하기
           </Link>
         </div>
-        <Suspense>
-          <Boards boards={boardQuery.data?.data ?? []} />
-        </Suspense>
-        <Pagination
-          itemsPerPage={PAGE_SIZE}
-          totalItems={boardQuery.data?.count ?? 0}
-          currentPage={currentPage}
-          paginate={paginate}
-        />
+        {boardQuery.isLoading && <BoardsSkeletonUi />}
+        {boardQuery.isSuccess && (
+          <>
+            <Boards boards={boardQuery.data.data ?? []} />
+            <Pagination
+              itemsPerPage={PAGE_SIZE}
+              totalItems={boardQuery.data.count}
+              currentPage={currentPage}
+              paginate={paginate}
+            />
+          </>
+        )}
       </div>
     </section>
   )

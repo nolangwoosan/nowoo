@@ -1,5 +1,9 @@
 import './globals.css'
+import 'dayjs/locale/ko'
 
+import dayjs from 'dayjs'
+import timezone from 'dayjs/plugin/timezone'
+import utc from 'dayjs/plugin/utc'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import Script from 'next/script'
@@ -8,6 +12,11 @@ import CoreProvider from '@/components/core-provider'
 import GoogleAnalytics from '@/components/google-analytics'
 import { openGraphImage } from '@/constants/open-graph'
 import { cn } from '@/lib/utils'
+
+dayjs.extend(utc)
+dayjs.extend(timezone)
+
+dayjs.tz.setDefault('Asia/Seoul')
 
 const inter = Inter({ subsets: ['latin'] })
 
