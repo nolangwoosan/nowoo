@@ -48,7 +48,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <main className='h-full'>
+    <main className='h-full max-w-7xl'>
       {children}
       <Footer />
     </main>
