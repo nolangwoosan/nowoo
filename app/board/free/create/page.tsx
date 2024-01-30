@@ -37,7 +37,7 @@ export default function Page() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<BoardSchema>({
     resolver: valibotResolver(boardSchema),
   })
@@ -102,7 +102,11 @@ export default function Page() {
           </div>
         </div>
         <div className='flex justify-center'>
-          <button className='mt-7 rounded-md bg-[#FB9E48] px-8 py-3 text-xl text-white' type='submit'>
+          <button
+            className='mt-7 rounded-md bg-[#FB9E48] px-8 py-3 text-xl text-white disabled:opacity-50'
+            type='submit'
+            disabled={isSubmitting}
+          >
             등록하기
           </button>
         </div>
