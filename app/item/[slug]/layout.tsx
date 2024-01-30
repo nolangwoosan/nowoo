@@ -1,4 +1,5 @@
-import Footer from '@/components/footer'
+import { Fragment } from 'react'
+
 import { openGraphImage } from '@/constants/open-graph'
 import { ROUTES } from '@/constants/routes'
 import { getItemImage } from '@/lib/utils'
@@ -47,10 +48,5 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  return (
-    <main className='h-full'>
-      {children}
-      <Footer />
-    </main>
-  )
+  return <Fragment>{children}</Fragment>
 }

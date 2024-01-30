@@ -6,7 +6,7 @@ import TwitterIcon from '@/public/twitter.svg'
 export default function Footer() {
   return (
     <footer className='flex h-[200px] items-center justify-center bg-[#2C2F36] text-[#9B9B9B]'>
-      <div className='flex w-full max-w-7xl items-center justify-between gap-2 p-24 max-lg:flex-col max-lg:gap-4 max-md:p-4'>
+      <div className='flex w-full max-w-7xl items-center justify-between gap-2 px-24 py-16 max-lg:flex-col max-lg:gap-4 max-md:p-4'>
         <div className='flex flex-col gap-1 max-md:text-center'>
           <span>© 2024 NOWOO</span>
           <p>

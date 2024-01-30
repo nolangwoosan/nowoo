@@ -5,6 +5,7 @@ import { Inter } from 'next/font/google'
 import Script from 'next/script'
 
 import CoreProvider from '@/components/core-provider'
+import Footer from '@/components/footer'
 import GoogleAnalytics from '@/components/google-analytics'
 import { openGraphImage } from '@/constants/open-graph'
 import { cn } from '@/lib/utils'
@@ -71,8 +72,11 @@ export default function RootLayout({
       <head>
         <link rel='icon' href='/favicon.ico' sizes='any' />
       </head>
-      <body className={cn(inter.className, 'min-h-dvh text-[#222222] max-md:text-sm')}>
-        <CoreProvider>{children}</CoreProvider>
+      <body className={cn(inter.className, 'text-[#222222] max-md:text-sm')}>
+        <CoreProvider>
+          <div className='min-h-[calc(100dvh-200px)] bg-gray-100'>{children}</div>
+          <Footer />
+        </CoreProvider>
         <GoogleAnalytics />
       </body>
       {process.env.NODE_ENV === 'production' && (
