@@ -12,7 +12,7 @@ export default function Boards() {
 
   return (
     <div className='flex flex-col border-t border-[#D8D8D8]'>
-      {boardQuery.data.data.map((board) => (
+      {boardQuery.data?.data?.map((board) => (
         <Link
           className='flex justify-between border-b border-[#D8D8D8] px-10 py-6'
           href={ROUTES.FREE_BOARD.DETAIL(board.id)}

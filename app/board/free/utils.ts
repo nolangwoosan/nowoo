@@ -1,4 +1,4 @@
-import { useSuspenseQuery } from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query'
 
 interface Board {
   id: number
@@ -17,7 +17,7 @@ export const QUERY_KEY = {
 }
 
 export const useBoard = ({ page = 1, pageSize = 10 }: { page?: number; pageSize?: number }) => {
-  return useSuspenseQuery<Boards>({
+  return useQuery<Boards>({
     queryKey: [
       ...QUERY_KEY.FREE_BOARD,
       {
@@ -25,9 +25,6 @@ export const useBoard = ({ page = 1, pageSize = 10 }: { page?: number; pageSize?
         pageSize,
       },
     ],
-    queryFn: () =>
-      fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/boards/free?page=${page}&pageSize=${pageSize}`).then((res) =>
-        res.json()
-      ),
+    queryFn: () => fetch(`/api/boards/free?page=${page}&pageSize=${pageSize}`).then((res) => res.json()),
   })
 }
