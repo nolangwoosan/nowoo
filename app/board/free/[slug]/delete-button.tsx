@@ -2,12 +2,11 @@
 
 import { valibotResolver } from '@hookform/resolvers/valibot'
 import { useQueryClient } from '@tanstack/react-query'
-import { X } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-import { Button, Dialog, DialogTrigger, Modal } from 'react-aria-components'
 import { useForm } from 'react-hook-form'
 import { minLength, object, Output, string } from 'valibot'
 
+import { Dialog, DialogContent, DialogTrigger } from '@/components/dialog'
 import { ROUTES } from '@/constants/routes'
 
 import { QUERY_KEY } from '../utils'
@@ -38,7 +37,6 @@ export function DeleteButton({ slug }: Props) {
 
   const onSubmit = async ({ password }: Schema) => {
     const response = await deleteBoard({ slug, password })
-    console.log(response)
 
     if (response.status === 200) {
       alert('삭제되었습니다.')
@@ -55,35 +53,28 @@ export function DeleteButton({ slug }: Props) {
   }
 
   return (
-    <DialogTrigger>
-      <Button className='rounded-md border border-[#FF3B3B] px-10 py-3 text-[#FF3B3B]'>삭제</Button>
-      <Modal className='fixed inset-0 flex items-center justify-center bg-black bg-opacity-50'>
-        <Dialog className='rounded-md bg-white'>
-          {({ close }) => (
-            <form className='relative flex flex-col p-5' onSubmit={handleSubmit(onSubmit)}>
-              <X className='absolute right-5 top-5 cursor-pointer text-gray-500' onClick={close} />
-              <div className='mb-10 flex flex-col gap-2'>
-                <span className='font-bold'>게시글 삭제</span>
-                <span className='text-[#717171]'>비밀번호를 입력해주세요</span>
-              </div>
-              <div className='flex gap-2'>
-                <input
-                  className='h-9 border-none bg-[#F1F1F1] p-2'
-                  type='password'
-                  placeholder='비밀번호'
-                  {...register('password')}
-                />
-                <button className='h-9 w-20 bg-[#4E86F3] text-white' type='submit'>
-                  확인
-                </button>
-              </div>
-              {errors.password && (
-                <span className='mt-1 text-sm text-red-600'>{errors.password.message?.toString()}</span>
-              )}
-            </form>
-          )}
-        </Dialog>
-      </Modal>
-    </DialogTrigger>
+    <Dialog>
+      <DialogTrigger className='rounded-md border border-[#FF3B3B] px-10 py-3 text-[#FF3B3B]'>삭제</DialogTrigger>
+      <DialogContent className='fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform'>
+        <form className='relative flex flex-col rounded-md bg-white p-5' onSubmit={handleSubmit(onSubmit)}>
+          <div className='mb-10 flex flex-col gap-2'>
+            <span className='font-bold'>게시글 삭제</span>
+            <span className='text-[#717171]'>비밀번호를 입력해주세요</span>
+          </div>
+          <div className='flex gap-2'>
+            <input
+              className='h-9 border-none bg-[#F1F1F1] p-2'
+              type='password'
+              placeholder='비밀번호'
+              {...register('password')}
+            />
+            <button className='h-9 w-20 bg-[#4E86F3] text-white' type='submit'>
+              확인
+            </button>
+          </div>
+          {errors.password && <span className='mt-1 text-sm text-red-600'>{errors.password.message?.toString()}</span>}
+        </form>
+      </DialogContent>
+    </Dialog>
   )
 }

@@ -7,7 +7,7 @@ interface Board {
   created_dt: string
 }
 
-interface Boards {
+export interface Boards {
   count: number
   data: Board[]
 }

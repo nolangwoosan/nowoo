@@ -4,7 +4,7 @@ import { valibotResolver } from '@hookform/resolvers/valibot'
 import { useQueryClient } from '@tanstack/react-query'
 import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
-import { minLength, object, Output, string } from 'valibot'
+import { maxLength, minLength, object, Output, string } from 'valibot'
 
 import Logo from '@/components/logo'
 import { Menu } from '@/components/menu'
@@ -15,10 +15,22 @@ import { QUERY_KEY } from '../utils'
 import { createBoard } from './action'
 
 const boardSchema = object({
-  title: string('제목을 입력해주세요.', [minLength(1, '제목을 입력해주세요.')]),
-  content: string('내용을 입력해주세요.', [minLength(1, '내용을 입력해주세요.')]),
-  writer: string('이름을 입력해주세요.', [minLength(1, '이름을 입력해주세요.')]),
-  password: string('비밀번호을 입력해주세요.', [minLength(1, '비밀번호을 입력해주세요.')]),
+  title: string('제목을 입력해주세요.', [
+    minLength(1, '제목을 입력해주세요.'),
+    maxLength(20, '제목은 20자 이내로 입력해주세요.'),
+  ]),
+  content: string('내용을 입력해주세요.', [
+    minLength(1, '내용을 입력해주세요.'),
+    maxLength(500, '내용은 500자 이내로 입력해주세요.'),
+  ]),
+  writer: string('이름을 입력해주세요.', [
+    minLength(1, '이름을 입력해주세요.'),
+    maxLength(10, '이름은 10자 이내로 입력해주세요.'),
+  ]),
+  password: string('비밀번호을 입력해주세요.', [
+    minLength(1, '비밀번호을 입력해주세요.'),
+    maxLength(10, '비밀번호은 10자 이내로 입력해주세요.'),
+  ]),
 })
 
 type BoardSchema = Output<typeof boardSchema>
