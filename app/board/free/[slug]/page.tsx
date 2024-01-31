@@ -43,7 +43,7 @@ export default async function Page({ params: { slug } }: Props) {
           </div>
           <span className='text-[#999]'>{board.writer}</span>
         </div>
-        <p className='text-[#999]'>{board.description}</p>
+        <p className='whitespace-pre-wrap text-[#999]'>{board.description}</p>
       </div>
       <div className='flex w-full items-center justify-between'>
         <div className='flex gap-5'>
