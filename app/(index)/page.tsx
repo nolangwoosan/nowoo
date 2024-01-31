@@ -1,9 +1,6 @@
 import { headers } from 'next/headers'
 import { Suspense } from 'react'
 
-import Logo from '@/components/logo'
-import { Menu } from '@/components/menu'
-import SearchForm from '@/components/search-form'
 import supabase from '@/lib/utils/supabase'
 
 import PopularItems from './popular-items'
@@ -37,16 +34,11 @@ export default async function HomePage() {
   }
 
   return (
-    <section className='relative mx-auto flex max-w-7xl flex-col items-center gap-6 p-24 max-lg:px-4 max-lg:py-16'>
-      <Logo />
-      <Menu />
-      <SearchForm />
-      <div className='mt-24 flex w-full gap-10 max-lg:flex-col'>
-        <Suspense>
-          <PopularItems />
-          <PopularMonsters />
-        </Suspense>
-      </div>
-    </section>
+    <div className='mt-24 flex w-full gap-10 max-lg:flex-col'>
+      <Suspense>
+        <PopularItems />
+        <PopularMonsters />
+      </Suspense>
+    </div>
   )
 }

@@ -4,14 +4,13 @@ import utc from 'dayjs/plugin/utc'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
-import Logo from '@/components/logo'
-import { Menu } from '@/components/menu'
-import SearchForm from '@/components/search-form'
 import { ROUTES } from '@/constants/routes'
 import supabase from '@/lib/utils/supabase'
 
 dayjs.extend(utc)
 dayjs.extend(timezone)
+
+import { Fragment } from 'react'
 
 import { DeleteButton } from './delete-button'
 
@@ -31,10 +30,7 @@ export default async function Page({ params: { slug } }: Props) {
   if (!board) notFound()
 
   return (
-    <section className='mx-auto flex max-w-screen-xl flex-col items-center gap-6 p-24 max-lg:px-4 max-lg:py-16'>
-      <Logo />
-      <Menu />
-      <SearchForm />
+    <Fragment>
       <div className='mb-8 mt-24 min-h-[500px] w-full bg-white p-5'>
         <div className='mb-7 flex items-end justify-between border-b border-[#D8D8D8] pb-5'>
           <div className='flex flex-col gap-5'>
@@ -54,6 +50,6 @@ export default async function Page({ params: { slug } }: Props) {
           목록
         </Link>
       </div>
-    </section>
+    </Fragment>
   )
 }

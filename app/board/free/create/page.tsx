@@ -3,12 +3,10 @@
 import { valibotResolver } from '@hookform/resolvers/valibot'
 import { useQueryClient } from '@tanstack/react-query'
 import { useRouter } from 'next/navigation'
+import { Fragment } from 'react'
 import { useForm } from 'react-hook-form'
 import { maxLength, minLength, object, Output, string } from 'valibot'
 
-import Logo from '@/components/logo'
-import { Menu } from '@/components/menu'
-import SearchForm from '@/components/search-form'
 import { ROUTES } from '@/constants/routes'
 
 import { QUERY_KEY } from '../utils'
@@ -55,10 +53,7 @@ export default function Page() {
   }
 
   return (
-    <section className='mx-auto flex max-w-screen-xl flex-col items-center gap-6 p-24 max-lg:px-4 max-lg:py-16'>
-      <Logo />
-      <Menu />
-      <SearchForm />
+    <Fragment>
       <form className='mt-24 w-full' onSubmit={handleSubmit(onSubmit)}>
         <div className='border-b border-[#D8D8D8] pb-6'>
           <h1 className='text-2xl font-bold max-md:text-xl'>자유게시판</h1>
@@ -111,6 +106,6 @@ export default function Page() {
           </button>
         </div>
       </form>
-    </section>
+    </Fragment>
   )
 }

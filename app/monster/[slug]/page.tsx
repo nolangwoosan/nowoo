@@ -1,11 +1,9 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
+import { Fragment } from 'react'
 
 import { Tables } from '@/@types/supabase'
-import Logo from '@/components/logo'
-import { Menu } from '@/components/menu'
-import SearchForm from '@/components/search-form'
 import { ROUTES } from '@/constants/routes'
 import { getItemImage, getMonsterImage } from '@/lib/utils'
 import supabase from '@/lib/utils/supabase'
@@ -48,10 +46,7 @@ export default async function Page({ params }: Readonly<Props>) {
     .returns<DropItemsReturnType>()
 
   return (
-    <section className='flex flex-col items-center gap-6 p-24 max-lg:px-4'>
-      <Logo />
-      <Menu />
-      <SearchForm />
+    <Fragment>
       <div className='mt-24 flex w-[500px] max-w-full flex-col bg-[#06062C] bg-opacity-50 p-10 text-white shadow-md max-md:p-4'>
         <div className='flex w-full flex-col items-center gap-1'>
           <h1 className='text-2xl font-semibold'>
@@ -150,6 +145,6 @@ export default async function Page({ params }: Readonly<Props>) {
           ))}
         </div>
       )}
-    </section>
+    </Fragment>
   )
 }

@@ -1,5 +1,6 @@
 import { Metadata } from 'next'
-import { Fragment } from 'react'
+
+import SearchLayout from '@/components/search-layout'
 
 export const metadata: Metadata = {
   title: '자유 게시판 - 메이플랜드 아이템 검색 사이트',
@@ -11,5 +12,5 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  return <Fragment>{children}</Fragment>
+  return <SearchLayout>{children}</SearchLayout>
 }

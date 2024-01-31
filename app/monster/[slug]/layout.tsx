@@ -1,5 +1,4 @@
-import { Fragment } from 'react'
-
+import SearchLayout from '@/components/search-layout'
 import { openGraphImage } from '@/constants/open-graph'
 import { ROUTES } from '@/constants/routes'
 import { getMonsterImage } from '@/lib/utils'
@@ -48,5 +47,5 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  return <Fragment>{children}</Fragment>
+  return <SearchLayout>{children}</SearchLayout>
 }
