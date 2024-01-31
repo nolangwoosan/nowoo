@@ -15,8 +15,8 @@ const schema = object({
     minLength(1, '댓글을 입력해주세요.'),
     maxLength(500, '댓글은 500자 이내로 입력해주세요.'),
   ]),
-  password: string('비밀번호을 입력해주세요.', [
-    minLength(1, '비밀번호을 입력해주세요.'),
+  password: string('비밀번호를 입력해주세요.', [
+    minLength(1, '비밀번호를 입력해주세요.'),
     maxLength(10, '비밀번호은 10자 이내로 입력해주세요.'),
   ]),
 })

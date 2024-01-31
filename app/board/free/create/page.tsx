@@ -21,8 +21,8 @@ const boardSchema = object({
     minLength(1, '내용을 입력해주세요.'),
     maxLength(500, '내용은 500자 이내로 입력해주세요.'),
   ]),
-  password: string('비밀번호을 입력해주세요.', [
-    minLength(1, '비밀번호을 입력해주세요.'),
+  password: string('비밀번호를 입력해주세요.', [
+    minLength(1, '비밀번호를 입력해주세요.'),
     maxLength(10, '비밀번호은 10자 이내로 입력해주세요.'),
   ]),
 })
@@ -89,7 +89,7 @@ export default function Page() {
               <input
                 className='w-full rounded-md border-none px-5 py-3'
                 type='password'
-                placeholder='비밀번호을 입력해주세요.'
+                placeholder='비밀번호를 입력해주세요.'
                 {...register('password')}
               />
               {errors.password && <span className='text-sm text-red-600'>{errors.password.message?.toString()}</span>}

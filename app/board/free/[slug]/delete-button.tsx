@@ -17,7 +17,7 @@ interface Props {
 }
 
 const schema = object({
-  password: string('비밀번호을 입력해주세요.', [minLength(1, '비밀번호을 입력해주세요.')]),
+  password: string('비밀번호를 입력해주세요.', [minLength(1, '비밀번호를 입력해주세요.')]),
 })
 
 type Schema = Output<typeof schema>

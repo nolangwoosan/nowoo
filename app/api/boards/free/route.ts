@@ -11,14 +11,50 @@ export async function GET(request: Request) {
 
   const offset = (page - 1) * pageSize
 
-  const response = await supabase
+  const boardsResponse = await supabase
     .from('boards')
-    .select('id, title, writer, created_dt', {
-      count: 'exact',
-    })
+    .select(
+      `
+    id, 
+    title, 
+    writer, 
+    created_dt,
+    board_comments (
+      id
+    )
+    `,
+      {
+        count: 'exact',
+      }
+    )
     .order('created_dt', { ascending: false })
     .range(offset, offset + pageSize - 1)
     .is('deleted_dt', null)
 
-  return new Response(JSON.stringify(response))
+  const boards = boardsResponse.data ?? []
+  const boardsWithCommentCount = []
+
+  for (const board of boards) {
+    const commentsResponse = await supabase
+      .from('board_comments')
+      .select('id')
+      .eq('board_id', board.id)
+      .is('deleted_dt', null)
+
+    const commentCount = commentsResponse.data ? commentsResponse.data.length : 0
+
+    const boardWithCommentCount = {
+      ...board,
+      comment_count: commentCount,
+    }
+
+    boardsWithCommentCount.push(boardWithCommentCount)
+  }
+
+  return new Response(
+    JSON.stringify({
+      count: boardsResponse.count,
+      data: boardsWithCommentCount,
+    })
+  )
 }

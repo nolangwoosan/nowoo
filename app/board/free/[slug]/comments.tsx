@@ -49,10 +49,14 @@ export async function Comments({ slug }: Readonly<Props>) {
         Object.values(comments).map((comment) => (
           <div className='mt-5 flex flex-col gap-1 rounded-md bg-white p-2 shadow-md' key={comment.id}>
             <div className='flex justify-between'>
-              <span className='font-semibold'>{comment.writer}</span>
+              <div className='flex flex-col'>
+                <span className='font-semibold'>{comment.writer}</span>
+                <span className='text-sm text-gray-400'>
+                  {dayjs(comment.created_dt).tz().format('YYYY.MM.DD HH:mm')}
+                </span>
+              </div>
               <CommentDeleteButton slug={slug} commentId={comment.id} />
             </div>
-            <span className='text-sm text-gray-400'>{dayjs(comment.created_dt).tz().format('YYYY.MM.DD HH:mm')}</span>
             <span className='mt-4 text-gray-600'>{comment.comment}</span>
           </div>
         ))

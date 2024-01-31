@@ -5,6 +5,7 @@ interface Board {
   title: string
   writer: string
   created_dt: string
+  comment_count: number
 }
 
 export interface Boards {

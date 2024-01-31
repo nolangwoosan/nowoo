@@ -15,7 +15,7 @@ interface Props {
 }
 
 const schema = object({
-  password: string('비밀번호을 입력해주세요.', [minLength(1, '비밀번호을 입력해주세요.')]),
+  password: string('비밀번호를 입력해주세요.', [minLength(1, '비밀번호를 입력해주세요.')]),
 })
 
 type Schema = Output<typeof schema>
@@ -47,7 +47,7 @@ export function CommentDeleteButton({ slug, commentId }: Props) {
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogTrigger className='rounded-md bg-[#FF3B3B] px-2 py-1 text-white'>삭제</DialogTrigger>
+      <DialogTrigger className='h-fit rounded-md bg-[#FF3B3B] px-2 py-1 text-white'>삭제</DialogTrigger>
       <DialogContent className='fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform'>
         <form className='relative flex flex-col rounded-md bg-white p-5' onSubmit={handleSubmit(onSubmit)}>
           <div className='mb-10 flex flex-col gap-2'>
