@@ -26,8 +26,9 @@ export function Boards({ boards }: Props) {
           href={ROUTES.FREE_BOARD.DETAIL(board.id.toString())}
           key={board.id}
         >
-          <div className='max-w-[60%] truncate text-[#999999] max-md:max-w-[40%]'>
-            {board.title} ({board.comment_count})
+          <div className='flex max-w-[60%] items-center gap-1 text-[#999999] max-md:max-w-[40%]'>
+            <span className='truncate'>{board.title}</span>
+            <span>({board.comment_count})</span>
           </div>
           <div className='flex items-center gap-24 max-md:gap-6'>
             <span className='truncate text-[#999999]'>{board.writer}</span>
