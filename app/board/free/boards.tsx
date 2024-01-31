@@ -23,7 +23,7 @@ export function Boards({ boards }: Props) {
       {boards?.map((board) => (
         <Link
           className='flex justify-between border-b border-[#D8D8D8] px-10 py-6 max-md:px-2'
-          href={ROUTES.FREE_BOARD.DETAIL(board.id)}
+          href={ROUTES.FREE_BOARD.DETAIL(board.id.toString())}
           key={board.id}
         >
           <div className='max-w-[60%] truncate text-[#999999] max-md:max-w-[40%]'>{board.title}</div>
