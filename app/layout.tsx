@@ -77,7 +77,7 @@ export default function RootLayout({
           <div className='min-h-[calc(100dvh-200px)] bg-gray-100'>{children}</div>
           <Footer />
         </CoreProvider>
-        <GoogleAnalytics />
+        {process.env.NODE_ENV === 'production' && <GoogleAnalytics />}
       </body>
       {process.env.NODE_ENV === 'production' && (
         <>

@@ -59,9 +59,9 @@ export default function Page() {
       <Logo />
       <Menu />
       <SearchForm />
-      <form className='mt-32 w-full' onSubmit={handleSubmit(onSubmit)}>
+      <form className='mt-24 w-full' onSubmit={handleSubmit(onSubmit)}>
         <div className='border-b border-[#D8D8D8] pb-6'>
-          <h1 className='text-2xl font-bold'>자유게시판</h1>
+          <h1 className='text-2xl font-bold max-md:text-xl'>자유게시판</h1>
         </div>
         <div className='flex flex-col'>
           <div className='flex items-center gap-2 border-b border-[#D8D8D8] px-4 py-3 max-md:flex-col max-md:items-start max-md:px-0'>

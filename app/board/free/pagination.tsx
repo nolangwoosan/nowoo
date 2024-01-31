@@ -58,21 +58,6 @@ export function Pagination({ itemsPerPage, totalItems, currentPage, paginate }: 
       >
         <ChevronsLeft />
       </Link>
-      {/* <Link
-        className={cn(
-          'flex h-10 w-10 items-center justify-center rounded-md border border-[#999] text-[#999] hover:opacity-70 max-md:h-8 max-md:w-8 max-md:text-sm'
-        )}
-        href={{
-          pathname,
-          query: {
-            page: currentPage - 1,
-          },
-        }}
-        onClick={() => handleClick(currentPage - 1)}
-      >
-        <ChevronLeft />
-      </Link> */}
-
       {getPageNumbers().map((number) => (
         <Link
           className={cn(
@@ -91,20 +76,6 @@ export function Pagination({ itemsPerPage, totalItems, currentPage, paginate }: 
           {number}
         </Link>
       ))}
-      {/* <Link
-        className={cn(
-          'flex h-10 w-10 items-center justify-center rounded-md border border-[#999] text-[#999] hover:opacity-70 max-md:h-8 max-md:w-8 max-md:text-sm'
-        )}
-        href={{
-          pathname,
-          query: {
-            page: currentPage + 1,
-          },
-        }}
-        onClick={() => handleClick(currentPage + 1)}
-      >
-        <ChevronRight />
-      </Link> */}
       <Link
         className={cn(
           'flex h-10 w-10 items-center justify-center rounded-md border border-[#999] text-[#999] hover:opacity-70 max-md:h-8 max-md:w-8 max-md:text-sm'

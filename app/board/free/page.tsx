@@ -33,7 +33,7 @@ export default function Page({ searchParams }: Props) {
       <Logo />
       <Menu />
       <SearchForm />
-      <div className='mt-32 w-full max-md:mt-40'>
+      <div className='mt-24 w-full'>
         <div className='mb-8 flex justify-between max-md:mb-6'>
           <h1 className='text-2xl font-bold max-md:text-xl'>자유게시판</h1>
           <Link

@@ -73,28 +73,30 @@ export default function SearchForm() {
   useOutsideClick({ ref: searchFormRef, handler: () => setIsFocused(false) })
 
   return (
-    <div
-      className='absolute top-64 flex w-[500px] flex-col justify-center rounded-[30px] bg-white max-md:top-56 max-md:w-full max-md:max-w-[500px] max-md:px-4'
-      ref={searchFormRef}
-      onFocus={() => setIsFocused(true)}
-    >
-      <div className={cn('flex w-full items-center gap-4 rounded-t-[30px] px-8 py-4')}>
-        <input
-          className='flex-1 border-none p-0 focus:border-transparent focus:ring-0'
-          type='text'
-          placeholder='아이템 or 몬스터 이름'
-          value={searchValue}
-          onChange={(event) => setSearchValue(event.target.value)}
-          onKeyDown={handleEnterKey}
-        />
-        <Search />
-      </div>
+    <div className='relative w-[500px] max-md:w-full max-md:max-w-[500px]'>
+      <div
+        className='absolute top-0 flex w-full flex-col justify-center rounded-[30px] bg-white'
+        ref={searchFormRef}
+        onFocus={() => setIsFocused(true)}
+      >
+        <div className={cn('flex w-full items-center gap-4 px-8 py-4 max-md:px-4')}>
+          <input
+            className='flex-1 border-none p-0 focus:border-transparent focus:ring-0'
+            type='text'
+            placeholder='아이템 or 몬스터 이름'
+            value={searchValue}
+            onChange={(event) => setSearchValue(event.target.value)}
+            onKeyDown={handleEnterKey}
+          />
+          <Search />
+        </div>
 
-      {isFocused && Boolean(debouncedSearchValue) && (
-        <Suspense fallback={<SearchResultSkeletonUI />}>
-          <SearchResult searchValue={debouncedSearchValue} onCheckFirstSearchResult={onCheckFirstSearchResult} />
-        </Suspense>
-      )}
+        {isFocused && Boolean(debouncedSearchValue) && (
+          <Suspense fallback={<SearchResultSkeletonUI />}>
+            <SearchResult searchValue={debouncedSearchValue} onCheckFirstSearchResult={onCheckFirstSearchResult} />
+          </Suspense>
+        )}
+      </div>
     </div>
   )
 }

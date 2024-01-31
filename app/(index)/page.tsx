@@ -37,11 +37,11 @@ export default async function HomePage() {
   }
 
   return (
-    <section className='mx-auto flex max-w-7xl flex-col items-center gap-6 p-24 max-lg:px-4'>
+    <section className='relative mx-auto flex max-w-7xl flex-col items-center gap-6 p-24 max-lg:px-4 max-lg:py-16'>
       <Logo />
       <Menu />
       <SearchForm />
-      <div className='mt-32 flex w-full gap-10 max-lg:flex-col'>
+      <div className='mt-24 flex w-full gap-10 max-lg:flex-col'>
         <Suspense>
           <PopularItems />
           <PopularMonsters />
