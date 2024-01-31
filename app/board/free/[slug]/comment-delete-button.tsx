@@ -1,19 +1,17 @@
 'use client'
 
 import { valibotResolver } from '@hookform/resolvers/valibot'
-import { useQueryClient } from '@tanstack/react-query'
-import { useRouter } from 'next/navigation'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { minLength, object, Output, string } from 'valibot'
 
 import { Dialog, DialogContent, DialogTrigger } from '@/components/dialog'
-import { ROUTES } from '@/constants/routes'
 
-import { QUERY_KEY } from '../utils'
-import { deleteBoard } from './action'
+import { deleteComment } from './action'
 
 interface Props {
   slug: string
+  commentId: string
 }
 
 const schema = object({
@@ -22,10 +20,7 @@ const schema = object({
 
 type Schema = Output<typeof schema>
 
-export function DeleteButton({ slug }: Props) {
-  const router = useRouter()
-  const queryClient = useQueryClient()
-
+export function CommentDeleteButton({ slug, commentId }: Props) {
   const {
     register,
     handleSubmit,
@@ -34,16 +29,14 @@ export function DeleteButton({ slug }: Props) {
   } = useForm<Schema>({
     resolver: valibotResolver(schema),
   })
+  const [isOpen, setIsOpen] = useState(false)
 
   const onSubmit = async ({ password }: Schema) => {
-    const response = await deleteBoard({ slug, password })
+    const response = await deleteComment({ slug, commentId, password })
 
     if (response.status === 200) {
       alert('삭제되었습니다.')
-      router.push(ROUTES.FREE_BOARD.LIST)
-      return queryClient.invalidateQueries({
-        queryKey: QUERY_KEY.FREE_BOARD,
-      })
+      setIsOpen(false)
     } else if (response.status === 401) {
       setError('password', {
         type: 'manual',
@@ -53,12 +46,12 @@ export function DeleteButton({ slug }: Props) {
   }
 
   return (
-    <Dialog>
-      <DialogTrigger className='rounded-md border border-[#FF3B3B] px-10 py-3 text-[#FF3B3B]'>삭제</DialogTrigger>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+      <DialogTrigger className='rounded-md bg-[#FF3B3B] px-2 py-1 text-white'>삭제</DialogTrigger>
       <DialogContent className='fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform'>
         <form className='relative flex flex-col rounded-md bg-white p-5' onSubmit={handleSubmit(onSubmit)}>
           <div className='mb-10 flex flex-col gap-2'>
-            <span className='font-bold'>게시글 삭제</span>
+            <span className='font-bold'>댓글 삭제</span>
             <span className='text-[#717171]'>비밀번호를 입력해주세요</span>
           </div>
           <div className='flex gap-2'>

@@ -1,17 +1,20 @@
 import dayjs from 'dayjs'
 import timezone from 'dayjs/plugin/timezone'
 import utc from 'dayjs/plugin/utc'
-import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
-import { ROUTES } from '@/constants/routes'
 import supabase from '@/lib/utils/supabase'
 
 dayjs.extend(utc)
 dayjs.extend(timezone)
 
+import Link from 'next/link'
 import { Fragment } from 'react'
 
+import { ROUTES } from '@/constants/routes'
+
+import { CommentInput } from './comment-input'
+import { Comments } from './comments'
 import { DeleteButton } from './delete-button'
 
 interface Props {
@@ -50,6 +53,10 @@ export default async function Page({ params: { slug } }: Props) {
           목록
         </Link>
       </div>
+
+      <CommentInput slug={slug} />
+
+      <Comments slug={slug} />
     </Fragment>
   )
 }

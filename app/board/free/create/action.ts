@@ -2,14 +2,8 @@
 
 import * as argon2 from 'argon2'
 
+import { getRandom4DigitNumber } from '@/lib/utils'
 import supabase from '@/lib/utils/supabase'
-
-function getRandom4DigitNumber() {
-  const array = new Uint16Array(1)
-  crypto.getRandomValues(array)
-  const randomNumber = array[0] % 10000
-  return String(randomNumber).padStart(4, '0')
-}
 
 export async function createBoard({ title, content, password }: { title: string; content: string; password: string }) {
   const response = await supabase.from('boards').insert([

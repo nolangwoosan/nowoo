@@ -7,6 +7,7 @@ import Link from 'next/link'
 
 dayjs.extend(utc)
 dayjs.extend(timezone)
+dayjs.tz.setDefault('Asia/Seoul')
 
 import { ROUTES } from '@/constants/routes'
 
