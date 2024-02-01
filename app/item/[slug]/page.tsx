@@ -98,8 +98,18 @@ export default async function Page({ params }: Readonly<Props>) {
 
         <div className='flex flex-col gap-10 px-4'>
           <div className='flex flex-col gap-1'>
-            {Boolean(item.inc_ph_attack) && <span>물리공격력: +{item.inc_ph_attack}</span>}
-            {Boolean(item.inc_mg_attack) && <span>마법공격력: +{item.inc_mg_attack}</span>}
+            {Boolean(item.inc_ph_attack) && (
+              <span>
+                물리공격력: +{item.inc_ph_attack}{' '}
+                {item.overall_category === 'Equip' && `(${item.inc_ph_attack - 5} ~ ${item.inc_ph_attack + 5})`}
+              </span>
+            )}
+            {Boolean(item.inc_mg_attack) && (
+              <span>
+                마법공격력: +{item.inc_mg_attack}{' '}
+                {item.overall_category === 'Equip' && `(${item.inc_mg_attack - 5} ~ ${item.inc_mg_attack + 5})`}
+              </span>
+            )}
             {Boolean(item.inc_ph_defence) && <span>물리방어력: +{item.inc_ph_defence}</span>}
             {Boolean(item.inc_mg_defence) && <span>마법방어력: +{item.inc_mg_defence}</span>}
             {Boolean(item.inc_str) && <span>STR: +{item.inc_str}</span>}
@@ -115,7 +125,7 @@ export default async function Page({ params }: Readonly<Props>) {
         </div>
       </div>
 
-      {dropMonsters && (
+      {dropMonsters && dropMonsters.length > 0 && (
         <div className='mt-4 flex w-full flex-col items-center gap-5'>
           <span className='text-xl font-semibold'>드랍 몬스터</span>
           {dropMonsters.map((dropMonster) => (
