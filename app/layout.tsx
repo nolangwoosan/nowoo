@@ -3,6 +3,7 @@ import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import Script from 'next/script'
+import { Fragment } from 'react'
 
 import CoreProvider from '@/components/core-provider'
 import Footer from '@/components/footer'
@@ -76,22 +77,29 @@ export default function RootLayout({
         <CoreProvider>
           <div className='min-h-[calc(100dvh-200px)] bg-gray-100'>{children}</div>
           <Footer />
+          {/* <button
+            className='g-recaptcha invisible'
+            data-sitekey='6Lf80GIpAAAAANfO7xqEa9kgIVF2KEaqP_TpFOR3'
+            data-callback='onSubmit'
+            data-action='submit'
+          ></button> */}
         </CoreProvider>
-        {process.env.NODE_ENV === 'production' && <GoogleAnalytics />}
       </body>
       {process.env.NODE_ENV === 'production' && (
-        <>
-          <Script async src='https://d-collect.jennifersoft.com/7e49137d/demian.js' />
-          <Script id='jennifer-frontend'>
+        <Fragment>
+          <GoogleAnalytics />
+          <Script src='https://d-collect.jennifersoft.com/7e49137d/demian.js' strategy='afterInteractive' />
+          <Script id='jennifer-frontend' strategy='afterInteractive'>
             {`
-      (function(j,ennifer) {
-        j['dmndata']=[];j['jenniferFront']=function(args){window.dmndata.push(args)};
-        j['dmnaid']=ennifer;j['dmnatime']=new Date();j['dmnanocookie']=false;j['dmnajennifer']='JENNIFER_FRONT@INTG';
-    }(window, '7e49137d'));
-        `}
+            (function(j,ennifer) {
+              j['dmndata']=[];j['jenniferFront']=function(args){window.dmndata.push(args)};
+              j['dmnaid']=ennifer;j['dmnatime']=new Date();j['dmnanocookie']=false;j['dmnajennifer']='JENNIFER_FRONT@INTG';
+            }(window, '7e49137d'));
+          `}
           </Script>
-        </>
+        </Fragment>
       )}
+      {/* <Script src='https://www.google.com/recaptcha/api.js' strategy='afterInteractive' /> */}
     </html>
   )
 }

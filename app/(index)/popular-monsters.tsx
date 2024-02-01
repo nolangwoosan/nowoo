@@ -9,7 +9,8 @@ export default async function PopularMonsters() {
   const { data: monsters } = await supabase
     .from('monsters')
     .select('id, maple_mob_id, name_kor')
-    .filter('name_kor', 'in', '("좀비루팡","드레이크","좀비버섯","뿔버섯","초록버섯")')
+    .filter('name_kor', 'in', '("좀비루팡","드레이크","좀비버섯","파이어보어","라이칸스로프")')
+    .limit(5)
 
   return (
     <div className='flex w-full flex-col gap-8 max-md:gap-4'>

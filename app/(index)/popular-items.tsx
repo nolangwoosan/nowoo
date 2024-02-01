@@ -9,7 +9,7 @@ export default async function PopularItems() {
   const { data: items } = await supabase
     .from('items')
     .select('id, maple_item_id, name_kor')
-    .filter('name_kor', 'in', '("이블윙즈","크리스탈 완드","퍼플 문라이트","일비 표창","고드름")')
+    .filter('name_kor', 'in', '("일비 표창","크리스탈 완드","뇌전 수리검","노란색 우산","고드름")')
 
   return (
     <div className='flex w-full flex-col gap-8 max-md:gap-4'>

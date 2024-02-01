@@ -17,5 +17,17 @@
   "css.validate": false,
   "editor.inlineSuggest.enabled": true,
   "css.lint.unknownAtRules": "ignore",
-  "cSpell.words": ["defence", "hookform", "ilike", "lucide", "naver", "NOWOO", "supabase", "valibot", "upsert"]
+  "cSpell.words": [
+    "defence",
+    "hookform",
+    "ilike",
+    "lucide",
+    "naver",
+    "NOWOO",
+    "recaptcha",
+    "sitekey",
+    "supabase",
+    "upsert",
+    "valibot"
+  ]
 }
