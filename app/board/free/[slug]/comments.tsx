@@ -4,6 +4,7 @@ import utc from 'dayjs/plugin/utc'
 
 import supabase from '@/lib/utils/supabase'
 
+import { CommentDate } from './comment-date'
 import { CommentDeleteButton } from './comment-delete-button'
 
 dayjs.extend(utc)
@@ -51,9 +52,7 @@ export async function Comments({ slug }: Readonly<Props>) {
             <div className='flex justify-between'>
               <div className='flex flex-col'>
                 <span className='font-semibold'>{comment.writer}</span>
-                <span className='text-sm text-gray-400'>
-                  {dayjs(comment.created_dt).tz().format('YYYY.MM.DD HH:mm')}
-                </span>
+                <CommentDate createdAt={comment.created_dt} />
               </div>
               <CommentDeleteButton slug={slug} commentId={comment.id} />
             </div>
