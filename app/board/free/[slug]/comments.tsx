@@ -1,14 +1,7 @@
-import dayjs from 'dayjs'
-import timezone from 'dayjs/plugin/timezone'
-import utc from 'dayjs/plugin/utc'
-
 import supabase from '@/lib/utils/supabase'
 
 import { CommentDate } from './comment-date'
 import { CommentDeleteButton } from './comment-delete-button'
-
-dayjs.extend(utc)
-dayjs.extend(timezone)
 
 interface Props {
   slug: string
