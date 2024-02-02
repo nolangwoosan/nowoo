@@ -34,7 +34,7 @@ export default async function Page({ params: { slug } }: Props) {
 
   return (
     <Fragment>
-      <div className='mb-8 mt-24 min-h-[500px] w-full bg-white p-5'>
+      <div className='mt-24 min-h-[500px] w-full bg-white p-5'>
         <div className='mb-7 flex items-end justify-between border-b border-[#D8D8D8] pb-5'>
           <div className='flex flex-col gap-5'>
             <span className='font-bold'>{board.title}</span>

@@ -12,7 +12,7 @@ export function MonsterImage(props: Props) {
   return (
     <Image
       {...rest}
-      src={`http://maplestory.io/api/gms/62/mob/${monsterId}/icon?resize=3`}
+      src={`http://maplestory.io/api/gms/62/mob/animated/${monsterId}/move`}
       alt={props.alt}
       onError={(e) => {
         e.currentTarget.src = `https://maplestory.io/api/kms/284/mob/${monsterId}/icon?resize=3`
