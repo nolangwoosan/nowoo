@@ -28,7 +28,22 @@ export interface Database {
           id?: number
           updated_dt?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: 'board_comments_boards_fk'
+            columns: ['board_id']
+            isOneToOne: false
+            referencedRelation: 'boards'
+            referencedColumns: ['id']
+          },
+          {
+            foreignKeyName: 'board_comments_comments_fk'
+            columns: ['comment_id']
+            isOneToOne: false
+            referencedRelation: 'comments'
+            referencedColumns: ['id']
+          },
+        ]
       }
       boards: {
         Row: {
@@ -131,6 +146,7 @@ export interface Database {
           sub_category: string
           updated_dt: string
           upgradable_count: number
+          views: number
         }
         Insert: {
           category: string
@@ -166,6 +182,7 @@ export interface Database {
           sub_category: string
           updated_dt?: string
           upgradable_count: number
+          views?: number
         }
         Update: {
           category?: string
@@ -201,29 +218,45 @@ export interface Database {
           sub_category?: string
           updated_dt?: string
           upgradable_count?: number
+          views?: number
         }
         Relationships: []
       }
       monster_drops: {
         Row: {
-          drop_chance: number
+          drop_chance: string
           id: number
           item_id: number
           monster_id: number
         }
         Insert: {
-          drop_chance: number
+          drop_chance: string
           id?: number
           item_id: number
           monster_id: number
         }
         Update: {
-          drop_chance?: number
+          drop_chance?: string
           id?: number
           item_id?: number
           monster_id?: number
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: 'monster_drops_items_fk'
+            columns: ['item_id']
+            isOneToOne: false
+            referencedRelation: 'items'
+            referencedColumns: ['id']
+          },
+          {
+            foreignKeyName: 'monster_drops_monster_id_fkey'
+            columns: ['monster_id']
+            isOneToOne: false
+            referencedRelation: 'monsters'
+            referencedColumns: ['id']
+          },
+        ]
       }
       monsters: {
         Row: {
@@ -247,6 +280,7 @@ export interface Database {
           ph_attack: number
           ph_defence: number
           updated_dt: string
+          views: number
         }
         Insert: {
           created_dt?: string
@@ -269,6 +303,7 @@ export interface Database {
           ph_attack: number
           ph_defence: number
           updated_dt?: string
+          views?: number
         }
         Update: {
           created_dt?: string
@@ -291,21 +326,31 @@ export interface Database {
           ph_attack?: number
           ph_defence?: number
           updated_dt?: string
+          views?: number
         }
         Relationships: []
       }
-      sample: {
+      user_access: {
         Row: {
+          agent: string
+          created_dt: string
           id: number
-          name: string
+          ip: string
+          updated_dt: string | null
         }
         Insert: {
+          agent: string
+          created_dt?: string
           id?: number
-          name: string
+          ip: string
+          updated_dt?: string | null
         }
         Update: {
+          agent?: string
+          created_dt?: string
           id?: number
-          name?: string
+          ip?: string
+          updated_dt?: string | null
         }
         Relationships: []
       }

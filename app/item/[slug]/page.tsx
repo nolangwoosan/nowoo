@@ -35,9 +35,17 @@ const JOB: Record<number, string[]> = {
 export default async function Page({ params }: Readonly<Props>) {
   const { slug } = params
 
-  const { data: item } = await supabase.from('items').select().match({ maple_item_id: slug }).single()
+  const currentViews = (await supabase.from('items').select('views').eq('maple_item_id', slug).single()).data?.views
+  const { data: item } = await supabase
+    .from('items')
+    .update({
+      views: currentViews ? currentViews + 1 : 1,
+    })
+    .eq('maple_item_id', slug)
+    .select()
+    .single()
 
-  if (!item) return notFound()
+  if (!item) notFound()
 
   const { data: dropMonsters } = await supabase
     .from('monster_drops')
@@ -101,24 +109,24 @@ export default async function Page({ params }: Readonly<Props>) {
           <div className='flex flex-col gap-1'>
             {Boolean(item.inc_ph_attack) && (
               <span>
-                물리공격력: +{item.inc_ph_attack}{' '}
+                물리공격력 : +{item.inc_ph_attack}{' '}
                 {item.overall_category === 'Equip' && `(${item.inc_ph_attack - 5} ~ ${item.inc_ph_attack + 5})`}
               </span>
             )}
             {Boolean(item.inc_mg_attack) && (
               <span>
-                마법공격력: +{item.inc_mg_attack}{' '}
+                마법공격력 : +{item.inc_mg_attack}{' '}
                 {item.overall_category === 'Equip' && `(${item.inc_mg_attack - 5} ~ ${item.inc_mg_attack + 5})`}
               </span>
             )}
-            {Boolean(item.inc_ph_defence) && <span>물리방어력: +{item.inc_ph_defence}</span>}
-            {Boolean(item.inc_mg_defence) && <span>마법방어력: +{item.inc_mg_defence}</span>}
-            {Boolean(item.inc_str) && <span>STR: +{item.inc_str}</span>}
-            {Boolean(item.inc_dex) && <span>DEX: +{item.inc_dex}</span>}
-            {Boolean(item.inc_int) && <span>INT: +{item.inc_int}</span>}
-            {Boolean(item.inc_luk) && <span>LUK: +{item.inc_luk}</span>}
-            {Boolean(item.inc_hp) && <span>HP: +{item.inc_hp}</span>}
-            {Boolean(item.inc_mp) && <span>MP: +{item.inc_mp}</span>}
+            {Boolean(item.inc_ph_defence) && <span>물리방어력 : +{item.inc_ph_defence}</span>}
+            {Boolean(item.inc_mg_defence) && <span>마법방어력 : +{item.inc_mg_defence}</span>}
+            {Boolean(item.inc_str) && <span>STR : +{item.inc_str}</span>}
+            {Boolean(item.inc_dex) && <span>DEX : +{item.inc_dex}</span>}
+            {Boolean(item.inc_int) && <span>INT : +{item.inc_int}</span>}
+            {Boolean(item.inc_luk) && <span>LUK : +{item.inc_luk}</span>}
+            {Boolean(item.inc_hp) && <span>HP : +{item.inc_hp}</span>}
+            {Boolean(item.inc_mp) && <span>MP : +{item.inc_mp}</span>}
             <span>업그레이드 가능 횟수 : {item.upgradable_count}</span>
             <span>상점 거래가 : {item.price_shop.toLocaleString()} 메소</span>
             <span>거래 시세가 : {item.price_average ? `${item.price_average} 메소` : `데이터 준비중입니다.`}</span>

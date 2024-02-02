@@ -24,12 +24,16 @@ type DropItemsReturnType =
 export default async function Page({ params }: Readonly<Props>) {
   const { slug } = params
 
+  const currentViews = (await supabase.from('monsters').select('views').eq('maple_mob_id', slug).single()).data?.views
   const { data: monster } = await supabase
     .from('monsters')
+    .update({
+      views: currentViews ? currentViews + 1 : 1,
+    })
+    .match({ maple_mob_id: slug })
     .select(
       'id, maple_mob_id, name_kor, name_eng, level, hp, mp, exp, ph_attack, mg_attack, ph_defence, mg_defence, description_kor, is_undead'
     )
-    .match({ maple_mob_id: slug })
     .single()
 
   if (!monster) notFound()
@@ -121,7 +125,7 @@ export default async function Page({ params }: Readonly<Props>) {
         )}
       </div>
 
-      {dropItems && (
+      {dropItems && dropItems.length > 0 && (
         <div className='mt-4 flex w-full flex-col items-center gap-5'>
           <span className='text-xl font-semibold'>드랍 아이템</span>
           {dropItems.map((dropItem) => (
