@@ -8,12 +8,12 @@ export default async function PopularMonsters() {
   const { data: monsters } = await supabase
     .from('monsters')
     .select('id, maple_mob_id, name_kor')
-    .filter('name_kor', 'in', '("좀비루팡","드레이크","좀비버섯","파이어보어","라이칸스로프")')
+    .filter('name_kor', 'in', '("쿨리 좀비","루나픽시","주니어 그류핀","레드 드레이크","라이칸스로프")')
     .limit(5)
 
   return (
     <div className='flex w-full flex-col gap-8 rounded-md bg-white p-12 shadow-md max-md:gap-4 max-md:p-8'>
-      <span className='border-b border-[#D8D8D8] pb-4 text-2xl font-bold'>인기 몬스터</span>
+      <span className='border-b border-[#D8D8D8] pb-4 text-xl font-bold'>인기 몬스터</span>
       <div className='flex flex-col gap-4 rounded-sm max-md:gap-2'>
         {monsters?.map((monster) => (
           <Link className='flex items-center gap-8' key={monster.id} href={ROUTES.MONSTER(monster.maple_mob_id)}>
@@ -24,7 +24,7 @@ export default async function PopularMonsters() {
               height={60}
               alt={monster.name_kor}
             />
-            <span className='font-semibold'>{monster.name_kor}</span>
+            <span>{monster.name_kor}</span>
           </Link>
         ))}
       </div>

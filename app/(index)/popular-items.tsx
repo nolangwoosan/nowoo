@@ -8,11 +8,11 @@ export default async function PopularItems() {
   const { data: items } = await supabase
     .from('items')
     .select('id, maple_item_id, name_kor')
-    .filter('name_kor', 'in', '("일비 표창","크리스탈 완드","뇌전 수리검","노란색 우산","고드름")')
+    .filter('name_kor', 'in', '("토비 표창","이블윙즈","뇌전 수리검","노란색 우산","장갑 공격력 주문서 60%")')
 
   return (
     <div className='flex w-full flex-col gap-8 rounded-md bg-white p-12 shadow-md max-md:gap-4 max-md:p-8'>
-      <span className='border-b border-[#D8D8D8] pb-4 text-2xl font-bold'>다른 유저들이 선호하는 아이템</span>
+      <span className='border-b border-[#D8D8D8] pb-4 text-xl font-bold'>다른 유저들이 선호하는 아이템</span>
       <div className='flex flex-col gap-4 rounded-sm max-md:gap-2'>
         {items?.map((item) => (
           <Link className='flex items-center gap-8' key={item.id} href={ROUTES.ITEM(item.maple_item_id)}>
@@ -23,7 +23,7 @@ export default async function PopularItems() {
               height={60}
               alt={item.name_kor}
             />
-            <span className='font-semibold'>{item.name_kor}</span>
+            <span>{item.name_kor}</span>
           </Link>
         ))}
       </div>
