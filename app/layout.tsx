@@ -1,7 +1,7 @@
 import './globals.css'
 
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import localFont from 'next/font/local'
 import Script from 'next/script'
 import { Fragment } from 'react'
 
@@ -11,7 +11,7 @@ import GoogleAnalytics from '@/components/google-analytics'
 import { openGraphImage } from '@/constants/open-graph'
 import { cn } from '@/lib/utils'
 
-const inter = Inter({ subsets: ['latin'] })
+const pretendard = localFont({ src: '../public/font/PretendardVariable.woff2' })
 
 export const metadata: Metadata = {
   title: 'NOWOO - 메이플랜드 아이템 검색 사이트',
@@ -73,7 +73,7 @@ export default function RootLayout({
       <head>
         <link rel='icon' href='/favicon.ico' sizes='any' />
       </head>
-      <body className={cn(inter.className, 'text-[#222222] max-md:text-sm')}>
+      <body className={cn(pretendard.className, 'text-[#222222] max-md:text-sm')}>
         <CoreProvider>
           <div className='min-h-[calc(100dvh-200px)] bg-gray-100'>{children}</div>
           <Footer />
