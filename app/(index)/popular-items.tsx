@@ -1,8 +1,7 @@
-import Image from 'next/image'
 import Link from 'next/link'
 
+import { ItemImage } from '@/components/item-image'
 import { ROUTES } from '@/constants/routes'
-import { getItemImage } from '@/lib/utils'
 import supabase from '@/lib/utils/supabase'
 
 export default async function PopularItems() {
@@ -17,9 +16,9 @@ export default async function PopularItems() {
       <div className='flex flex-col gap-4 rounded-sm bg-white p-12 shadow-md max-md:gap-2 max-md:p-4'>
         {items?.map((item) => (
           <Link className='flex items-center gap-8' key={item.id} href={ROUTES.ITEM(item.maple_item_id)}>
-            <Image
+            <ItemImage
               className='aspect-square object-contain'
-              src={getItemImage(item.maple_item_id)}
+              itemId={item.maple_item_id}
               width={60}
               height={60}
               alt={item.name_kor}

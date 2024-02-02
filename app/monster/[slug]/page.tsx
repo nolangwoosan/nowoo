@@ -1,11 +1,11 @@
-import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { Fragment } from 'react'
 
 import { Tables } from '@/@types/supabase'
+import { ItemImage } from '@/components/item-image'
+import { MonsterImage } from '@/components/monster-image'
 import { ROUTES } from '@/constants/routes'
-import { getItemImage, getMonsterImage } from '@/lib/utils'
 import supabase from '@/lib/utils/supabase'
 
 interface Props {
@@ -59,16 +59,16 @@ export default async function Page({ params }: Readonly<Props>) {
 
         <div className='flex gap-12 px-4 py-4'>
           <div className='h-fit bg-white p-2'>
-            <Image
+            <MonsterImage
+              monsterId={monster.maple_mob_id}
               className='aspect-square object-contain max-md:hidden'
-              src={getMonsterImage(monster.maple_mob_id)}
               width={160}
               height={160}
               alt={monster.name_kor}
             />
-            <Image
+            <MonsterImage
+              monsterId={monster.maple_mob_id}
               className='aspect-square object-contain md:hidden'
-              src={getMonsterImage(monster.maple_mob_id)}
               width={60}
               height={60}
               alt={monster.name_kor}
@@ -130,9 +130,9 @@ export default async function Page({ params }: Readonly<Props>) {
               href={ROUTES.ITEM(dropItem.items.maple_item_id)}
               key={dropItem.items.maple_item_id}
             >
-              <Image
+              <ItemImage
+                itemId={dropItem.items.maple_item_id}
                 className='aspect-square object-contain'
-                src={getItemImage(dropItem.items.maple_item_id)}
                 width={70}
                 height={70}
                 alt={dropItem.items.name_kor}

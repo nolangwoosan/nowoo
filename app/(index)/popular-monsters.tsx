@@ -1,8 +1,7 @@
-import Image from 'next/image'
 import Link from 'next/link'
 
+import { MonsterImage } from '@/components/monster-image'
 import { ROUTES } from '@/constants/routes'
-import { getMonsterImage } from '@/lib/utils'
 import supabase from '@/lib/utils/supabase'
 
 export default async function PopularMonsters() {
@@ -18,9 +17,9 @@ export default async function PopularMonsters() {
       <div className='flex flex-col gap-4 rounded-sm bg-white p-12 shadow-md max-md:gap-2 max-md:p-4'>
         {monsters?.map((monster) => (
           <Link className='flex items-center gap-8' key={monster.id} href={ROUTES.MONSTER(monster.maple_mob_id)}>
-            <Image
+            <MonsterImage
+              monsterId={monster.maple_mob_id}
               className='aspect-square object-contain'
-              src={getMonsterImage(monster.maple_mob_id)}
               width={60}
               height={60}
               alt={monster.name_kor}
