@@ -1,7 +1,11 @@
 'use client'
 
+import * as Tabs from '@radix-ui/react-tabs'
+import { Pencil } from 'lucide-react'
 import Link from 'next/link'
 import { useState } from 'react'
+
+import { cn } from '@/lib/utils'
 
 import { Boards } from './boards'
 import { BoardsSkeletonUi } from './boards-skeleton-ui'
@@ -16,7 +20,15 @@ interface Props {
   }
 }
 
+const tabs = [
+  { id: 'all', name: '전체 글' },
+  // { id: 'trade', name: '거래 글' },
+]
+
+type Tab = (typeof tabs)[number]
+
 export default function Page({ searchParams }: Props) {
+  const [currentTab, setCurrentTab] = useState<Tab['id']>(tabs[0].id)
   const [currentPage, setCurrentPage] = useState(searchParams.page ? Number(searchParams.page) : 1)
   const boardQuery = useBoard({ page: currentPage, pageSize: PAGE_SIZE })
 
@@ -26,27 +38,61 @@ export default function Page({ searchParams }: Props) {
 
   return (
     <div className='mt-24 w-full'>
-      <div className='mb-8 flex justify-between max-md:mb-6'>
-        <h1 className='text-2xl font-bold max-md:text-xl'>자유게시판</h1>
-        <Link
-          className='rounded-md bg-[#FB9E48] px-8 py-3 text-xl text-white hover:opacity-70 max-md:px-4 max-md:py-2 max-md:text-base'
-          href='/board/free/create'
-        >
-          등록하기
-        </Link>
-      </div>
-      {boardQuery.isLoading && <BoardsSkeletonUi />}
-      {boardQuery.isSuccess && (
-        <>
-          <Boards boards={boardQuery.data.data ?? []} />
-          <Pagination
-            itemsPerPage={PAGE_SIZE}
-            totalItems={boardQuery.data.count}
-            currentPage={currentPage}
-            paginate={paginate}
-          />
-        </>
-      )}
+      <Tabs.Root defaultValue={tabs[0].id} value={currentTab} onValueChange={setCurrentTab}>
+        <div className='mb-2 flex items-end justify-between'>
+          <Tabs.List className='flex gap-2'>
+            {tabs.map((tab) => (
+              <Tabs.Trigger
+                className={cn(
+                  'rounded-md border border-gray-600 px-4 py-2 text-gray-600',
+                  tab.id === currentTab && 'border-none bg-[#FB9E48] text-white'
+                )}
+                type='button'
+                key={tab.id}
+                value={tab.id}
+              >
+                {tab.name} ({boardQuery.data?.count ?? 0})
+              </Tabs.Trigger>
+            ))}
+          </Tabs.List>
+          <Link
+            className='flex h-fit items-center gap-2 rounded-md border border-[#FB9E48] px-4 py-2 text-[#FB9E48] hover:opacity-70'
+            href='/board/free/create'
+          >
+            <Pencil size={20} />
+            <span>글쓰기</span>
+          </Link>
+        </div>
+
+        <Tabs.Content value={tabs[0].id}>
+          {boardQuery.isLoading && <BoardsSkeletonUi />}
+          {boardQuery.isSuccess && (
+            <>
+              <Boards boards={boardQuery.data.data ?? []} />
+              <Pagination
+                itemsPerPage={PAGE_SIZE}
+                totalItems={boardQuery.data.count}
+                currentPage={currentPage}
+                paginate={paginate}
+              />
+            </>
+          )}
+        </Tabs.Content>
+        {/* <Tabs.Content value={tabs[1].id}>
+          {boardQuery.isLoading && <BoardsSkeletonUi />}
+          {boardQuery.isSuccess && (
+            <>
+              <Boards boards={boardQuery.data.data ?? []} />
+              <Pagination
+                itemsPerPage={PAGE_SIZE}
+                totalItems={boardQuery.data.count}
+                currentPage={currentPage}
+                paginate={paginate}
+              />
+            </>
+          )}
+        </Tabs.Content> */}
+      </Tabs.Root>
     </div>
   )
 }

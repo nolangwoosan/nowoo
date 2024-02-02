@@ -1,6 +1,7 @@
 'use client'
 
 import { valibotResolver } from '@hookform/resolvers/valibot'
+import { X } from 'lucide-react'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { minLength, object, Output, string } from 'valibot'
@@ -47,7 +48,9 @@ export function CommentDeleteButton({ slug, commentId }: Props) {
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogTrigger className='h-fit rounded-md bg-[#FF3B3B] px-2 py-1 text-white'>삭제</DialogTrigger>
+      <DialogTrigger className='h-fit rounded-md bg-gray-300 text-white hover:opacity-70'>
+        <X />
+      </DialogTrigger>
       <DialogContent className='fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform'>
         <form className='relative flex flex-col rounded-md bg-white p-5' onSubmit={handleSubmit(onSubmit)}>
           <div className='mb-10 flex flex-col gap-2'>

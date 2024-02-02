@@ -54,7 +54,9 @@ export function DeleteButton({ slug }: Props) {
 
   return (
     <Dialog>
-      <DialogTrigger className='rounded-md border border-[#FF3B3B] px-10 py-3 text-[#FF3B3B]'>삭제</DialogTrigger>
+      <DialogTrigger className='rounded-md border border-[#FF3B3B] px-6 py-2 text-lg text-[#FF3B3B] transition-colors hover:bg-[#FF3B3B] hover:text-white'>
+        삭제
+      </DialogTrigger>
       <DialogContent className='fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform'>
         <form className='relative flex flex-col rounded-md bg-white p-5' onSubmit={handleSubmit(onSubmit)}>
           <div className='mb-10 flex flex-col gap-2'>

@@ -38,10 +38,10 @@ export async function Comments({ slug }: Readonly<Props>) {
 
   return (
     <div className='flex w-full flex-col'>
-      <span>{boardComments?.length ?? 0}개의 댓글</span>
+      <span className='font-semibold'>{boardComments?.length ?? 0}개의 댓글</span>
       {boardComments?.map((comments) =>
         Object.values(comments).map((comment) => (
-          <div className='mt-5 flex flex-col gap-1 rounded-md bg-white p-2 shadow-md' key={comment.id}>
+          <div className='mt-4 flex flex-col gap-1 rounded-md bg-white p-4' key={comment.id}>
             <div className='flex justify-between'>
               <div className='flex flex-col'>
                 <span className='font-semibold'>{comment.writer}</span>

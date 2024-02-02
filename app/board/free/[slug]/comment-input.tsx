@@ -57,7 +57,7 @@ export function CommentInput({ slug }: Readonly<Props>) {
         {...register('comment')}
       />
       {errors.comment && <span className='text-[#FF3B3B]'>{errors.comment.message}</span>}
-      <div className='mt-5 flex justify-end'>
+      <div className='mt-2 flex justify-end'>
         <div className='flex flex-col'>
           <input
             className='mr-3 h-10 rounded-md border border-[#D8D8D8] p-2'
@@ -68,7 +68,7 @@ export function CommentInput({ slug }: Readonly<Props>) {
           {errors.password && <span className='text-[#FF3B3B]'>{errors.password.message}</span>}
         </div>
         <button
-          className='h-10 rounded-md bg-[#FB9E48] px-8 text-white disabled:opacity-50 max-md:px-4'
+          className='h-10 rounded-md bg-gray-600 px-8 text-white hover:opacity-70 disabled:opacity-50 max-md:px-4'
           type='submit'
           disabled={isSubmitting}
         >

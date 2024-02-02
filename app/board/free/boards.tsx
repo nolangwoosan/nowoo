@@ -26,16 +26,16 @@ export function Boards({ boards }: Props) {
           href={ROUTES.FREE_BOARD.DETAIL(board.id.toString())}
           key={board.id}
         >
-          <div className='flex max-w-[60%] items-center gap-1 text-[#999999] max-md:max-w-[40%]'>
+          <div className='flex max-w-[60%] items-center gap-1 text-gray-600 max-md:max-w-[40%]'>
             <span className='truncate'>{board.title}</span>
             <span>({board.comment_count})</span>
           </div>
           <div className='flex items-center gap-24 max-md:gap-6'>
             <span className='truncate text-[#999999]'>{board.writer}</span>
-            <span className='text-[#999999] max-md:hidden'>
+            <span className='text-sm text-[#999999] max-md:hidden'>
               {dayjs(board.created_dt).tz('Asia/Seoul').format('YYYY.MM.DD HH:mm')}
             </span>
-            <span className='text-[#999999] md:hidden'>
+            <span className='text-sm text-[#999999] md:hidden'>
               {dayjs(board.created_dt).tz('Asia/Seoul').format('YYYY.MM.DD')}
             </span>
           </div>
