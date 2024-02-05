@@ -9,7 +9,7 @@ export function PopularSkeletonUI({ title }: Readonly<Props>) {
       <div className='flex flex-col gap-4 rounded-sm max-md:gap-2'>
         {new Array(5).fill(null).map((_, index) => (
           <div key={index} className='flex animate-pulse items-center gap-4'>
-            <div className='aspect-square h-8 w-8 rounded-full bg-gray-300'></div>
+            <div className='aspect-square h-16 w-16 rounded-full bg-gray-300'></div>
             <span className='h-8 w-full bg-gray-300'></span>
           </div>
         ))}
