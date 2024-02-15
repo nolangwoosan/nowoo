@@ -22,7 +22,7 @@ const schema = object({
 
 type Schema = Output<typeof schema>
 
-export function CommentDeleteButton({ slug, commentId }: Props) {
+export function CommentDeleteButton({ slug, commentId }: Readonly<Props>) {
   const {
     register,
     handleSubmit,

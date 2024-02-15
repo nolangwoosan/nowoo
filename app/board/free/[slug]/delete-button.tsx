@@ -23,7 +23,7 @@ const schema = object({
 
 type Schema = Output<typeof schema>
 
-export function DeleteButton({ slug }: Props) {
+export function DeleteButton({ slug }: Readonly<Props>) {
   const router = useRouter()
   const queryClient = useQueryClient()
 

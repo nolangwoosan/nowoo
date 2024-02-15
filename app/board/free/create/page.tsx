@@ -3,7 +3,6 @@
 import { valibotResolver } from '@hookform/resolvers/valibot'
 import { useQueryClient } from '@tanstack/react-query'
 import { useRouter } from 'next/navigation'
-import { Fragment } from 'react'
 import { useForm } from 'react-hook-form'
 import { maxLength, minLength, object, Output, string } from 'valibot'
 
@@ -61,71 +60,57 @@ export default function Page() {
   }
 
   return (
-    <Fragment>
-      <form className='mt-24 w-full' onSubmit={handleSubmit(onSubmit)}>
-        <div className='border-b border-[#D8D8D8] pb-6'>
-          <h1 className='text-2xl font-bold max-md:text-xl'>자유게시판</h1>
-        </div>
-        <div className='flex flex-col'>
-          {/* <div className='flex items-center gap-2 border-b border-[#D8D8D8] px-4 py-3 max-md:flex-col max-md:items-start max-md:px-0'>
-            <span className='w-[200px] max-md:text-lg max-md:font-semibold'>카테고리</span>
-            <div className='flex-1 max-md:w-full'>
-              <input
-                className='w-full rounded-md border-none px-5 py-3'
-                placeholder='제목을 입력해주세요.'
-                {...register('title')}
-              />
-              {errors.title && <span className='text-sm text-red-600'>{errors.title.message?.toString()}</span>}
-            </div>
-          </div> */}
-
-          <div className='flex items-center gap-2 border-b border-[#D8D8D8] px-4 py-3 max-md:flex-col max-md:items-start max-md:px-0'>
-            <span className='w-[200px] max-md:text-lg max-md:font-semibold'>제목</span>
-            <div className='flex-1 max-md:w-full'>
-              <input
-                className='w-full rounded-md border-none px-5 py-3'
-                placeholder='제목을 입력해주세요.'
-                {...register('title')}
-              />
-              {errors.title && <span className='text-sm text-red-600'>{errors.title.message?.toString()}</span>}
-            </div>
-          </div>
-
-          <div className='flex items-center gap-2 border-b border-[#D8D8D8] px-4 py-3 max-md:flex-col max-md:items-start max-md:px-0'>
-            <span className='w-[200px] max-md:text-lg max-md:font-semibold'>내용</span>
-            <div className='flex-1 max-md:w-full'>
-              <textarea
-                className='h-[250px] w-full rounded-md border-none px-5 py-3'
-                placeholder='내용을 입력해주세요.'
-                {...register('content')}
-              />
-              {errors.content && <span className='text-sm text-red-600'>{errors.content.message?.toString()}</span>}
-            </div>
-          </div>
-
-          <div className='flex items-center gap-2 border-b border-[#D8D8D8] px-4 py-3 max-md:flex-col max-md:items-start max-md:px-0'>
-            <span className='w-[200px] max-md:text-lg max-md:font-semibold'>비밀번호</span>
-            <div className='flex-1 max-md:w-full'>
-              <input
-                className='w-full rounded-md border-none px-5 py-3'
-                type='password'
-                placeholder='비밀번호를 입력해주세요.'
-                {...register('password')}
-              />
-              {errors.password && <span className='text-sm text-red-600'>{errors.password.message?.toString()}</span>}
-            </div>
+    <form className='mt-24 w-full' onSubmit={handleSubmit(onSubmit)}>
+      <div className='border-b border-[#D8D8D8] pb-6'>
+        <h1 className='text-2xl font-bold max-md:text-xl'>자유게시판</h1>
+      </div>
+      <div className='flex flex-col'>
+        <div className='flex items-center gap-2 border-b border-[#D8D8D8] px-4 py-3 max-md:flex-col max-md:items-start max-md:px-0'>
+          <span className='w-[200px] max-md:text-lg max-md:font-semibold'>제목</span>
+          <div className='flex-1 max-md:w-full'>
+            <input
+              className='w-full rounded-md border-none px-5 py-3'
+              placeholder='제목을 입력해주세요.'
+              {...register('title')}
+            />
+            {errors.title && <span className='text-sm text-red-600'>{errors.title.message?.toString()}</span>}
           </div>
         </div>
-        <div className='flex justify-center'>
-          <button
-            className='mt-7 rounded-md bg-[#FB9E48] px-8 py-3 text-xl text-white disabled:opacity-50'
-            type='submit'
-            disabled={isSubmitting}
-          >
-            등록하기
-          </button>
+
+        <div className='flex items-center gap-2 border-b border-[#D8D8D8] px-4 py-3 max-md:flex-col max-md:items-start max-md:px-0'>
+          <span className='w-[200px] max-md:text-lg max-md:font-semibold'>내용</span>
+          <div className='flex-1 max-md:w-full'>
+            <textarea
+              className='h-[250px] w-full rounded-md border-none px-5 py-3'
+              placeholder='내용을 입력해주세요.'
+              {...register('content')}
+            />
+            {errors.content && <span className='text-sm text-red-600'>{errors.content.message?.toString()}</span>}
+          </div>
         </div>
-      </form>
-    </Fragment>
+
+        <div className='flex items-center gap-2 border-b border-[#D8D8D8] px-4 py-3 max-md:flex-col max-md:items-start max-md:px-0'>
+          <span className='w-[200px] max-md:text-lg max-md:font-semibold'>비밀번호</span>
+          <div className='flex-1 max-md:w-full'>
+            <input
+              className='w-full rounded-md border-none px-5 py-3'
+              type='password'
+              placeholder='비밀번호를 입력해주세요.'
+              {...register('password')}
+            />
+            {errors.password && <span className='text-sm text-red-600'>{errors.password.message?.toString()}</span>}
+          </div>
+        </div>
+      </div>
+      <div className='flex justify-center'>
+        <button
+          className='mt-7 rounded-md bg-[#FB9E48] px-8 py-3 text-xl text-white disabled:opacity-50'
+          type='submit'
+          disabled={isSubmitting}
+        >
+          등록하기
+        </button>
+      </div>
+    </form>
   )
 }

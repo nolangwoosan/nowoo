@@ -23,7 +23,7 @@ interface Props {
   }
 }
 
-export default async function Page({ params: { slug } }: Props) {
+export default async function Page({ params: { slug } }: Readonly<Props>) {
   const { data: board } = await supabase
     .from('boards')
     .select('title, description, writer, created_dt')

@@ -27,7 +27,7 @@ const tabs = [
 
 type Tab = (typeof tabs)[number]
 
-export default function Page({ searchParams }: Props) {
+export default function Page({ searchParams }: Readonly<Props>) {
   const [currentTab, setCurrentTab] = useState<Tab['id']>(tabs[0].id)
   const [currentPage, setCurrentPage] = useState(searchParams.page ? Number(searchParams.page) : 1)
   const boardQuery = useBoard({ page: currentPage, pageSize: PAGE_SIZE })

@@ -11,6 +11,6 @@ interface Props {
   createdAt: string
 }
 
-export function CommentDate({ createdAt }: Props) {
+export function CommentDate({ createdAt }: Readonly<Props>) {
   return <span className='text-sm text-gray-400'>{dayjs(createdAt).tz().format('YYYY.MM.DD HH:mm')}</span>
 }

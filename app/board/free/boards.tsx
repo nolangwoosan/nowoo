@@ -11,7 +11,7 @@ dayjs.tz.setDefault('Asia/Seoul')
 
 import { ROUTES } from '@/constants/routes'
 
-import { Boards } from './utils'
+import { type Boards } from './utils'
 
 interface Props {
   boards: Boards['data']
