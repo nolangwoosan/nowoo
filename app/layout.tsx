@@ -8,6 +8,7 @@ import { Fragment } from 'react'
 import CoreProvider from '@/components/core-provider'
 import Footer from '@/components/footer'
 import GoogleAnalytics from '@/components/google-analytics'
+import { Toaster } from '@/components/toast/toaster'
 import { openGraphImage } from '@/constants/open-graph'
 import { cn } from '@/lib/utils'
 
@@ -77,6 +78,7 @@ export default function RootLayout({
         <CoreProvider>
           <div className='min-h-[calc(100dvh-200px)] bg-gray-100'>{children}</div>
           <Footer />
+          <Toaster />
           {/* <button
             className='g-recaptcha invisible'
             data-sitekey='6Lf80GIpAAAAANfO7xqEa9kgIVF2KEaqP_TpFOR3'

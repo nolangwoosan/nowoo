@@ -7,6 +7,7 @@ import { useForm } from 'react-hook-form'
 import { minLength, object, Output, string } from 'valibot'
 
 import { Dialog, DialogContent, DialogTrigger } from '@/components/dialog'
+import { useToast } from '@/components/toast/use-toast'
 
 import { deleteComment } from './action'
 
@@ -31,12 +32,16 @@ export function CommentDeleteButton({ slug, commentId }: Props) {
     resolver: valibotResolver(schema),
   })
   const [isOpen, setIsOpen] = useState(false)
+  const { toast } = useToast()
 
   const onSubmit = async ({ password }: Schema) => {
     const response = await deleteComment({ slug, commentId, password })
 
     if (response.status === 200) {
-      alert('삭제되었습니다.')
+      toast({
+        title: '댓글 삭제',
+        description: '댓글이 삭제되었습니다.',
+      })
       setIsOpen(false)
     } else if (response.status === 401) {
       setError('password', {

@@ -4,6 +4,8 @@ import { valibotResolver } from '@hookform/resolvers/valibot'
 import { useForm } from 'react-hook-form'
 import { maxLength, minLength, object, Output, string } from 'valibot'
 
+import { useToast } from '@/components/toast/use-toast'
+
 import { createComment } from './action'
 
 interface Props {
@@ -32,6 +34,7 @@ export function CommentInput({ slug }: Readonly<Props>) {
   } = useForm<Schema>({
     resolver: valibotResolver(schema),
   })
+  const { toast } = useToast()
 
   const onSubmit = async ({ comment, password }: Schema) => {
     const { status } = await createComment({
@@ -43,9 +46,15 @@ export function CommentInput({ slug }: Readonly<Props>) {
     if (status === 200) {
       setValue('comment', '')
       setValue('password', '')
-      alert('댓글이 등록되었습니다.')
+      toast({
+        title: '댓글 등록',
+        description: '댓글이 성공적으로 등록되었습니다.',
+      })
     } else {
-      alert('댓글 등록에 실패했습니다.')
+      toast({
+        title: '댓글 등록 실패',
+        description: '댓글 등록에 실패하였습니다.',
+      })
     }
   }
 

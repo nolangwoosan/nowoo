@@ -7,6 +7,7 @@ import { Fragment } from 'react'
 import { useForm } from 'react-hook-form'
 import { maxLength, minLength, object, Output, string } from 'valibot'
 
+import { useToast } from '@/components/toast/use-toast'
 import { ROUTES } from '@/constants/routes'
 
 import { QUERY_KEY } from '../utils'
@@ -39,17 +40,24 @@ export default function Page() {
   } = useForm<BoardSchema>({
     resolver: valibotResolver(boardSchema),
   })
+  const { toast } = useToast()
 
   const onSubmit = async (data: BoardSchema) => {
     if (await createBoard(data)) {
-      alert('등록되었습니다.')
+      toast({
+        title: '등록 성공',
+        description: '게시글이 성공적으로 등록되었습니다.',
+      })
       router.push(ROUTES.FREE_BOARD.LIST)
       return queryClient.invalidateQueries({
         queryKey: QUERY_KEY.FREE_BOARD,
       })
-    } else {
-      alert('등록에 실패하였습니다.')
     }
+
+    toast({
+      title: '등록 실패',
+      description: '게시글 등록에 실패하였습니다.',
+    })
   }
 
   return (
@@ -118,6 +126,17 @@ export default function Page() {
           </button>
         </div>
       </form>
+      <button
+        type='button'
+        onClick={() => {
+          toast({
+            title: '등록 성공',
+            description: '게시글이 성공적으로 등록되었습니다.',
+          })
+        }}
+      >
+        asd
+      </button>
     </Fragment>
   )
 }

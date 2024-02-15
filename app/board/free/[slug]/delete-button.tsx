@@ -7,6 +7,7 @@ import { useForm } from 'react-hook-form'
 import { minLength, object, Output, string } from 'valibot'
 
 import { Dialog, DialogContent, DialogTrigger } from '@/components/dialog'
+import { useToast } from '@/components/toast/use-toast'
 import { ROUTES } from '@/constants/routes'
 
 import { QUERY_KEY } from '../utils'
@@ -34,17 +35,23 @@ export function DeleteButton({ slug }: Props) {
   } = useForm<Schema>({
     resolver: valibotResolver(schema),
   })
+  const { toast } = useToast()
 
   const onSubmit = async ({ password }: Schema) => {
     const response = await deleteBoard({ slug, password })
 
     if (response.status === 200) {
-      alert('삭제되었습니다.')
+      toast({
+        title: '게시글 삭제',
+        description: '게시글이 삭제되었습니다.',
+      })
       router.push(ROUTES.FREE_BOARD.LIST)
       return queryClient.invalidateQueries({
         queryKey: QUERY_KEY.FREE_BOARD,
       })
-    } else if (response.status === 401) {
+    }
+
+    if (response.status === 401) {
       setError('password', {
         type: 'manual',
         message: '비밀번호가 일치하지 않습니다.',
