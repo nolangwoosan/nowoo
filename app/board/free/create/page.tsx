@@ -126,17 +126,6 @@ export default function Page() {
           </button>
         </div>
       </form>
-      <button
-        type='button'
-        onClick={() => {
-          toast({
-            title: '등록 성공',
-            description: '게시글이 성공적으로 등록되었습니다.',
-          })
-        }}
-      >
-        asd
-      </button>
     </Fragment>
   )
 }
