@@ -1,41 +1,14 @@
-import { headers } from 'next/headers'
 import { Suspense } from 'react'
 
-import supabase from '@/lib/utils/supabase'
-
+import AccessLogger from './access-logger'
 import PopularItems from './popular-items'
 import PopularMonsters from './popular-monsters'
 import { PopularSkeletonUI } from './popular-skeleton-ui'
 
-export default async function HomePage() {
-  const header = headers()
-  const [ip] = (header.get('x-forwarded-for') ?? '127.0.0.1').split(',')
-  const userAgent = header.get('user-agent') ?? ''
-
-  const { data: prevAccessLogs } = await supabase
-    .from('user_access')
-    .select('id')
-    .match({ ip, agent: userAgent })
-    .gte('updated_dt', new Date(Date.now() - 24 * 60 * 60 * 1000).toUTCString())
-    .order('updated_dt', { ascending: false })
-
-  const lastAccessLog = prevAccessLogs?.[0]
-
-  if (lastAccessLog?.id) {
-    await supabase.from('user_access').upsert({
-      id: lastAccessLog.id,
-      ip,
-      agent: userAgent,
-    })
-  } else {
-    await supabase.from('user_access').insert({
-      ip,
-      agent: userAgent,
-    })
-  }
-
+export default function HomePage() {
   return (
     <div className='mt-24 flex w-full gap-10 max-lg:flex-col'>
+      <AccessLogger />
       <Suspense fallback={<PopularSkeletonUI title='다른 유저들이 선호하는 아이템' />}>
         <PopularItems />
       </Suspense>
