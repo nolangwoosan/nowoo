@@ -8,79 +8,79 @@ datasource db {
 }
 
 model Item {
-  item_idx         Int           @id @default(autoincrement())
-  maple_item_id    Int
-  name_kor         String        @db.LongText
-  name_eng         String        @db.LongText
-  description_kor  String
-  description_eng  String
-  overall_category String        @db.LongText
-  category         String        @db.LongText
-  sub_category     String        @db.LongText
-  req_level        Int
-  req_str          Int
-  req_dex          Int
-  req_int          Int
-  req_luk          Int
-  req_pop          Int
-  req_job          Int
-  upgradable_count Int
-  inc_ph_attack    Int
-  inc_mg_attack    Int
-  inc_ph_defence   Int
-  inc_mg_defence   Int
-  inc_str          Int
-  inc_dex          Int
-  inc_int          Int
-  inc_luk          Int
-  inc_hp           Int
-  inc_mp           Int
-  opt_etc          String?       @db.LongText
-  price_shop       Int
-  price_average    Int
-  views            BigInt        @default(0)
-  monster_drops    MonsterDrop[]
-  createdDt        DateTime      @default(now()) @map("created_dt")
-  updatedDt        DateTime      @updatedAt @map("updated_dt")
-  deletedDt        DateTime?     @map("deleted_dt")
+  itemIdx         Int           @id @default(autoincrement()) @map("item_idx")
+  mapleItemId     Int           @map("maple_item_id")
+  nameKor         String        @map("name_kor") @db.LongText
+  nameEng         String        @map("name_eng") @db.LongText
+  descriptionKor  String        @map("description_kor") @db.LongText
+  descriptionEng  String        @map("description_eng") @db.LongText
+  overallCategory String        @map("overall_category") @db.LongText
+  category        String        @map("category") @db.LongText
+  subCategory     String        @map("sub_category") @db.LongText
+  reqLevel        Int           @map("req_level")
+  reqStr          Int           @map("req_str")
+  reqDex          Int           @map("req_dex")
+  reqInt          Int           @map("req_int")
+  reqLuk          Int           @map("req_luk")
+  reqPop          Int           @map("req_pop")
+  reqJob          Int           @map("req_job")
+  upgradableCount Int           @map("upgradable_count")
+  incPhAttack     Int           @map("inc_ph_attack")
+  incMgAttack     Int           @map("inc_mg_attack")
+  incPhDefence    Int           @map("inc_ph_defence")
+  incMgDefence    Int           @map("inc_mg_defence")
+  incStr          Int           @map("inc_str")
+  incDex          Int           @map("inc_dex")
+  incInt          Int           @map("inc_int")
+  incLuk          Int           @map("inc_luk")
+  incHp           Int           @map("inc_hp")
+  incMp           Int           @map("inc_mp")
+  optEtc          String?       @map("opt_etc") @db.LongText
+  priceShop       Int           @map("price_shop")
+  priceAverage    Int           @map("price_average")
+  views           BigInt        @default(0)
+  monsterDrops    MonsterDrop[]
+  createdDt       DateTime      @default(now()) @map("created_dt")
+  updatedDt       DateTime      @updatedAt @map("updated_dt")
+  deletedDt       DateTime?     @map("deleted_dt")
 
   @@map("items")
 }
 
 model MonsterDrop {
-  id          Int     @id @default(autoincrement())
-  monster_id  Int
-  item_id     Int
-  drop_chance String
-  items       Item    @relation(fields: [item_id], references: [item_idx])
-  monsters    Monster @relation(fields: [monster_id], references: [id])
+  id         Int     @id @default(autoincrement())
+  monsterId  Int     @map("monster_id")
+  itemId     Int     @map("item_id")
+  dropChance String  @map("drop_chance")
+  items      Item    @relation(fields: [itemId], references: [itemIdx])
+  monsters   Monster @relation(fields: [monsterId], references: [id])
 
   @@map("monster_drops")
 }
 
 model Monster {
-  id                Int           @id @default(autoincrement())
-  maple_mob_id      Int
-  name_kor          String
-  name_eng          String
-  description_kor   String
-  description_eng   String
-  level             Int
-  hp                Int
-  mp                Int
-  exp               Int
-  ph_attack         Int
-  mg_attack         Int
-  ph_defence        Int
-  mg_defence        Int
-  is_undead         Boolean
-  drop_money        Int
-  drop_money_chance String
-  createdDt         DateTime      @default(now()) @map("created_dt")
-  updatedDt         DateTime      @updatedAt @map("updated_dt")
-  deletedDt         DateTime?     @map("deleted_dt")
-  views             BigInt        @default(0)
-  monster_drops     MonsterDrop[]
+  id              Int           @id @default(autoincrement())
+  mapleMobId      Int           @map("maple_mob_id")
+  nameKor         String        @map("name_kor")
+  nameEng         String        @map("name_eng")
+  descriptionKor  String        @map("description_kor")
+  descriptionEng  String        @map("description_eng")
+  level           Int
+  hp              Int
+  mp              Int
+  exp             Int
+  phAttack        Int           @map("ph_attack")
+  mgAttack        Int           @map("mg_attack")
+  phDefence       Int           @map("ph_defence")
+  mgDefence       Int           @map("mg_defence")
+  isUndead        Boolean       @map("is_undead")
+  dropMoney       Int           @map("drop_money")
+  dropMoneyChance String        @map("drop_money_chance")
+  createdDt       DateTime      @default(now()) @map("created_dt")
+  updatedDt       DateTime      @updatedAt @map("updated_dt")
+  deletedDt       DateTime?     @map("deleted_dt")
+  views           BigInt        @default(0)
+  monsterDrops    MonsterDrop[]
 
   @@map("monsters")
 }
@@ -111,7 +111,7 @@ model Letter {
   from      Int
   to        Int
   coin      Int       @default(0)
-  is_read   Boolean   @default(false)
+  isRead    Boolean   @default(false) @map("is_read")
   createdDt DateTime  @default(now()) @map("created_dt")
   deletedDt DateTime? @map("deleted_dt")
 
