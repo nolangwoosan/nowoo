@@ -32,6 +32,23 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=<your_supabase_anon_key>
 ## 실행 방법
 
 ```sh
-pnpm install
-pnpm dev
+$ pnpm install
+$ pnpm dev
+```
+
+```zsh
+# Install Prisma
+$ pnpm install prisma
+
+# Initialize Prisma (will generate prisma folder and etc)
+$ npx prisma init
+
+# Migrate to DB
+$ npx prisma db push
+
+# Pull by DB
+$ npx prisma db pull
+
+# Help
+$ npx prisma --help
 ```
