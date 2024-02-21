@@ -53,7 +53,7 @@ model MonsterDrop {
   itemId     Int     @map("item_id")
   dropChance String  @map("drop_chance")
   items      Item    @relation(fields: [itemId], references: [itemIdx])
-  monsters   Monster @relation(fields: [monsterId], references: [id])
+  monsters   Monster @relation(fields: [monsterId], references: [monsterIdx])
 
   @@index([itemId], map: "monster_drops_item_id_fkey")
   @@index([monsterId], map: "monster_drops_monster_id_fkey")
@@ -61,7 +61,7 @@ model MonsterDrop {
 }
 
 model Monster {
-  id              Int           @id @default(autoincrement())
+  monsterIdx              Int           @id @default(autoincrement())
   mapleMobId      Int           @map("maple_mob_id")
   nameKor         String        @map("name_kor")
   nameEng         String        @map("name_eng")
