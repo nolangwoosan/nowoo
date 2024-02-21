@@ -61,7 +61,7 @@ model MonsterDrop {
 }
 
 model Monster {
-  monsterIdx              Int           @id @default(autoincrement())
+  monsterIdx      Int           @id @default(autoincrement())
   mapleMobId      Int           @map("maple_mob_id")
   nameKor         String        @map("name_kor")
   nameEng         String        @map("name_eng")
