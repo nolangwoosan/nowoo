@@ -65,8 +65,8 @@ model Monster {
   mapleMobId      Int           @map("maple_mob_id")
   nameKor         String        @map("name_kor")
   nameEng         String        @map("name_eng")
-  descriptionKor  String        @map("description_kor")
-  descriptionEng  String        @map("description_eng")
+  descriptionKor  String        @map("description_kor") @db.LongText
+  descriptionEng  String        @map("description_eng") @db.LongText
   level           Int
   hp              Int
   mp              Int
