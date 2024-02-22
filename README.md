@@ -8,6 +8,8 @@ height='70'
 
 **메이플랜드 아이템 검색 사이트**
 
+<br />
+
 | kind        |                       |                          |                     |
 | ----------- | --------------------- | ------------------------ | ------------------- |
 | **app**     | Next.js (framework)   | Tailwind CSS (css)       | NextAuth.js (auth)  |
@@ -16,6 +18,8 @@ height='70'
 |             | ESLint (linter)       | lint-staged (pre-commit) |                     |
 | **testing** | Vitest (test runner)  | Playwright (e2e testing) |                     |
 | **others**  | workflows (ci)        | .vscode (editor)         |                     |
+
+<br />
 
 ## 요구 사항
 
@@ -34,12 +38,8 @@ DATABASE_URL=DATABASE_URL=mysql://mysql:mysql@localhost:5432/mysql
 ```sh
 $ pnpm install
 $ pnpm dev
-```
-
-### For development or production environment
-
-```sh
-$ pnpm install
+# for development
 $ pnpm start:dev
+# for production
 $ pnpm start:prod
 ```
