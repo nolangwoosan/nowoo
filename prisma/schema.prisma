@@ -2,6 +2,12 @@ generator client {
   provider = "prisma-client-js"
 }
 
+generator erd {
+  provider = "prisma-erd-generator"
+  theme    = "forest"
+  output   = "../prisma/ERD.md"
+}
+
 datasource db {
   provider = "mysql"
   url      = "mysql://root:1234@localhost:3306/test"
