@@ -4,7 +4,7 @@ import { CommentDate } from "./comment-date";
 import { CommentDeleteButton } from "./comment-delete-button";
 
 interface Props {
-  slug: string;
+  boardId: string;
 }
 
 type BoardCommentsReturnType = {
@@ -16,7 +16,7 @@ type BoardCommentsReturnType = {
   };
 }[];
 
-export async function Comments({ slug }: Readonly<Props>) {
+export async function Comments({ boardId }: Readonly<Props>) {
   const { data: boardComments } = await supabase
     .from("board_comments")
     .select(
@@ -30,7 +30,7 @@ export async function Comments({ slug }: Readonly<Props>) {
     `,
     )
     .match({
-      board_id: slug,
+      board_id: boardId,
     })
     .order("created_dt", { ascending: true })
     .is("deleted_dt", null)
@@ -47,7 +47,7 @@ export async function Comments({ slug }: Readonly<Props>) {
                 <span className="font-semibold">{comment.writer}</span>
                 <CommentDate createdAt={comment.created_dt} />
               </div>
-              <CommentDeleteButton slug={slug} commentId={comment.id} />
+              <CommentDeleteButton boardId={boardId} commentId={comment.id} />
             </div>
             <span className="mt-4 text-gray-600">{comment.comment}</span>
           </div>

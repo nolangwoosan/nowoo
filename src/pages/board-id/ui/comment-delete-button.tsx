@@ -4,15 +4,15 @@ import { valibotResolver } from "@hookform/resolvers/valibot";
 import { X } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useToast } from "src/shared/ui/use-toast";
 import { Output, minLength, object, string } from "valibot";
 
 import { Dialog, DialogContent, DialogTrigger } from "@/shared/ui/dialog";
-import { useToast } from "src/shared/ui/use-toast";
 
-import { deleteComment } from "./action";
+import { deleteComment } from "../lib/action";
 
 interface Props {
-  slug: string;
+  boardId: string;
   commentId: string;
 }
 
@@ -22,7 +22,7 @@ const schema = object({
 
 type Schema = Output<typeof schema>;
 
-export function CommentDeleteButton({ slug, commentId }: Readonly<Props>) {
+export function CommentDeleteButton({ boardId, commentId }: Readonly<Props>) {
   const {
     register,
     handleSubmit,
@@ -35,7 +35,7 @@ export function CommentDeleteButton({ slug, commentId }: Readonly<Props>) {
   const { toast } = useToast();
 
   const onSubmit = async ({ password }: Schema) => {
-    const response = await deleteComment({ slug, commentId, password });
+    const response = await deleteComment({ boardId, commentId, password });
 
     if (response.status === 200) {
       toast({

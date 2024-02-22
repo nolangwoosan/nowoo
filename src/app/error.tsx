@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useEffect } from "react";
 
-import Logo from "src/widgets/search/ui/logo";
+import { Logo } from "@/widgets/search";
 
 export default function CustomError({ error }: Readonly<{ error: Error & { digest?: string }; reset: () => void }>) {
   useEffect(() => {

@@ -7,8 +7,8 @@ import { getRandom4DigitNumber } from "@/shared/api-helpers";
 import supabase from "@/shared/api-helpers/supabase";
 import { ROUTES } from "@/shared/routes";
 
-export const deleteBoard = async ({ slug, password }: { slug: string; password: string }) => {
-  const board = await supabase.from("boards").select("id, password").eq("id", Number(slug)).single();
+export const deleteBoard = async ({ boardId, password }: { boardId: string; password: string }) => {
+  const board = await supabase.from("boards").select("id, password").eq("id", Number(boardId)).single();
 
   if (!board.data) {
     return {
@@ -28,8 +28,8 @@ export const deleteBoard = async ({ slug, password }: { slug: string; password: 
 
   await supabase
     .from("boards")
-    .update({ id: Number(slug), deleted_dt: new Date().toUTCString() })
-    .match({ id: Number(slug) });
+    .update({ id: Number(boardId), deleted_dt: new Date().toUTCString() })
+    .match({ id: Number(boardId) });
 
   return {
     status: 200,
@@ -38,11 +38,11 @@ export const deleteBoard = async ({ slug, password }: { slug: string; password: 
 };
 
 export const createComment = async ({
-  slug,
+  boardId,
   password,
   comment,
 }: {
-  slug: string;
+  boardId: string;
   password: string;
   comment: string;
 }) => {
@@ -61,7 +61,7 @@ export const createComment = async ({
   const newCommentId = data[0].id;
   const { error: boardCommentError } = await supabase
     .from("board_comments")
-    .insert({ board_id: Number(slug), comment_id: newCommentId });
+    .insert({ board_id: Number(boardId), comment_id: newCommentId });
 
   if (boardCommentError) {
     return {
@@ -70,7 +70,7 @@ export const createComment = async ({
     };
   }
 
-  revalidatePath(ROUTES.FREE_BOARD.DETAIL(slug));
+  revalidatePath(ROUTES.FREE_BOARD.DETAIL(boardId));
 
   return {
     status: 200,
@@ -79,11 +79,11 @@ export const createComment = async ({
 };
 
 export const deleteComment = async ({
-  slug,
+  boardId,
   password,
   commentId,
 }: {
-  slug: string;
+  boardId: string;
   password: string;
   commentId: string;
 }) => {
@@ -124,7 +124,7 @@ export const deleteComment = async ({
       comment_id: commentId,
     });
 
-  revalidatePath(ROUTES.FREE_BOARD.DETAIL(slug));
+  revalidatePath(ROUTES.FREE_BOARD.DETAIL(boardId));
 
   return {
     status: 200,

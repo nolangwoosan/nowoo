@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import Logo from "src/widgets/search/ui/logo";
+import { Logo } from "@/widgets/search";
 
 export default function NotFound() {
   return (

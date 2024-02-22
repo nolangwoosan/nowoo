@@ -11,7 +11,7 @@ dayjs.tz.setDefault("Asia/Seoul");
 
 import { ROUTES } from "@/shared/routes";
 
-import { type Boards } from "./utils";
+import { type Boards } from "../lib/use-board";
 
 interface Props {
   boards: Boards["data"];

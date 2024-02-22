@@ -4,17 +4,17 @@ import { valibotResolver } from "@hookform/resolvers/valibot";
 import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
+import { useToast } from "src/shared/ui/use-toast";
 import { Output, minLength, object, string } from "valibot";
 
 import { ROUTES } from "@/shared/routes";
 import { Dialog, DialogContent, DialogTrigger } from "@/shared/ui/dialog";
-import { useToast } from "src/shared/ui/use-toast";
 
-import { QUERY_KEY } from "../utils";
-import { deleteBoard } from "./action";
+import { QUERY_KEY } from "../../board/lib/use-board";
+import { deleteBoard } from "../lib/action";
 
 interface Props {
-  slug: string;
+  boardId: string;
 }
 
 const schema = object({
@@ -23,7 +23,7 @@ const schema = object({
 
 type Schema = Output<typeof schema>;
 
-export function DeleteButton({ slug }: Readonly<Props>) {
+export function DeleteButton({ boardId }: Readonly<Props>) {
   const router = useRouter();
   const queryClient = useQueryClient();
 
@@ -38,7 +38,7 @@ export function DeleteButton({ slug }: Readonly<Props>) {
   const { toast } = useToast();
 
   const onSubmit = async ({ password }: Schema) => {
-    const response = await deleteBoard({ slug, password });
+    const response = await deleteBoard({ boardId, password });
 
     if (response.status === 200) {
       toast({

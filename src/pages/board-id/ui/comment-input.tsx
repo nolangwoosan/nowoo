@@ -2,14 +2,13 @@
 
 import { valibotResolver } from "@hookform/resolvers/valibot";
 import { useForm } from "react-hook-form";
+import { useToast } from "src/shared/ui/use-toast";
 import { Output, maxLength, minLength, object, string } from "valibot";
 
-import { useToast } from "src/shared/ui/use-toast";
-
-import { createComment } from "./action";
+import { createComment } from "../lib/action";
 
 interface Props {
-  slug: string;
+  boardId: string;
 }
 
 const schema = object({
@@ -25,7 +24,7 @@ const schema = object({
 
 type Schema = Output<typeof schema>;
 
-export function CommentInput({ slug }: Readonly<Props>) {
+export function CommentInput({ boardId }: Readonly<Props>) {
   const {
     register,
     handleSubmit,
@@ -38,7 +37,7 @@ export function CommentInput({ slug }: Readonly<Props>) {
 
   const onSubmit = async ({ comment, password }: Schema) => {
     const { status } = await createComment({
-      slug,
+      boardId,
       comment,
       password,
     });

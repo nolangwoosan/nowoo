@@ -1,10 +1,10 @@
 import supabase from "@/shared/api-helpers/supabase";
 
-export async function generateMetadata({ params }: { params: { slug: string } }) {
+export async function generateMetadata({ params }: { params: { boardId: string } }) {
   const { data: board } = await supabase
     .from("boards")
     .select("title, description, writer, created_dt")
-    .eq("id", params.slug)
+    .eq("id", params.boardId)
     .single();
 
   return {

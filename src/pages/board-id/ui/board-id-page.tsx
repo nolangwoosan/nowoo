@@ -18,16 +18,14 @@ import { Comments } from "./comments";
 import { DeleteButton } from "./delete-button";
 
 interface Props {
-  params: {
-    slug: string;
-  };
+  boardId: string;
 }
 
-export default async function Page({ params: { slug } }: Readonly<Props>) {
+export async function BoardIdPage({ boardId }: Readonly<Props>) {
   const { data: board } = await supabase
     .from("boards")
     .select("title, description, writer, created_dt")
-    .eq("id", slug)
+    .eq("id", boardId)
     .single();
 
   if (!board) notFound();
@@ -46,7 +44,7 @@ export default async function Page({ params: { slug } }: Readonly<Props>) {
       </div>
       <div className="flex w-full items-center justify-between">
         <div className="flex gap-5">
-          <DeleteButton slug={slug} />
+          <DeleteButton boardId={boardId} />
           {/* <button className='rounded-md border border-[#999] px-10 py-3 text-[#999]'>수정</button> */}
         </div>
         <Link
@@ -57,9 +55,9 @@ export default async function Page({ params: { slug } }: Readonly<Props>) {
         </Link>
       </div>
 
-      <CommentInput slug={slug} />
+      <CommentInput boardId={boardId} />
 
-      <Comments slug={slug} />
+      <Comments boardId={boardId} />
     </Fragment>
   );
 }
