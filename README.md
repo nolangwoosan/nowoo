@@ -17,17 +17,8 @@ height='70'
 ### 1. .env.local 파일 생성
 
 ```
-NEXT_PUBLIC_SUPABASE_URL=https://<your_supabase_url>.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=<your_supabase_anon_key>
+DATABASE_URL=DATABASE_URL=mysql://mysql:mysql@localhost:5432/mysql
 ```
-
-### 2. 스키마 기반 타입스크립트 파일 자동 생성 ([Generating TypeScript Types](https://supabase.com/docs/guides/api/rest/generating-types))
-
-- app/\_types/supabase.ts 파일이 이미 존재할 경우, 생략해도 됩니다.
-
-1. npx supabase login
-2. npx supabase link (tarotbunny 선택 > DB 비밀번호 입력)
-3. pnpm update-types
 
 ## 실행 방법
 
@@ -36,19 +27,10 @@ $ pnpm install
 $ pnpm dev
 ```
 
-```zsh
-# Install Prisma
-$ pnpm install prisma
+### For development or production environment
 
-# Initialize Prisma (will generate prisma folder and etc)
-$ npx prisma init
-
-# Migrate to DB
-$ npx prisma db push
-
-# Pull by DB
-$ npx prisma db pull
-
-# Help
-$ npx prisma --help
+```sh
+$ pnpm install
+$ pnpm start:dev
+$ pnpm start:prod
 ```

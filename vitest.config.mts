@@ -11,6 +11,10 @@ export default defineConfig({
     mockReset: true,
     restoreMocks: true,
     clearMocks: true,
+    coverage: {
+      reporter: ['text', 'json-summary', 'json'],
+      reportOnFailure: true,
+    },
     include: ['./**/*.test.{ts,tsx}'],
   },
   resolve: {
