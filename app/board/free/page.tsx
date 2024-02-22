@@ -7,8 +7,8 @@ import { useState } from "react";
 
 import { cn } from "@/app/_lib/utils";
 
-import { Boards } from "./boards";
-import { BoardsSkeletonUi } from "./boards-skeleton-ui";
+import { Board } from "./board";
+import { BoardsSkeletonUi } from "./board-skeleton-ui";
 import { Pagination } from "./pagination";
 import { useBoard } from "./utils";
 
@@ -68,7 +68,7 @@ export default function Page({ searchParams }: Readonly<Props>) {
           {boardQuery.isLoading && <BoardsSkeletonUi />}
           {boardQuery.isSuccess && (
             <>
-              <Boards boards={boardQuery.data.data ?? []} />
+              <Board boards={boardQuery.data.data ?? []} />
               <Pagination
                 itemsPerPage={PAGE_SIZE}
                 totalItems={boardQuery.data.count}

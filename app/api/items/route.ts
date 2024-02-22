@@ -1,14 +1,26 @@
-import supabase from "@/app/_lib/utils/supabase";
+import { prisma } from "@/app/_lib/utils/db";
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
-  const query = searchParams.get("query");
+  const query = searchParams.get("query") || "";
 
-  const res = await supabase
-    .from("items")
-    .select("id, maple_item_id, name_kor")
-    .ilike("name_kor", `%${query}%`)
-    .limit(5);
+  const items = await prisma.item.findMany({
+    where: {
+      nameKor: {
+        contains: query.split(" ").join(""),
+      },
+    },
+    select: {
+      itemIdx: true,
+      mapleItemId: true,
+      nameKor: true,
+    },
+    take: 5,
+  });
 
-  return new Response(JSON.stringify(res));
+  return new Response(
+    JSON.stringify({
+      data: items,
+    }),
+  );
 }

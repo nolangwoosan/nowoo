@@ -3,9 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "pnpm dev:db:setup && next dev",
+    "dev:db:setup": "pnpm generate:client",
     "build": "next build",
     "start": "next start",
+    "start:dev": "pnpm dev:db:setup && env-cmd -f .env.development next build && next start",
+    "start:prod": "env-cmd -f .env.development next build && next start",
     "lint": "next lint",
     "test": "vitest run",
     "test:watch": "vitest watch",
@@ -16,6 +19,7 @@
     "eslint:fix": "eslint \"**/*.{js,jsx,ts,tsx}\" --fix",
     "check:spell": "cspell '**' --gitignore --no-progress",
     "update-types": "npx supabase gen types typescript --linked --schema nowoo > @types/supabase.ts",
+    "generate:client": "prisma generate",
     "prepare": "husky install"
   },
   "dependencies": {
@@ -59,6 +63,8 @@
     "@vitejs/plugin-react": "^4.2.1",
     "autoprefixer": "^10.4.17",
     "cspell": "^8.4.1",
+    "dotenv-cli": "^7.3.0",
+    "env-cmd": "^10.1.0",
     "eslint": "^8.56.0",
     "eslint-config-next": "14.1.0",
     "eslint-config-prettier": "^9.1.0",

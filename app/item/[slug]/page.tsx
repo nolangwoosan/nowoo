@@ -2,25 +2,17 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Fragment } from "react";
 
-import { Tables } from "@/@types/supabase";
 import { ItemImage } from "@/app/_components/item-image";
 import { MonsterImage } from "@/app/_components/monster-image";
 import { ROUTES } from "@/app/_constants/routes";
 import { cn } from "@/app/_lib/utils";
-import supabase from "@/app/_lib/utils/supabase";
+import { prisma } from "@/app/_lib/utils/db";
 
 interface Props {
   params: {
     slug: string;
   };
 }
-
-type DropMonstersReturnType =
-  | {
-      drop_chance: Tables<"monster_drops">["drop_chance"];
-      monsters: Tables<"monsters">;
-    }[]
-  | null;
 
 const JOB: Record<number, string[]> = {
   0: ["초보자"],
@@ -35,62 +27,100 @@ const JOB: Record<number, string[]> = {
 export default async function Page({ params }: Readonly<Props>) {
   const { slug } = params;
 
-  const currentViews = (await supabase.from("items").select("views").eq("maple_item_id", slug).single()).data?.views;
-  const { data: item } = await supabase
-    .from("items")
-    .update({
-      views: currentViews ? currentViews + 1 : 1,
-    })
-    .eq("maple_item_id", slug)
-    .select()
-    .single();
+  const item = await prisma.item.findFirst({
+    where: {
+      mapleItemId: Number(slug),
+    },
+    select: {
+      itemIdx: true,
+      mapleItemId: true,
+      nameKor: true,
+      reqLevel: true,
+      reqStr: true,
+      reqDex: true,
+      reqInt: true,
+      reqLuk: true,
+      reqPop: true,
+      reqJob: true,
+      incPhAttack: true,
+      incMgAttack: true,
+      incPhDefence: true,
+      incMgDefence: true,
+      incStr: true,
+      incDex: true,
+      incInt: true,
+      incLuk: true,
+      incHp: true,
+      incMp: true,
+      upgradableCount: true,
+      priceShop: true,
+      priceAverage: true,
+      overallCategory: true,
+      views: true,
+    },
+  });
 
   if (!item) notFound();
 
-  const { data: dropMonsters } = await supabase
-    .from("monster_drops")
-    .select(
-      `
-    drop_chance,
-    monsters ( id, maple_mob_id, name_kor, name_eng )
-  `,
-    )
-    .match({
-      item_id: item.id,
-    })
-    .returns<DropMonstersReturnType>();
+  await prisma.item.update({
+    where: {
+      itemIdx: item.itemIdx,
+    },
+    data: {
+      views: {
+        increment: 1,
+      },
+    },
+  });
+
+  const dropMonsters = await prisma.monsterDrop.findMany({
+    where: {
+      itemId: item.itemIdx,
+    },
+    select: {
+      dropChance: true,
+      monsters: {
+        select: {
+          monsterIdx: true,
+          mapleMobId: true,
+          nameKor: true,
+          nameEng: true,
+        },
+      },
+    },
+  });
 
   return (
     <Fragment>
       <div className="mt-24 flex w-[500px] max-w-full flex-col bg-[#06062C] bg-opacity-50 px-2 pb-5 text-white shadow-md">
         <div className="mt-5 flex w-full flex-col items-center gap-1 p-2">
-          <h1 className="text-3xl font-semibold">{item.name_kor}</h1>
+          <h1 className="text-3xl font-semibold">{item.nameKor}</h1>
         </div>
 
         <div className="flex gap-12 px-4 py-4 max-md:gap-8">
           <div className="h-fit bg-white bg-opacity-30 p-2">
             <ItemImage
-              itemId={item.maple_item_id}
+              itemId={item.mapleItemId}
               className="aspect-square object-contain max-md:hidden"
               width={160}
               height={160}
-              alt={item.name_kor}
+              alt={item.nameKor}
             />
             <ItemImage
-              itemId={item.maple_item_id}
+              itemId={item.mapleItemId}
               className="aspect-square object-contain md:hidden"
               width={80}
               height={80}
-              alt={item.name_kor}
+              alt={item.nameKor}
             />
           </div>
           <div className="flex flex-col">
-            <span className="mb-2 text-sm">REQ LEV : {item.req_level}</span>
-            <span className="mb-2 text-sm">REQ STR : {item.req_str}</span>
-            <span className="mb-2 text-sm">REQ DEX : {item.req_dex}</span>
-            <span className="mb-2 text-sm">REQ INT : {item.req_int}</span>
-            <span className="mb-2 text-sm">REQ LUK : {item.req_luk}</span>
-            <span className="mb-2 text-sm">REQ POP : {item.req_pop}</span>
+            <span className="mb-2 text-sm">REQ LEV : {item.reqLevel}</span>
+            <span className="mb-2 text-sm">REQ STR : {item.reqStr}</span>
+            <span className="mb-2 text-sm">REQ DEX : {item.reqDex}</span>
+            <span className="mb-2 text-sm">REQ INT : {item.reqInt}</span>
+            <span className="mb-2 text-sm">REQ LUK : {item.reqLuk}</span>
+            <span className="mb-2 text-sm">REQ POP : {item.reqPop}</span>
           </div>
         </div>
 
@@ -98,7 +128,7 @@ export default async function Page({ params }: Readonly<Props>) {
           {["초보자", "전사", "마법사", "궁수", "도적"].map((job) => (
             <span
               key={job}
-              className={cn("text-lg", item.req_job !== 0 && !JOB[item.req_job].includes(job) && "text-red-500")}
+              className={cn("text-lg", item.reqJob !== 0 && !JOB[item.reqJob].includes(job) && "text-red-500")}
             >
               {job}
             </span>
@@ -107,29 +137,29 @@ export default async function Page({ params }: Readonly<Props>) {
 
         <div className="flex flex-col gap-10 px-4">
           <div className="flex flex-col gap-1">
-            {Boolean(item.inc_ph_attack) && (
+            {Boolean(item.incPhAttack) && (
               <span>
-                물리공격력 : +{item.inc_ph_attack}{" "}
-                {item.overall_category === "Equip" && `(${item.inc_ph_attack - 5} ~ ${item.inc_ph_attack + 5})`}
+                물리공격력 : +{item.incPhAttack}{" "}
+                {item.overallCategory === "Equip" && `(${item.incPhAttack - 5} ~ ${item.incPhAttack + 5})`}
               </span>
             )}
-            {Boolean(item.inc_mg_attack) && (
+            {Boolean(item.incMgAttack) && (
               <span>
-                마법공격력 : +{item.inc_mg_attack}{" "}
-                {item.overall_category === "Equip" && `(${item.inc_mg_attack - 5} ~ ${item.inc_mg_attack + 5})`}
+                마법공격력 : +{item.incMgAttack}{" "}
+                {item.overallCategory === "Equip" && `(${item.incMgAttack - 5} ~ ${item.incMgAttack + 5})`}
               </span>
             )}
-            {Boolean(item.inc_ph_defence) && <span>물리방어력 : +{item.inc_ph_defence}</span>}
-            {Boolean(item.inc_mg_defence) && <span>마법방어력 : +{item.inc_mg_defence}</span>}
-            {Boolean(item.inc_str) && <span>STR : +{item.inc_str}</span>}
-            {Boolean(item.inc_dex) && <span>DEX : +{item.inc_dex}</span>}
-            {Boolean(item.inc_int) && <span>INT : +{item.inc_int}</span>}
-            {Boolean(item.inc_luk) && <span>LUK : +{item.inc_luk}</span>}
-            {Boolean(item.inc_hp) && <span>HP : +{item.inc_hp}</span>}
-            {Boolean(item.inc_mp) && <span>MP : +{item.inc_mp}</span>}
-            <span>업그레이드 가능 횟수 : {item.upgradable_count}</span>
-            <span>상점 거래가 : {item.price_shop.toLocaleString()} 메소</span>
-            <span>거래 시세가 : {item.price_average ? `${item.price_average} 메소` : "데이터 준비중입니다."}</span>
+            {Boolean(item.incPhDefence) && <span>물리방어력 : +{item.incPhDefence}</span>}
+            {Boolean(item.incMgDefence) && <span>마법방어력 : +{item.incMgDefence}</span>}
+            {Boolean(item.incStr) && <span>STR : +{item.incStr}</span>}
+            {Boolean(item.incDex) && <span>DEX : +{item.incDex}</span>}
+            {Boolean(item.incInt) && <span>INT : +{item.incInt}</span>}
+            {Boolean(item.incLuk) && <span>LUK : +{item.incLuk}</span>}
+            {Boolean(item.incHp) && <span>HP : +{item.incHp}</span>}
+            {Boolean(item.incMp) && <span>MP : +{item.incMp}</span>}
+            <span>업그레이드 가능 횟수 : {item.upgradableCount}</span>
+            <span>상점 거래가 : {item.priceShop.toLocaleString()} 메소</span>
+            <span>거래 시세가 : {item.priceAverage ? `${item.priceAverage} 메소` : "데이터 준비중입니다."}</span>
           </div>
         </div>
       </div>
@@ -140,19 +170,19 @@ export default async function Page({ params }: Readonly<Props>) {
           {dropMonsters.map((dropMonster) => (
             <Link
               className="flex w-[500px] items-center gap-7 bg-[#06062C] bg-opacity-50 px-8 py-2 max-md:w-full max-md:max-w-[500px]"
-              href={ROUTES.MONSTER(dropMonster.monsters.maple_mob_id)}
-              key={dropMonster.monsters.maple_mob_id}
+              href={ROUTES.MONSTER(dropMonster.monsters.mapleMobId)}
+              key={dropMonster.monsters.mapleMobId}
             >
               <MonsterImage
-                monsterId={dropMonster.monsters.maple_mob_id}
+                monsterId={dropMonster.monsters.mapleMobId}
                 className="aspect-square object-contain"
                 width={70}
                 height={70}
-                alt={dropMonster.monsters.name_kor}
+                alt={dropMonster.monsters.nameKor}
               />
               <div className="flex flex-col gap-1">
-                <span className="text-white">{dropMonster.monsters.name_kor}</span>
-                <span className="text-[#FB9E48]">드랍율: {dropMonster.drop_chance}</span>
+                <span className="text-white">{dropMonster.monsters.nameKor}</span>
+                <span className="text-[#FB9E48]">드랍율: {dropMonster.dropChance}</span>
               </div>
             </Link>
           ))}

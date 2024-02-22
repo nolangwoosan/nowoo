@@ -33,6 +33,8 @@ export default function SearchResult({ searchValue, onCheckFirstSearchResult }: 
   });
 
   const items = itemsQuery.data?.data;
+  console.log(itemsQuery.data);
+
   const monsters = monstersQuery.data?.data;
 
   useEffect(() => {
@@ -53,20 +55,20 @@ export default function SearchResult({ searchValue, onCheckFirstSearchResult }: 
         <div className="flex flex-col gap-4 py-8">
           <div className="text-center text-2xl font-bold text-gray-600 max-md:text-base">아이템</div>
           <div className="flex flex-col">
-            {items?.map((item) => (
+            {items?.map(({ itemIdx, mapleItemId, nameKor }) => (
               <Link
-                key={item.id}
+                key={itemIdx}
                 className="flex items-center gap-4 px-4 py-2 hover:bg-[#FB9E48] hover:text-white"
-                href={item.maple_item_id ? ROUTES.ITEM(item.maple_item_id) : ROUTES.HOME}
+                href={ROUTES.ITEM(mapleItemId)}
               >
                 <ItemImage
-                  itemId={item.maple_item_id ?? 0}
+                  itemId={mapleItemId}
                   className="aspect-square object-contain"
                   width={48}
                   height={48}
-                  alt={item.name_kor ?? ""}
+                  alt={nameKor}
                 />
-                <span>{item.name_kor}</span>
+                <span>{nameKor}</span>
               </Link>
             ))}
           </div>
@@ -76,20 +78,20 @@ export default function SearchResult({ searchValue, onCheckFirstSearchResult }: 
         <div className="flex flex-col gap-4">
           <div className="text-center text-2xl font-bold text-gray-600 max-md:text-base">몬스터</div>
           <div className="flex flex-col">
-            {monsters?.map((monster) => (
+            {monsters?.map(({ monsterIdx, mapleMobId, nameKor }) => (
               <Link
-                key={monster.id}
+                key={monsterIdx}
                 className="flex items-center gap-4 px-4 py-2 hover:bg-[#FB9E48] hover:text-white"
-                href={monster.maple_mob_id ? ROUTES.MONSTER(monster.maple_mob_id) : ROUTES.HOME}
+                href={ROUTES.MONSTER(mapleMobId)}
               >
                 <MonsterImage
-                  monsterId={monster.maple_mob_id ?? 0}
+                  monsterId={mapleMobId}
                   className="aspect-square object-contain"
                   width={48}
                   height={48}
-                  alt={monster.name_kor ?? ""}
+                  alt={nameKor}
                 />
-                <span>{monster.name_kor}</span>
+                <span>{nameKor}</span>
               </Link>
             ))}
           </div>

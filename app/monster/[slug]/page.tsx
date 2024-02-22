@@ -2,11 +2,10 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Fragment } from "react";
 
-import { Tables } from "@/@types/supabase";
 import { ItemImage } from "@/app/_components/item-image";
 import { MonsterImage } from "@/app/_components/monster-image";
 import { ROUTES } from "@/app/_constants/routes";
-import supabase from "@/app/_lib/utils/supabase";
+import { prisma } from "@/app/_lib/utils/db";
 
 interface Props {
   params: {
@@ -14,68 +13,89 @@ interface Props {
   };
 }
 
-type DropItemsReturnType =
-  | {
-      drop_chance: Tables<"monster_drops">["drop_chance"];
-      items: Tables<"items">;
-    }[]
-  | null;
-
 export default async function Page({ params }: Readonly<Props>) {
   const { slug } = params;
 
-  const currentViews = (await supabase.from("monsters").select("views").eq("maple_mob_id", slug).single()).data?.views;
-  const { data: monster } = await supabase
-    .from("monsters")
-    .update({
-      views: currentViews ? currentViews + 1 : 1,
-    })
-    .match({ maple_mob_id: slug })
-    .select(
-      "id, maple_mob_id, name_kor, name_eng, level, hp, mp, exp, ph_attack, mg_attack, ph_defence, mg_defence, description_kor, is_undead",
-    )
-    .single();
+  const monster = await prisma.monster.findFirst({
+    where: {
+      mapleMobId: Number(slug),
+    },
+    select: {
+      monsterIdx: true,
+      mapleMobId: true,
+      nameKor: true,
+      nameEng: true,
+      level: true,
+      hp: true,
+      mp: true,
+      exp: true,
+      phAttack: true,
+      mgAttack: true,
+      phDefence: true,
+      mgDefence: true,
+      descriptionKor: true,
+      isUndead: true,
+      views: true,
+    },
+  });
 
   if (!monster) notFound();
 
-  const { data: dropItems } = await supabase
-    .from("monster_drops")
-    .select(
-      `
-    drop_chance,
-    items ( id, maple_item_id, name_kor, name_eng )
-  `,
-    )
-    .match({ monster_id: monster.id })
-    .returns<DropItemsReturnType>();
+  await prisma.monster.update({
+    where: {
+      monsterIdx: monster.monsterIdx,
+    },
+    data: {
+      views: {
+        increment: 1,
+      },
+    },
+  });
+
+  const dropItems = await prisma.monsterDrop.findMany({
+    where: {
+      monsterId: monster.monsterIdx,
+    },
+    select: {
+      dropChance: true,
+      items: {
+        select: {
+          itemIdx: true,
+          mapleItemId: true,
+          nameKor: true,
+          nameEng: true,
+        },
+      },
+    },
+  });
 
   return (
     <Fragment>
       <div className="mt-24 flex w-[500px] max-w-full flex-col bg-[#06062C] bg-opacity-50 p-10 text-white shadow-md max-md:p-4">
         <div className="flex w-full flex-col items-center gap-1">
           <h1 className="text-2xl font-semibold">
-            {monster.name_kor} (Lv. {monster.level})
+            {monster.nameKor} (Lv. {monster.level})
           </h1>
           <div>
-            <span>{monster.name_eng}</span>
+            <span>{monster.nameEng}</span>
           </div>
         </div>
 
         <div className="flex gap-12 px-4 py-4">
           <div className="h-fit bg-white p-2">
             <MonsterImage
-              monsterId={monster.maple_mob_id}
+              monsterId={monster.mapleMobId}
               className="aspect-square object-contain max-md:hidden"
               width={160}
               height={160}
-              alt={monster.name_kor}
+              alt={monster.nameKor}
             />
             <MonsterImage
-              monsterId={monster.maple_mob_id}
+              monsterId={monster.mapleMobId}
               className="aspect-square object-contain md:hidden"
               width={60}
               height={60}
-              alt={monster.name_kor}
+              alt={monster.nameKor}
             />
           </div>
           <div className="flex flex-1 flex-col gap-2">
@@ -103,19 +123,19 @@ export default async function Page({ params }: Readonly<Props>) {
             <div className="grid flex-1 grid-cols-2 justify-between border-r border-[#BBB] p-2">
               <span className="mb-2 flex-1 text-center">물리</span>
               <span className="mb-2 flex-1 text-center">마법</span>
-              <span className="flex-1 text-center">{monster.ph_attack}</span>
-              <span className="flex-1 text-center">{monster.mg_attack}</span>
+              <span className="flex-1 text-center">{monster.phAttack}</span>
+              <span className="flex-1 text-center">{monster.mgAttack}</span>
             </div>
             <div className="grid flex-1 grid-cols-2 justify-between p-2">
               <span className="mb-2 flex-1 text-center">물리</span>
               <span className="mb-2 flex-1 text-center">마법</span>
-              <span className="flex-1 text-center">{monster.ph_defence}</span>
-              <span className="flex-1 text-center">{monster.mg_defence}</span>
+              <span className="flex-1 text-center">{monster.phDefence}</span>
+              <span className="flex-1 text-center">{monster.mgDefence}</span>
             </div>
           </div>
         </div>
 
-        {monster.is_undead && (
+        {monster.isUndead && (
           <div
             className="mx-auto mt-8 rounded-md border border-red-700 text-center text-sm text-red-700"
             style={{ width: "100px" }}
@@ -131,19 +151,19 @@ export default async function Page({ params }: Readonly<Props>) {
           {dropItems.map((dropItem) => (
             <Link
               className="flex w-[500px] items-center gap-7 bg-[#06062C] bg-opacity-50 px-8 py-2 max-md:w-full max-md:max-w-[500px]"
-              href={ROUTES.ITEM(dropItem.items.maple_item_id)}
-              key={dropItem.items.maple_item_id}
+              href={ROUTES.ITEM(dropItem.items.mapleItemId)}
+              key={dropItem.items.mapleItemId}
             >
               <ItemImage
-                itemId={dropItem.items.maple_item_id}
+                itemId={dropItem.items.mapleItemId}
                 className="aspect-square object-contain"
                 width={70}
                 height={70}
-                alt={dropItem.items.name_kor}
+                alt={dropItem.items.nameKor}
               />
               <div className="flex flex-col gap-1">
-                <span className="text-white">{dropItem.items.name_kor}</span>
-                <span className="text-[#FB9E48]">드랍율: {dropItem.drop_chance}</span>
+                <span className="text-white">{dropItem.items.nameKor}</span>
+                <span className="text-[#FB9E48]">드랍율: {dropItem.dropChance}</span>
               </div>
             </Link>
           ))}

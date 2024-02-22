@@ -14,17 +14,17 @@ import { SearchResultSkeletonUI } from "./search-result-skeleton-ui";
 
 export interface Items {
   data: {
-    id: number | null;
-    maple_item_id: number | null;
-    name_kor: string | null;
+    itemIdx: number;
+    mapleItemId: number;
+    nameKor: string;
   }[];
 }
 
 export interface Monsters {
   data: {
-    id: number | null;
-    maple_mob_id: number | null;
-    name_kor: string | null;
+    monsterIdx: number;
+    mapleMobId: number;
+    nameKor: string;
   }[];
 }
 
@@ -55,13 +55,13 @@ export default function SearchForm() {
     (event: React.KeyboardEvent<HTMLInputElement>) => {
       if (event.key === "Enter") {
         if (firstSearchResult) {
-          if ("maple_item_id" in firstSearchResult) {
-            router.push(ROUTES.ITEM(firstSearchResult.maple_item_id ?? 0));
+          if ("mapleItemId" in firstSearchResult) {
+            router.push(ROUTES.ITEM(firstSearchResult.mapleItemId));
             return;
           }
 
-          if ("maple_mob_id" in firstSearchResult) {
-            router.push(ROUTES.MONSTER(firstSearchResult.maple_mob_id ?? 0));
+          if ("mapleMobId" in firstSearchResult) {
+            router.push(ROUTES.MONSTER(firstSearchResult.mapleMobId));
             return;
           }
         }

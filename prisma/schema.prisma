@@ -4,13 +4,13 @@ generator client {
 
 generator erd {
   provider = "prisma-erd-generator"
-  theme    = "forest"
   output   = "../prisma/ERD.md"
+  theme    = "forest"
 }
 
 datasource db {
   provider = "mysql"
-  url      = "mysql://root:1234@localhost:3306/test"
+  url      = env("DATABASE_URL")
 }
 
 model Item {
@@ -67,7 +67,7 @@ model MonsterDrop {
 }
 
 model Monster {
-  monsterIdx      Int           @id @default(autoincrement())
+  monsterIdx      Int           @id @default(autoincrement()) @map("monster_idx")
   mapleMobId      Int           @map("maple_mob_id")
   nameKor         String        @map("name_kor")
   nameEng         String        @map("name_eng")

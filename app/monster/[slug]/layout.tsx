@@ -2,40 +2,43 @@ import SearchLayout from "@/app/_components/search-layout";
 import { openGraphImage } from "@/app/_constants/open-graph";
 import { ROUTES } from "@/app/_constants/routes";
 import { getMonsterImage } from "@/app/_lib/utils";
-import supabase from "@/app/_lib/utils/supabase";
+import { prisma } from "@/app/_lib/utils/db";
 
 export async function generateMetadata({ params }: { params: { slug: string } }) {
-  const { data: monster } = await supabase
-    .from("monsters")
-    .select("name_kor, description_kor, maple_mob_id")
-    .match({
-      maple_mob_id: params.slug,
-    })
-    .single();
+  const monster = await prisma.monster.findFirst({
+    where: {
+      mapleMobId: Number(params.slug),
+    },
+    select: {
+      nameKor: true,
+      descriptionKor: true,
+      mapleMobId: true,
+    },
+  });
 
   return {
-    title: `${monster?.name_kor || "몬스터"} | NOWOO - 메이플랜드 아이템 검색 사이트`,
-    description: monster?.description_kor || "메이플랜드 아이템 검색 사이트",
+    title: `${monster?.nameKor || "몬스터"} | NOWOO - 메이플랜드 아이템 검색 사이트`,
+    description: monster?.descriptionKor || "메이플랜드 아이템 검색 사이트",
     alternates: {
       canonical: `https://nowoo.kr + ${ROUTES.MONSTER(Number(params.slug))}`,
     },
     openGraph: {
-      title: `${monster?.name_kor || "몬스터"} | NOWOO - 메이플랜드 아이템 검색 사이트`,
-      description: monster?.description_kor || "메이플랜드 아이템 검색 사이트",
+      title: `${monster?.nameKor || "몬스터"} | NOWOO - 메이플랜드 아이템 검색 사이트`,
+      description: monster?.descriptionKor || "메이플랜드 아이템 검색 사이트",
       url: `https://nowoo.kr + ${ROUTES.MONSTER(Number(params.slug))}`,
       images: [
         {
-          url: monster?.maple_mob_id ? getMonsterImage(monster.maple_mob_id) : openGraphImage,
+          url: monster?.mapleMobId ? getMonsterImage(monster.mapleMobId) : openGraphImage,
         },
       ],
     },
     twitter: {
       card: "summary_large_image",
-      title: `${monster?.name_kor || "몬스터"} | NOWOO - 메이플랜드 아이템 검색 사이트`,
-      description: monster?.description_kor || "메이플랜드 아이템 검색 사이트",
+      title: `${monster?.nameKor || "몬스터"} | NOWOO - 메이플랜드 아이템 검색 사이트`,
+      description: monster?.descriptionKor || "메이플랜드 아이템 검색 사이트",
       images: [
         {
-          url: monster?.maple_mob_id ? getMonsterImage(monster.maple_mob_id) : openGraphImage,
+          url: monster?.mapleMobId ? getMonsterImage(monster.mapleMobId) : openGraphImage,
         },
       ],
     },

@@ -77,6 +77,7 @@ export default function RootLayout({
       <body className={cn(pretendard.className, "text-[#222222] max-md:text-sm")}>
         <CoreProvider>
           <div className="min-h-[calc(100dvh-200px)] bg-gray-100">{children}</div>
+          {process.env.NEXT_PUBLIC_TEST_ENV}
           <Footer />
           <Toaster />
           {/* <button
