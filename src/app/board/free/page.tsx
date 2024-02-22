@@ -1,4 +1,4 @@
-import { FreeBoardPage } from "src/pages/board";
+import { FreeBoardPage } from "@/pages/board";
 
 interface Props {
   searchParams: {

@@ -3,14 +3,13 @@ import timezone from "dayjs/plugin/timezone";
 import utc from "dayjs/plugin/utc";
 import { notFound } from "next/navigation";
 
-import supabase from "@/shared/api-helpers/supabase";
-
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
 import Link from "next/link";
 import { Fragment } from "react";
 
+import { prisma } from "@/shared/api-helpers/db";
 import { ROUTES } from "@/shared/routes";
 
 import { CommentInput } from "./comment-input";
@@ -22,11 +21,17 @@ interface Props {
 }
 
 export async function BoardIdPage({ boardId }: Readonly<Props>) {
-  const { data: board } = await supabase
-    .from("boards")
-    .select("title, description, writer, created_dt")
-    .eq("id", boardId)
-    .single();
+  const board = await prisma.board.findUnique({
+    where: {
+      boardIdx: Number(boardId),
+    },
+    select: {
+      title: true,
+      description: true,
+      writer: true,
+      createdDt: true,
+    },
+  });
 
   if (!board) notFound();
 
@@ -36,16 +41,15 @@ export async function BoardIdPage({ boardId }: Readonly<Props>) {
         <div className="mb-7 flex items-end justify-between border-b border-[#D8D8D8] pb-2">
           <div className="flex flex-col gap-3">
             <span className="text-xl font-bold">{board.title}</span>
-            <span className="text-[#999]">{dayjs(board.created_dt).tz("Asia/Seoul").format("YYYY.MM.DD HH:mm")}</span>
+            <span className="text-[#999]">{dayjs(board.createdDt).tz("Asia/Seoul").format("YYYY.MM.DD HH:mm")}</span>
           </div>
-          <span className="text-[#999]">{board.writer}</span>
+          <span className="text-[#999]">{board.writer.gameNick}</span>
         </div>
         <p className="whitespace-pre-wrap break-words text-[#999]">{board.description}</p>
       </div>
       <div className="flex w-full items-center justify-between">
         <div className="flex gap-5">
           <DeleteButton boardId={boardId} />
-          {/* <button className='rounded-md border border-[#999] px-10 py-3 text-[#999]'>수정</button> */}
         </div>
         <Link
           className="rounded-md bg-[#FB9E48] px-6 py-2 text-lg text-white hover:opacity-70"

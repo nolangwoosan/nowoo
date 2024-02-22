@@ -4,12 +4,12 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import Script from "next/script";
 import { Fragment } from "react";
-import { Toaster } from "src/shared/ui/toaster";
 
 import CoreProvider from "@/app/_providers/core-provider";
 import GoogleAnalytics from "@/app/_providers/google-analytics";
 import { cn } from "@/shared/api-helpers";
 import { openGraphImage } from "@/shared/ui/open-graph";
+import { Toaster } from "@/shared/ui/toaster";
 import { Footer } from "@/widgets/footer";
 
 const pretendard = localFont({ src: "../../public/font/PretendardVariable.woff2" });

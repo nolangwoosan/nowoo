@@ -1,4 +1,4 @@
-import { ItemIdPage } from "src/pages/item-id";
+import { ItemIdPage } from "@/pages/item-id";
 
 interface Props {
   params: {

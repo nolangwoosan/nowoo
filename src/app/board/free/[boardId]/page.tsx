@@ -5,7 +5,7 @@ import utc from "dayjs/plugin/utc";
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
-import { BoardIdPage } from "src/pages/board-id";
+import { BoardIdPage } from "@/pages/board-id";
 
 interface Props {
   params: {

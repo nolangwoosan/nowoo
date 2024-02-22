@@ -1,4 +1,4 @@
-import supabase from "@/shared/api-helpers/supabase";
+import { prisma } from "@/shared/api-helpers/db";
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -11,41 +11,45 @@ export async function GET(request: Request) {
 
   const offset = (page - 1) * pageSize;
 
-  const boardsResponse = await supabase
-    .from("boards")
-    .select(
-      `
-    id,
-    title,
-    writer,
-    created_dt,
-    board_comments (
-      id
-    )
-    `,
-      {
-        count: "exact",
+  const boards = await prisma.board.findMany({
+    select: {
+      _count: true,
+      boardIdx: true,
+      title: true,
+      writer: true,
+      createdDt: true,
+      commnets: {
+        select: {
+          commentIdx: true,
+        },
       },
-    )
-    .order("created_dt", { ascending: false })
-    .range(offset, offset + pageSize - 1)
-    .is("deleted_dt", null);
+    },
+    orderBy: {
+      createdDt: "desc",
+    },
+    skip: offset,
+    take: pageSize,
+    where: {
+      deletedDt: null,
+    },
+  });
 
-  const boards = boardsResponse.data ?? [];
   const boardsWithCommentCount = [];
 
   for (const board of boards) {
-    const commentsResponse = await supabase
-      .from("board_comments")
-      .select("id")
-      .eq("board_id", board.id)
-      .is("deleted_dt", null);
-
-    const commentCount = commentsResponse.data ? commentsResponse.data.length : 0;
+    const comments = await prisma.comment.findMany({
+      select: {
+        commentIdx: true,
+      },
+      where: {
+        boardId: board.boardIdx,
+        deletedDt: null,
+      },
+    });
 
     const boardWithCommentCount = {
       ...board,
-      comment_count: commentCount,
+      comment_count: comments.length,
     };
 
     boardsWithCommentCount.push(boardWithCommentCount);
@@ -53,7 +57,7 @@ export async function GET(request: Request) {
 
   return new Response(
     JSON.stringify({
-      count: boardsResponse.count,
+      count: await prisma.board.count(),
       data: boardsWithCommentCount,
     }),
   );

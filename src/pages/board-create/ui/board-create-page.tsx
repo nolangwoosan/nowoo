@@ -4,11 +4,11 @@ import { valibotResolver } from "@hookform/resolvers/valibot";
 import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
-import { useToast } from "src/shared/ui/use-toast";
 import { Output, maxLength, minLength, object, string } from "valibot";
 
 import { QUERY_KEY } from "@/pages/board/lib/use-board";
 import { ROUTES } from "@/shared/routes";
+import { useToast } from "@/shared/ui/use-toast";
 
 import { createBoard } from "../lib/action";
 
