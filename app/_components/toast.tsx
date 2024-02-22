@@ -1,10 +1,10 @@
-import * as ToastPrimitive from '@radix-ui/react-toast'
-import { X } from 'lucide-react'
+import * as ToastPrimitive from "@radix-ui/react-toast";
+import { X } from "lucide-react";
 
 interface Props {
-  title?: string
-  content: string
-  children?: React.ReactNode
+  title?: string;
+  content: string;
+  children?: React.ReactNode;
 }
 
 export const Toast = ({ title, content, children, ...props }: Readonly<Props>) => {
@@ -14,21 +14,21 @@ export const Toast = ({ title, content, children, ...props }: Readonly<Props>) =
       {...props}
     >
       {title && (
-        <ToastPrimitive.Title className='text-slate12 mb-[5px] text-[15px] font-medium [grid-area:_title]'>
+        <ToastPrimitive.Title className="text-slate12 mb-[5px] text-[15px] font-medium [grid-area:_title]">
           {title}
         </ToastPrimitive.Title>
       )}
       <ToastPrimitive.Description>{content}</ToastPrimitive.Description>
       {children && (
-        <ToastPrimitive.Action className='[grid-area:_action]' asChild altText=''>
+        <ToastPrimitive.Action className="[grid-area:_action]" asChild altText="">
           {children}
         </ToastPrimitive.Action>
       )}
-      <ToastPrimitive.Close aria-label='Close'>
+      <ToastPrimitive.Close aria-label="Close">
         <span aria-hidden>
           <X />
         </span>
       </ToastPrimitive.Close>
     </ToastPrimitive.Root>
-  )
-}
+  );
+};

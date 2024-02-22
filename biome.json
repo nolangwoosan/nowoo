@@ -16,6 +16,6 @@
   },
   "files": {
     "ignoreUnknown": true,
-    "ignore": ["./.next", "./tests-examples/demo-todo-app.spec.ts"]
+    "ignore": ["./.next"]
   }
 }

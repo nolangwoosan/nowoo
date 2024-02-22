@@ -1,53 +1,53 @@
-'use client'
+"use client";
 
-import * as Tabs from '@radix-ui/react-tabs'
-import { Pencil } from 'lucide-react'
-import Link from 'next/link'
-import { useState } from 'react'
+import * as Tabs from "@radix-ui/react-tabs";
+import { Pencil } from "lucide-react";
+import Link from "next/link";
+import { useState } from "react";
 
-import { cn } from '@/lib/utils'
+import { cn } from "@/app/_lib/utils";
 
-import { Boards } from './boards'
-import { BoardsSkeletonUi } from './boards-skeleton-ui'
-import { Pagination } from './pagination'
-import { useBoard } from './utils'
+import { Boards } from "./boards";
+import { BoardsSkeletonUi } from "./boards-skeleton-ui";
+import { Pagination } from "./pagination";
+import { useBoard } from "./utils";
 
-const PAGE_SIZE = 10
+const PAGE_SIZE = 10;
 
 interface Props {
   searchParams: {
-    page?: string
-  }
+    page?: string;
+  };
 }
 
 const tabs = [
-  { id: 'all', name: '전체 글' },
+  { id: "all", name: "전체 글" },
   // { id: 'trade', name: '거래 글' },
-]
+];
 
-type Tab = (typeof tabs)[number]
+type Tab = (typeof tabs)[number];
 
 export default function Page({ searchParams }: Readonly<Props>) {
-  const [currentTab, setCurrentTab] = useState<Tab['id']>(tabs[0].id)
-  const [currentPage, setCurrentPage] = useState(searchParams.page ? Number(searchParams.page) : 1)
-  const boardQuery = useBoard({ page: currentPage, pageSize: PAGE_SIZE })
+  const [currentTab, setCurrentTab] = useState<Tab["id"]>(tabs[0].id);
+  const [currentPage, setCurrentPage] = useState(searchParams.page ? Number(searchParams.page) : 1);
+  const boardQuery = useBoard({ page: currentPage, pageSize: PAGE_SIZE });
 
   const paginate = (pageNumber: number) => {
-    setCurrentPage(pageNumber)
-  }
+    setCurrentPage(pageNumber);
+  };
 
   return (
-    <div className='mt-24 w-full'>
+    <div className="mt-24 w-full">
       <Tabs.Root defaultValue={tabs[0].id} value={currentTab} onValueChange={setCurrentTab}>
-        <div className='mb-2 flex items-end justify-between'>
-          <Tabs.List className='flex gap-2'>
+        <div className="mb-2 flex items-end justify-between">
+          <Tabs.List className="flex gap-2">
             {tabs.map((tab) => (
               <Tabs.Trigger
                 className={cn(
-                  'rounded-md border border-gray-600 px-4 py-2 text-gray-600',
-                  tab.id === currentTab && 'border-none bg-[#FB9E48] text-white'
+                  "rounded-md border border-gray-600 px-4 py-2 text-gray-600",
+                  tab.id === currentTab && "border-none bg-[#FB9E48] text-white",
                 )}
-                type='button'
+                type="button"
                 key={tab.id}
                 value={tab.id}
               >
@@ -56,8 +56,8 @@ export default function Page({ searchParams }: Readonly<Props>) {
             ))}
           </Tabs.List>
           <Link
-            className='flex h-fit items-center gap-2 rounded-md border border-[#FB9E48] px-4 py-2 text-[#FB9E48] hover:opacity-70'
-            href='/board/free/create'
+            className="flex h-fit items-center gap-2 rounded-md border border-[#FB9E48] px-4 py-2 text-[#FB9E48] hover:opacity-70"
+            href="/board/free/create"
           >
             <Pencil size={20} />
             <span>글쓰기</span>
@@ -94,5 +94,5 @@ export default function Page({ searchParams }: Readonly<Props>) {
         </Tabs.Content> */}
       </Tabs.Root>
     </div>
-  )
+  );
 }

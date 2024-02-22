@@ -1,8 +1,8 @@
-'use client'
+"use client";
 
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-import React from 'react'
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import React from "react";
 
 export default function ReactQueryClientProvider({ children }: { children: React.ReactNode }) {
   const [queryClient] = React.useState(
@@ -15,13 +15,13 @@ export default function ReactQueryClientProvider({ children }: { children: React
             staleTime: 60 * 1000,
           },
         },
-      })
-  )
+      }),
+  );
 
   return (
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools />
       {children}
     </QueryClientProvider>
-  )
+  );
 }
