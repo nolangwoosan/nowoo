@@ -1,7 +1,15 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-"use server";
+'use server'
 
-export async function createBoard({ title, content, password }: { title: string; content: string; password: string }) {
+export async function createBoard({
+  title,
+  content,
+  password,
+}: {
+  title: string
+  content: string
+  password: string
+}) {
   // const response = await supabase.from("boards").insert([
   //   {
   //     title,
@@ -12,5 +20,5 @@ export async function createBoard({ title, content, password }: { title: string;
   // ]);
   // return response.status === 201
 
-  return true;
+  return true
 }

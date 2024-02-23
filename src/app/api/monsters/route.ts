@@ -1,13 +1,13 @@
-import { prisma } from "@/shared/api-helpers/db";
+import { prisma } from '@/shared/api-helpers/db'
 
 export async function GET(request: Request) {
-  const { searchParams } = new URL(request.url);
-  const query = searchParams.get("query") || "";
+  const { searchParams } = new URL(request.url)
+  const query = searchParams.get('query') || ''
 
   const items = await prisma.monster.findMany({
     where: {
       nameKor: {
-        contains: query.split(" ").join(""),
+        contains: query.split(' ').join(''),
       },
     },
     select: {
@@ -16,11 +16,11 @@ export async function GET(request: Request) {
       nameKor: true,
     },
     take: 5,
-  });
+  })
 
   return new Response(
     JSON.stringify({
       data: items,
-    }),
-  );
+    })
+  )
 }

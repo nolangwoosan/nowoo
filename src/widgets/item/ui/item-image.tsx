@@ -1,13 +1,13 @@
-"use client";
+'use client'
 
-import Image, { ImageProps } from "next/image";
+import Image, { ImageProps } from 'next/image'
 
-interface Props extends Omit<ImageProps, "src"> {
-  itemId: string | number;
+interface Props extends Omit<ImageProps, 'src'> {
+  itemId: string | number
 }
 
 export function ItemImage(props: Props) {
-  const { itemId, ...rest } = props;
+  const { itemId, ...rest } = props
 
   return (
     <Image
@@ -15,8 +15,8 @@ export function ItemImage(props: Props) {
       src={`http://maplestory.io/api/gms/62/item/${itemId}/icon?resize=3`}
       alt={props.alt}
       onError={(e) => {
-        e.currentTarget.src = `https://maplestory.io/api/kms/284/item/${itemId}/icon?resize=3`;
+        e.currentTarget.src = `https://maplestory.io/api/kms/284/item/${itemId}/icon?resize=3`
       }}
     />
-  );
+  )
 }

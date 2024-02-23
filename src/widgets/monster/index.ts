@@ -1,1 +1,1 @@
-export { MonsterImage } from "./ui/monster-image";
+export { MonsterImage } from './ui/monster-image'

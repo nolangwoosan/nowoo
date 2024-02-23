@@ -1,1 +1,1 @@
-export { FreeBoardPage } from "./ui/free-board-page";
+export { FreeBoardPage } from './ui/free-board-page'

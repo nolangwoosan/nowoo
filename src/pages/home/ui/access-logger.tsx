@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-unused-vars */
-import { headers } from "next/headers";
+import { headers } from 'next/headers'
 
 export default async function AccessLogger() {
-  const header = headers();
-  const [ip] = (header.get("x-forwarded-for") ?? "127.0.0.1").split(",");
-  const userAgent = header.get("user-agent") ?? "";
+  const header = headers()
+  const [ip] = (header.get('x-forwarded-for') ?? '127.0.0.1').split(',')
+  const userAgent = header.get('user-agent') ?? ''
 
   // const { data: prevAccessLogs } = await supabase
   //   .from("user_access")
@@ -29,5 +29,5 @@ export default async function AccessLogger() {
   //   });
   // }
 
-  return null;
+  return null
 }

@@ -1,6 +1,10 @@
-import { prisma } from "@/shared/api-helpers/db";
+import { prisma } from '@/shared/api-helpers/db'
 
-export async function generateMetadata({ params }: { params: { boardId: string } }) {
+export async function generateMetadata({
+  params,
+}: {
+  params: { boardId: string }
+}) {
   const board = await prisma.board.findUnique({
     where: {
       boardIdx: Number(params.boardId),
@@ -11,17 +15,17 @@ export async function generateMetadata({ params }: { params: { boardId: string }
       writer: true,
       createdDt: true,
     },
-  });
+  })
 
   return {
-    title: `${board?.title || "자유 게시판"} | NOWOO - 메이플랜드 아이템 검색 사이트`,
-  };
+    title: `${board?.title || '자유 게시판'} | NOWOO - 메이플랜드 아이템 검색 사이트`,
+  }
 }
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
-  return children;
+  return children
 }

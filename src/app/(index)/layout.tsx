@@ -1,9 +1,9 @@
-import { SearchLayout } from "@/widgets/search/ui/search-layout";
+import { SearchLayout } from '@/widgets/search/ui/search-layout'
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
-  return <SearchLayout>{children}</SearchLayout>;
+  return <SearchLayout>{children}</SearchLayout>
 }

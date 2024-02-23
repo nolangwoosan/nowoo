@@ -1,1 +1,1 @@
-export { BoardCreatePage } from "./ui/board-create-page";
+export { BoardCreatePage } from './ui/board-create-page'

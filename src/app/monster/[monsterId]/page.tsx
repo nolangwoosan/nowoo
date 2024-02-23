@@ -1,13 +1,13 @@
-import { MonsterIdPage } from "@/pages/monster-id";
+import { MonsterIdPage } from '@/pages/monster-id'
 
 interface Props {
   params: {
-    monsterId: string;
-  };
+    monsterId: string
+  }
 }
 
 export default async function Page({ params }: Readonly<Props>) {
-  const { monsterId } = params;
+  const { monsterId } = params
 
-  return <MonsterIdPage monsterId={monsterId} />;
+  return <MonsterIdPage monsterId={monsterId} />
 }

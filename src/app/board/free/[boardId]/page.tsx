@@ -1,18 +1,18 @@
-import dayjs from "dayjs";
-import timezone from "dayjs/plugin/timezone";
-import utc from "dayjs/plugin/utc";
+import dayjs from 'dayjs'
+import timezone from 'dayjs/plugin/timezone'
+import utc from 'dayjs/plugin/utc'
 
-dayjs.extend(utc);
-dayjs.extend(timezone);
+dayjs.extend(utc)
+dayjs.extend(timezone)
 
-import { BoardIdPage } from "@/pages/board-id";
+import { BoardIdPage } from '@/pages/board-id'
 
 interface Props {
   params: {
-    boardId: string;
-  };
+    boardId: string
+  }
 }
 
 export default async function Page({ params: { boardId } }: Readonly<Props>) {
-  return <BoardIdPage boardId={boardId} />;
+  return <BoardIdPage boardId={boardId} />
 }

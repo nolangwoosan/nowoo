@@ -1,1 +1,1 @@
-export { MonsterIdPage } from "./ui/monster-id-page";
+export { MonsterIdPage } from './ui/monster-id-page'

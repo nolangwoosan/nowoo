@@ -14,8 +14,16 @@
       "recommended": true
     }
   },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "single",
+      "jsxQuoteStyle": "single",
+      "semicolons": "asNeeded",
+      "trailingComma": "es5"
+    }
+  },
   "files": {
     "ignoreUnknown": true,
-    "ignore": ["./.next"]
+    "ignore": ["./.next", "./pnpm-lock.yaml"]
   }
 }

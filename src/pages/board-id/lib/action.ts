@@ -1,7 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-"use server";
+'use server'
 
-export const deleteBoard = async ({ boardId, password }: { boardId: string; password: string }) => {
+export const deleteBoard = async ({
+  boardId,
+  password,
+}: {
+  boardId: string
+  password: string
+}) => {
   // const board = await prisma.board.findUnique({
   //   where: {
   //     boardIdx: Number(boardId),
@@ -34,17 +40,17 @@ export const deleteBoard = async ({ boardId, password }: { boardId: string; pass
 
   return {
     status: 200,
-  };
-};
+  }
+}
 
 export const createComment = async ({
   boardId,
   password,
   comment,
 }: {
-  boardId: string;
-  password: string;
-  comment: string;
+  boardId: string
+  password: string
+  comment: string
 }) => {
   // const { data, error } = await supabase
   //   .from('comments')
@@ -74,17 +80,17 @@ export const createComment = async ({
 
   return {
     status: 200,
-  };
-};
+  }
+}
 
 export const deleteComment = async ({
   boardId,
   password,
   commentId,
 }: {
-  boardId: string;
-  password: string;
-  commentId: string;
+  boardId: string
+  password: string
+  commentId: string
 }) => {
   // const { data } = await supabase.from('comments').select('id, password').eq('id', Number(commentId)).single()
   // if (!data) {
@@ -125,5 +131,5 @@ export const deleteComment = async ({
 
   return {
     status: 200,
-  };
-};
+  }
+}
