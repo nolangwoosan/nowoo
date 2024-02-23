@@ -7,7 +7,7 @@ import { Fragment } from 'react'
 
 import CoreProvider from '@/app/_providers/core-provider'
 import GoogleAnalytics from '@/app/_providers/google-analytics'
-import { cn } from '@/shared/api-helpers'
+import { cn } from '@/shared/tailwind-merge'
 import { openGraphImage } from '@/shared/ui/open-graph'
 import { Toaster } from '@/shared/ui/toaster'
 import { Footer } from '@/widgets/footer'

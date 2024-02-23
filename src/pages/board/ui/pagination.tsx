@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React from 'react'
 
-import { cn } from '@/shared/api-helpers'
+import { cn } from '@/shared/tailwind-merge'
 
 interface Props {
   itemsPerPage: number

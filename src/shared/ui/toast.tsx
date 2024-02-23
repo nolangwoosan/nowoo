@@ -2,7 +2,7 @@ import * as ToastPrimitives from '@radix-ui/react-toast'
 import { X } from 'lucide-react'
 import * as React from 'react'
 
-import { cn } from '@/shared/api-helpers'
+import { cn } from '@/shared/tailwind-merge'
 
 const ToastProvider = ToastPrimitives.Provider
 

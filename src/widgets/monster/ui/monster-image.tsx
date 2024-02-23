@@ -9,6 +9,10 @@ interface Props extends Omit<ImageProps, 'src'> {
 export function MonsterImage(props: Props) {
   const { monsterId, ...rest } = props
 
+  if (Number.isNaN(Number(monsterId))) {
+    throw new Error('몬스터 아이디가 숫자가 아닙니다.')
+  }
+
   return (
     <Image
       {...rest}

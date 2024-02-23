@@ -2,9 +2,9 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { Fragment } from 'react'
 
-import { cn } from '@/shared/api-helpers'
 import { prisma } from '@/shared/api-helpers/db'
 import { ROUTES } from '@/shared/routes'
+import { cn } from '@/shared/tailwind-merge'
 import { ItemImage } from '@/widgets/item'
 import { MonsterImage } from '@/widgets/monster'
 

@@ -5,7 +5,7 @@ import { Pencil } from 'lucide-react'
 import Link from 'next/link'
 import { useState } from 'react'
 
-import { cn } from '@/shared/api-helpers'
+import { cn } from '@/shared/tailwind-merge'
 
 import { useBoard } from '../lib/use-board'
 import { Board } from './board'
