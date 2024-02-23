@@ -7,8 +7,8 @@ import { useForm } from 'react-hook-form'
 import { Output, maxLength, minLength, object, string } from 'valibot'
 
 import { QUERY_KEY } from '@/pages/board/lib/use-board'
+import { useToast } from '@/shared/hooks'
 import { ROUTES } from '@/shared/routes'
-import { useToast } from '@/shared/ui/use-toast'
 
 import { createBoard } from '../lib/action'
 

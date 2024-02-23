@@ -4,11 +4,10 @@ import { Search } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { Suspense, useCallback, useRef, useState } from 'react'
 
-import { useDebounce } from '@/shared/hooks/use-debounce'
-import { useOutsideClick } from '@/shared/hooks/use-outside-click'
 import { ROUTES } from '@/shared/routes'
 import { cn } from '@/shared/tailwind-merge'
 
+import { useDebounce, useOutsideClick } from '@/shared/hooks'
 import { SearchResult } from './search-result'
 import { SearchResultSkeletonUI } from './search-result-skeleton-ui'
 

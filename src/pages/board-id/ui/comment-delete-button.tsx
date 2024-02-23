@@ -6,8 +6,8 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Output, minLength, object, string } from 'valibot'
 
+import { useToast } from '@/shared/hooks'
 import { Dialog, DialogContent, DialogTrigger } from '@/shared/ui/dialog'
-import { useToast } from '@/shared/ui/use-toast'
 
 import { deleteComment } from '../lib/action'
 

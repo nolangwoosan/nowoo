@@ -1,9 +1,8 @@
 'use client'
 
+import { useToast } from '@/shared/hooks'
 import { ROUTES } from '@/shared/routes'
 import { Dialog, DialogContent, DialogTrigger } from '@/shared/ui/dialog'
-import { useToast } from '@/shared/ui/use-toast'
-import { valibotResolver } from '@hookform/resolvers/valibot'
 import { useQueryClient } from '@tanstack/react-query'
 import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
