@@ -1,8 +1,5 @@
+import { icon } from '@/shared/icon'
 import Image from 'next/image'
-
-import InstagramIcon from '@/shared/icon/instagram.svg'
-import KakaoIcon from '@/shared/icon/kakao.svg'
-import TwitterIcon from '@/shared/icon/twitter.svg'
 
 export function Footer() {
   return (
@@ -17,7 +14,7 @@ export function Footer() {
         </div>
         <div className='flex items-center gap-2'>
           <a className='rounded-full bg-white p-2' href='https://twitter.com/yoowo16' rel='noreferrer' target='_blank'>
-            <Image src={TwitterIcon} width={16} height={16} alt='twitter' />
+            <Image src={icon.x} width={16} height={16} alt='X' />
           </a>
           <a
             className='rounded-full bg-white p-2'
@@ -25,7 +22,7 @@ export function Footer() {
             rel='noreferrer'
             target='_blank'
           >
-            <Image src={InstagramIcon} width={16} height={16} alt='instagram' />
+            <Image src={icon.instagram} width={16} height={16} alt='instagram' />
           </a>
           <a
             className='rounded-full bg-white p-2'
@@ -33,7 +30,7 @@ export function Footer() {
             rel='noreferrer'
             target='_blank'
           >
-            <Image src={KakaoIcon} width={16} height={16} alt='kakao' />
+            <Image src={icon.kakao} width={16} height={16} alt='kakao' />
           </a>
         </div>
         <div className='flex items-center gap-2 max-lg:gap-4'>

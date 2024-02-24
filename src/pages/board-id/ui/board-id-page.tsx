@@ -9,7 +9,7 @@ dayjs.extend(timezone)
 import Link from 'next/link'
 import { Fragment } from 'react'
 
-import { prisma } from '@/shared/api-helpers/db'
+import { prisma } from '@/shared/helpers/db'
 import { ROUTES } from '@/shared/routes'
 
 import { CommentInput } from './comment-input'

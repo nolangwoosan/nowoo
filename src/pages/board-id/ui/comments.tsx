@@ -1,4 +1,4 @@
-import { prisma } from '@/shared/api-helpers/db'
+import { prisma } from '@/shared/helpers/db'
 
 import { CommentDate } from './comment-date'
 import { CommentDeleteButton } from './comment-delete-button'

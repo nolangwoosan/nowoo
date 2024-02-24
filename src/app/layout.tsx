@@ -11,6 +11,7 @@ import { cn } from '@/shared/tailwind-merge'
 import { openGraphImage } from '@/shared/ui/open-graph'
 import { Toaster } from '@/shared/ui/toaster'
 import { Footer } from '@/widgets/footer'
+import { Header } from '@/widgets/header'
 
 const pretendard = localFont({
   src: '../../public/font/PretendardVariable.woff2',
@@ -78,6 +79,7 @@ export default function RootLayout({
       </head>
       <body className={cn(pretendard.className, 'text-[#222222] max-md:text-sm')}>
         <CoreProvider>
+          <Header />
           <div className='min-h-[calc(100dvh-200px)] bg-gray-100'>{children}</div>
           {process.env.NEXT_PUBLIC_TEST_ENV}
           <Footer />

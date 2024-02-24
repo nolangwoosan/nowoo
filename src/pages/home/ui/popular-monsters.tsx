@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import { prisma } from '@/shared/api-helpers/db'
+import { prisma } from '@/shared/helpers/db'
 import { ROUTES } from '@/shared/routes'
 import { MonsterImage } from '@/widgets/monster'
 

@@ -1,4 +1,4 @@
-import { prisma } from '@/shared/api-helpers/db'
+import { prisma } from '@/shared/helpers/db'
 
 export async function generateMetadata({
   params,
