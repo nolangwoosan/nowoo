@@ -95,7 +95,7 @@ model Monster {
 
 model Account {
   id                       String  @id @default(cuid())
-  userId                   String
+  userId                   Int
   type                     String
   provider                 String
   providerAccountId        String
@@ -113,7 +113,7 @@ model Account {
 }
 
 model User {
-  id            String    @id @default(cuid())
+  id            Int       @id @default(autoincrement())
   name          String?
   image         String?
   email         String    @unique
@@ -180,7 +180,7 @@ model Board {
   boardIdx    Int       @id @default(autoincrement()) @map("board_idx")
   title       String
   description String    @db.LongText
-  writerId    String    @map("writer_id")
+  writerId    Int       @map("writer_id")
   category    Int
   views       BigInt    @default(0)
   createdDt   DateTime  @default(now()) @map("created_dt")
@@ -198,7 +198,7 @@ model Comment {
   comment         String    @db.LongText
   parentCommentId Int?      @map("parent_comment_id")
   boardId         Int       @map("board_id")
-  writerId        String    @map("writer_id")
+  writerId        Int       @map("writer_id")
   createdDt       DateTime  @default(now()) @map("created_dt")
   updatedDt       DateTime  @updatedAt @map("updated_dt")
   deletedDt       DateTime? @map("deleted_dt")

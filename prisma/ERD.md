@@ -89,7 +89,7 @@ erDiagram
 
 
   "users" {
-    String id "🗝️"
+    Int id "🗝️"
     String name "❓"
     String image "❓"
     String email
@@ -147,7 +147,7 @@ erDiagram
     Int board_idx "🗝️"
     String title
     String description
-    String writer_id
+    Int writer_id
     Int category
     BigInt views
     DateTime created_dt
@@ -161,7 +161,7 @@ erDiagram
     String comment
     Int parent_comment_id "❓"
     Int board_id
-    String writer_id
+    Int writer_id
     DateTime created_dt
     DateTime updated_dt
     DateTime deleted_dt "❓"

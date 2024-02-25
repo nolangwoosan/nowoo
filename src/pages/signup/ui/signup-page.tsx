@@ -33,7 +33,10 @@ export function SignUpPage() {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify({
+        email: data.email,
+        password: data.password,
+      }),
     })
 
     const result = await response.json()
