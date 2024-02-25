@@ -1,6 +1,6 @@
 import { PropsWithChildren } from 'react'
 
-import { Logo } from './logo'
+import { Logo } from '@/widgets/logo'
 import { Menu } from './menu'
 import { SearchForm } from './search-form'
 

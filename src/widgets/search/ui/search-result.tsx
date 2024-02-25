@@ -33,7 +33,6 @@ export function SearchResult({ searchValue, onCheckFirstSearchResult }: Readonly
   })
 
   const items = itemsQuery.data?.data
-  console.log(itemsQuery.data)
 
   const monsters = monstersQuery.data?.data
 

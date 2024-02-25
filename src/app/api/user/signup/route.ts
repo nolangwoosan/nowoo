@@ -1,6 +1,6 @@
-import { prisma } from '@/shared/helpers/db'
 import argon2 from 'argon2'
 
+import { prisma } from '@/shared/helpers/db'
 interface RequestBody {
   email: string
   password: string
@@ -12,23 +12,44 @@ export async function POST(request: Request) {
   if (!requestBody.email) {
     return new Response(
       JSON.stringify({
-        message: '이메일을 입력해주세요.',
-      })
+        message: '이메일은 필수 요청값입니다.',
+      }),
+      {
+        status: 400,
+      }
     )
   }
 
   if (!requestBody.password) {
     return new Response(
       JSON.stringify({
-        message: '비밀번호를 입력해주세요.',
-      })
+        message: '비밀번호는 필수 요청값입니다.',
+      }),
+      {
+        status: 400,
+      }
+    )
+  }
+
+  const isUserExist = await prisma.user.findUnique({
+    where: {
+      email: requestBody.email,
+    },
+  })
+
+  if (isUserExist) {
+    return new Response(
+      JSON.stringify({
+        message: '이미 존재하는 이메일입니다.',
+      }),
+      {
+        status: 400,
+      }
     )
   }
 
   const user = await prisma.user.create({
     data: {
-      gameNick: 'test',
-      gameTcNick: 'test',
       email: requestBody.email,
       password: await argon2.hash(requestBody.password),
     },
@@ -38,7 +59,7 @@ export async function POST(request: Request) {
     JSON.stringify({
       message: '회원가입이 완료되었습니다.',
       data: {
-        userIdx: user.userIdx,
+        userId: user.id,
       },
     })
   )

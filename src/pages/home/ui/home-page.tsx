@@ -4,7 +4,7 @@ import PopularItems from './popular-items'
 import PopularMonsters from './popular-monsters'
 import { PopularSkeletonUI } from './popular-skeleton-ui'
 
-export function HomePage() {
+export async function HomePage() {
   return (
     <div className='mt-24 flex w-full gap-10 max-lg:flex-col'>
       {/* <AccessLogger /> */}

@@ -14,7 +14,7 @@ import { Footer } from '@/widgets/footer'
 import { Header } from '@/widgets/header'
 
 const pretendard = localFont({
-  src: '../../public/font/PretendardVariable.woff2',
+  src: '../shared/font/PretendardVariable.woff2',
 })
 
 export const metadata: Metadata = {

@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import { Logo } from '@/widgets/search'
+import { Logo } from '@/widgets/logo'
 
 export default function NotFound() {
   return (

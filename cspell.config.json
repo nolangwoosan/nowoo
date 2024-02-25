@@ -8,6 +8,7 @@
   "words": [
     "biomejs",
     "commitlint",
+    "cuid",
     "defence",
     "dmnaid",
     "dmnajennifer",
@@ -34,6 +35,7 @@
     "orioledb",
     "pooler",
     "recaptcha",
+    "signin",
     "signup",
     "sitekey",
     "supabase",

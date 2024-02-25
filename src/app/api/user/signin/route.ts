@@ -10,15 +10,11 @@ interface RequestBody {
 export async function POST(request: Request) {
   const requestBody: RequestBody = await request.json()
 
-  console.log(requestBody)
-
   const user = await prisma.user.findFirst({
     where: {
       email: requestBody.email,
     },
   })
-
-  console.log(user)
 
   if (!user) {
     return new Response(
@@ -42,7 +38,7 @@ export async function POST(request: Request) {
     JSON.stringify({
       message: '로그인이 완료되었습니다.',
       data: {
-        userIdx: user.userIdx,
+        userId: user.id,
       },
     })
   )

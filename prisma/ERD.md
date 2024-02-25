@@ -72,11 +72,30 @@ erDiagram
     }
 
 
+  "Account" {
+    String id "🗝️"
+    String type
+    String provider
+    String providerAccountId
+    String refresh_token "❓"
+    String access_token "❓"
+    Int refresh_token_expires_in "❓"
+    Int expires_at "❓"
+    String token_type "❓"
+    String scope "❓"
+    String id_token "❓"
+    String session_state "❓"
+    }
+
+
   "users" {
-    Int user_idx "🗝️"
+    String id "🗝️"
+    String name "❓"
+    String image "❓"
     String email
-    String game_nick
-    String game_tc_nick
+    DateTime emailVerified "❓"
+    String game_nick "❓"
+    String game_tc_nick "❓"
     Int game_level
     String game_job
     String password
@@ -128,7 +147,7 @@ erDiagram
     Int board_idx "🗝️"
     String title
     String description
-    Int writer_id
+    String writer_id
     Int category
     BigInt views
     DateTime created_dt
@@ -142,7 +161,7 @@ erDiagram
     String comment
     Int parent_comment_id "❓"
     Int board_id
-    Int writer_id
+    String writer_id
     DateTime created_dt
     DateTime updated_dt
     DateTime deleted_dt "❓"
@@ -152,6 +171,8 @@ erDiagram
     "monster_drops" o|--|| "items" : "items"
     "monster_drops" o|--|| "monsters" : "monsters"
     "monsters" o{--}o "monster_drops" : "monsterDrops"
+    "Account" o|--|| "users" : "user"
+    "users" o{--}o "Account" : "accounts"
     "users" o{--}o "boards" : "posts"
     "users" o{--}o "comments" : "comments"
     "users" o{--}o "parties" : "joinedParties"
