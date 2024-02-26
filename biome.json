@@ -27,6 +27,6 @@
   },
   "files": {
     "ignoreUnknown": true,
-    "ignore": ["./.next", "./pnpm-lock.yaml"]
+    "ignore": ["./.next", "./pnpm-lock.yaml", "./src/shared/shadcn/ui/*.{tsx}"]
   }
 }
