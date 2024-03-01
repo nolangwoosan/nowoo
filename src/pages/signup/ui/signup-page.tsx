@@ -57,9 +57,14 @@ export function SignUpPage() {
   }
 
   return (
-    <div className='flex justify-center items-center flex-col gap-4 pt-20'>
-      <Logo />
-      <form className='flex flex-col gap-2 mb-4' onSubmit={handleSubmit(onSumbit)}>
+    <div className='flex justify-center items-center flex-col gap-4 py-20'>
+      <form
+        className='flex flex-col gap-2 mb-4 p-8 border border-gray-300 rounded-lg shadow-md'
+        onSubmit={handleSubmit(onSumbit)}
+      >
+        <div className='mb-4 flex justify-center'>
+          <Logo />
+        </div>
         <label className='flex flex-col gap-1 w-80' htmlFor='email'>
           <span>이메일</span>
           <input
@@ -72,25 +77,15 @@ export function SignUpPage() {
         </label>
         <label className='flex flex-col gap-1' htmlFor='password'>
           <span>비밀번호</span>
-          <input
-            className='border border-gray-300 rounded-md p-2'
-            type='password'
-            placeholder='비밀번호'
-            {...register('password')}
-          />
+          <input className='border border-gray-300 rounded-md p-2' type='password' {...register('password')} />
           <small className='text-red-500'>{errors.password?.message}</small>
         </label>
         <label className='flex flex-col gap-1' htmlFor='password'>
           <span>비밀번호 확인</span>
-          <input
-            className='border border-gray-300 rounded-md p-2'
-            type='password'
-            placeholder='비밀번호 확인'
-            {...register('passwordConfirm')}
-          />
+          <input className='border border-gray-300 rounded-md p-2' type='password' {...register('passwordConfirm')} />
           <small className='text-red-500'>{errors.passwordConfirm?.message}</small>
         </label>
-        <button className='bg-blue-500 text-white rounded-md p-2 mt-4' type='submit'>
+        <button className='bg-gray-900 text-white rounded-md p-2 mt-4' type='submit'>
           회원가입
         </button>
       </form>

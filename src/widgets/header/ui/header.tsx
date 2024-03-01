@@ -6,8 +6,8 @@ export async function Header() {
 
   return (
     <header className='fixed top-4 right-4'>
-      <Link className='text-black hover:text-blue-700 px-4 py-2 bg-slate-300 rounded-lg' href='/signin'>
-        Login
+      <Link className='px-4 py-2 bg-gray-900 rounded-md text-white' href='/signin'>
+        로그인
       </Link>
     </header>
   )

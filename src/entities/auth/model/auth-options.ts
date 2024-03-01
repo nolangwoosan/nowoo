@@ -4,6 +4,8 @@ import { PrismaClient } from '@prisma/client'
 import { NextAuthOptions } from 'next-auth'
 import { Adapter } from 'next-auth/adapters'
 import CredentialsProvider from 'next-auth/providers/credentials'
+import DiscordProvider from 'next-auth/providers/discord'
+import GoogleProvder from 'next-auth/providers/google'
 import KakaoProvider from 'next-auth/providers/kakao'
 
 const prisma = new PrismaClient()
@@ -51,6 +53,14 @@ export const authOptions: NextAuthOptions = {
     KakaoProvider({
       clientId: process.env.KAKAO_CLIENT_ID,
       clientSecret: process.env.KAKAO_CLIENT_SECRET,
+    }),
+    DiscordProvider({
+      clientId: process.env.DISCORD_CLIENT_ID,
+      clientSecret: process.env.DISCORD_CLIENT_SECRET,
+    }),
+    GoogleProvder({
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
   ],
   callbacks: {
