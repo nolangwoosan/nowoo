@@ -4,6 +4,7 @@ export const ROUTES = {
   ITEM: (id: number) => `/item/${id}` as const,
   SIGN_UP: '/signup' as const,
   SIGN_IN: '/signin' as const,
+  ME: '/me' as const,
   FREE_BOARD: {
     LIST: '/board/free' as const,
     CREATE: '/board/free/create' as const,

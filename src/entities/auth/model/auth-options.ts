@@ -5,6 +5,7 @@ import { NextAuthOptions } from 'next-auth'
 import { Adapter } from 'next-auth/adapters'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import DiscordProvider from 'next-auth/providers/discord'
+import EmailProvider from 'next-auth/providers/email'
 import GoogleProvder from 'next-auth/providers/google'
 import KakaoProvider from 'next-auth/providers/kakao'
 
@@ -50,6 +51,10 @@ export const authOptions: NextAuthOptions = {
         return null
       },
     }),
+    EmailProvider({
+      server: `smtp://${process.env.EMAIL_SERVER_USER}:${process.env.EMAIL_SERVER_PASSWORD}@${process.env.EMAIL_SERVER_HOST}`,
+      from: process.env.EMAIL_FROM,
+    }),
     KakaoProvider({
       clientId: process.env.KAKAO_CLIENT_ID,
       clientSecret: process.env.KAKAO_CLIENT_SECRET,
@@ -64,19 +69,15 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
-    signIn: async () => {
+    signIn: async ({ email }) => {
+      console.log(email)
       return true
     },
-    async jwt({ token, user }) {
-      token.email = user?.email ?? ''
-
+    async jwt({ token, user, account, profile }) {
       return token
     },
-    async session({ session, token }) {
-      return {
-        ...session,
-        ...token,
-      }
+    async session({ session, token, user }) {
+      return session
     },
   },
 }

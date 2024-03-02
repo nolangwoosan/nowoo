@@ -3,18 +3,14 @@
 import { valibotResolver } from '@hookform/resolvers/valibot'
 import { signIn } from 'next-auth/react'
 import Image from 'next/image'
-import Link from 'next/link'
 import { useForm } from 'react-hook-form'
 import { Output, email, minLength, object, string } from 'valibot'
 
-import { toast } from '@/shared/hooks/use-toast'
 import { icon } from '@/shared/icon'
-import { ROUTES } from '@/shared/routes'
 import { Logo } from '@/widgets/logo'
 
 const userSchema = object({
   email: string([minLength(1, '이메일을 입력해주세요.'), email('이메일 형식에 맞게 입력해주세요.')]),
-  password: string([minLength(1, '비밀번호를 입력해주세요.')]),
 })
 
 type UserSchema = Output<typeof userSchema>
@@ -22,31 +18,16 @@ type UserSchema = Output<typeof userSchema>
 export function SignInPage() {
   const {
     register,
-    handleSubmit,
     formState: { errors },
+    handleSubmit,
   } = useForm<UserSchema>({
     resolver: valibotResolver(userSchema),
   })
 
   const onSumbit = async (data: UserSchema) => {
-    const result = await signIn('credentials', {
+    signIn('email', {
       email: data.email,
-      password: data.password,
-      redirect: true,
       callbackUrl: '/',
-    })
-
-    if (!result?.ok) {
-      toast({
-        title: '로그인 실패',
-        description: '일치하는 정보가 없습니다.',
-      })
-      return
-    }
-
-    toast({
-      title: '로그인 성공',
-      description: '로그인에 성공하였습니다.',
     })
   }
 
@@ -69,13 +50,9 @@ export function SignInPage() {
           />
           <small className='text-red-500'>{errors.email?.message}</small>
         </label>
-        <label className='flex flex-col gap-1' htmlFor='password'>
-          <span className='font-medium'>비밀번호</span>
-          <input className='border border-gray-300 rounded-md p-2' type='password' {...register('password')} />
-          <small className='text-red-500'>{errors.password?.message}</small>
-        </label>
-        <button className='bg-gray-900 text-white rounded-md p-2 mt-4' type='submit'>
-          로그인
+
+        <button className='bg-gray-900 text-white rounded-md p-2' type='submit'>
+          이메일로 계속 하기
         </button>
         <hr className='mt-4 bg-gray-300 h-[1px] w-full' />
         <button
@@ -100,9 +77,6 @@ export function SignInPage() {
         >
           <span>구글 로그인</span>
         </button>
-        <Link className='text-gray-600 text-center mt-2 text-sm' href={ROUTES.SIGN_UP}>
-          이메일로 회원가입
-        </Link>
       </form>
     </div>
   )
